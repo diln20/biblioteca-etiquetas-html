@@ -52,8 +52,18 @@ setTimeout(() => {
   (0, eval)(fs.readFileSync('html-css-section.js', 'utf8'));
   window.__integrationSectionsAdded = false;
   (0, eval)(fs.readFileSync('integration-sections.js', 'utf8'));
+  const formattingSection = { title: 'Introducción', description: '', items: [{ code: '<main><section><h2>Ejemplo</h2><p>Texto</p></section></main>' }] };
+  sections.unshift(formattingSection);
+  window.__htmlExamplesFormatted = false;
+  (0, eval)(fs.readFileSync('example-code-formatter.js', 'utf8'));
+  const formattedTagExample = formattingSection.items[0].code;
+  sections.shift();
+  const htmlDetailSection = { title: 'Texto', description: 'Elementos de texto.', items: [T('<p>', 'Párrafo', 'Representa un párrafo.', '<p>Texto</p>', '<p>Texto</p>', ['title'], { kind: 'Semántica', flags: ['semantic'] })] };
+  sections.unshift(htmlDetailSection);
   window.__allExplanationsEnhanced = false;
   (0, eval)(fs.readFileSync('explanation-enhancer.js', 'utf8'));
+  const detailedHtmlTag = htmlDetailSection.items[0].description;
+  sections.shift();
   const navButtons = sections.map(() => {
     const text = { textContent: '', classList: { values: [], add(value) { this.values.push(value); } } };
     return {
@@ -82,7 +92,8 @@ setTimeout(() => {
     domScript: written.includes('dom-section.js?v=1'),
     htmlCssScript: written.includes('html-css-section.js?v=1'),
     integrationScript: written.includes('integration-sections.js?v=1'),
-    explanationScript: written.includes('explanation-enhancer.js?v=1'),
+    formattingScript: written.includes('example-code-formatter.js?v=1'),
+    explanationScript: written.includes('explanation-enhancer.js?v=2'),
     courseUiScript: written.includes('course-ui.js?v=6'),
     styles: written.includes('theme-modern.css?v=2'),
     scriptSyntax,
@@ -95,6 +106,8 @@ setTimeout(() => {
     cssDetailedExplanations: sections.slice(1, 4).every(section => section.items.every(item => item.description.length > 150)),
     allDetailedExplanations: sections.every(section => section.items.every(item => item.description.includes('Para leer este ejemplo:'))),
     allSectionGuidance: sections.every(section => section.description.includes('Orden recomendado:')),
+    formattedTagExample: formattedTagExample === '<main>\n  <section>\n    <h2>Ejemplo</h2>\n    <p>Texto</p>\n  </section>\n</main>',
+    detailedHtmlTag: ['Sintaxis:','Tipo y significado:','Atributos destacados:','Ejemplo:'].every(part => detailedHtmlTag.includes(part)),
     javascriptSections: sections.slice(4, 7).map(section => `${section.title}:${section.items.length}`).join('|') === 'JavaScript · Principiante:10|JavaScript · Intermedio:8|JavaScript · Avanzado:6',
     domSection: sections[7]?.title === 'Manejo del DOM' && sections[7].items.length === 7,
     htmlCssSection: sections[8]?.title === 'HTML + CSS' && sections[8].items.length === 12,
@@ -104,7 +117,7 @@ setTimeout(() => {
     error: document.body.innerHTML,
   };
   console.log(result);
-  if (!written || result.actualClosingScripts !== 10 || result.escapedClosingScripts !== 3 || !result.attributeExamples || !result.webFoundationsScript || !result.cssScript || !result.javascriptScript || !result.domScript || !result.htmlCssScript || !result.integrationScript || !result.explanationScript || !result.courseUiScript || scriptSyntax !== 'ok' || !result.attributeUsageExample || !result.webFoundations || !result.cssSections || !result.cssTargetElement || !result.cssApplicationMethods || !result.cssIntegratedExamples || !result.cssDetailedExplanations || !result.allDetailedExplanations || !result.allSectionGuidance || !result.javascriptSections || !result.domSection || !result.htmlCssSection || !result.integrationSections || !result.courseUiGrouped || !result.courseTheme) {
+  if (!written || result.actualClosingScripts !== 11 || result.escapedClosingScripts !== 3 || !result.attributeExamples || !result.webFoundationsScript || !result.cssScript || !result.javascriptScript || !result.domScript || !result.htmlCssScript || !result.integrationScript || !result.formattingScript || !result.explanationScript || !result.courseUiScript || scriptSyntax !== 'ok' || !result.attributeUsageExample || !result.webFoundations || !result.cssSections || !result.cssTargetElement || !result.cssApplicationMethods || !result.cssIntegratedExamples || !result.cssDetailedExplanations || !result.allDetailedExplanations || !result.allSectionGuidance || !result.formattedTagExample || !result.detailedHtmlTag || !result.javascriptSections || !result.domSection || !result.htmlCssSection || !result.integrationSections || !result.courseUiGrouped || !result.courseTheme) {
     process.exitCode = 1;
   }
 }, 200);

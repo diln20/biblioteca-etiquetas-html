@@ -11,6 +11,30 @@
   };
 
   const labelOf=item=>String(item.tag||item.topic||item.name||'elemento').replace(/[<>]/g,'').trim();
+  const htmlTagDetail=(item,label)=>{
+    const source=String(item.tag||'');
+    if(!source.startsWith('<'))return `Este tema explica una decisión de estructura HTML. Revisa primero la comparación del código y después identifica en el resultado qué significado aporta cada elemento.`;
+
+    const isDeclaration=source.startsWith('<!');
+    const isRange=source.includes('–');
+    const isVoid=item.flags?.includes('void');
+    const isSemantic=item.flags?.includes('semantic');
+    const syntax=isDeclaration
+      ? `Sintaxis: «${label}» es una declaración, se coloca al inicio del documento y no utiliza etiqueta de cierre.`
+      : isRange
+        ? `Sintaxis: representa una familia de etiquetas; cada nivel se escribe con apertura y cierre, por ejemplo «h1» y «/h1».`
+        : isVoid
+          ? `Sintaxis: «${label}» es una etiqueta vacía; no encierra contenido ni necesita una etiqueta de cierre.`
+          : `Sintaxis: normalmente comienza con «${label}», contiene texto u otros elementos y termina con «/${label}».`;
+    const meaning=isSemantic
+      ? `Tipo y significado: es semántica, por lo que su nombre comunica la función del contenido a navegadores y tecnologías de asistencia.`
+      : `Tipo: ${item.kind||'elemento HTML'}. Su función depende de la posición que ocupa y del contenido que contiene o representa.`;
+    const attributes=item.attrs?.length
+      ? `Atributos destacados: ${item.attrs.join(', ')}. Abre “Mostrar atributos” para consultar qué controla cada uno y ver su sintaxis aplicada a esta etiqueta.`
+      : `Atributos: no se destaca ninguno específico en este ejemplo, aunque puede admitir atributos globales como class, id, title o data-* cuando sean apropiados.`;
+    return `${syntax} ${meaning} ${attributes} Ejemplo: localiza «${label}» en “Código HTML” y compáralo con “Resultado” para comprobar cómo lo interpreta el navegador.`;
+  };
+
   const detailFor=(section,item)=>{
     const label=labelOf(item);
     if(conceptDetails[item.name])return conceptDetails[item.name];
@@ -20,8 +44,7 @@
     if(section.title==='Manejo del DOM')return `Primero identifica el elemento creado por HTML; luego observa cómo JavaScript usa «${label}» para encontrarlo, recorrerlo o modificarlo. Ejecuta el control del resultado y comprueba qué parte del DOM cambia.`;
     if(section.title.startsWith('JavaScript'))return `Lee el ejemplo en este orden: valores iniciales, operación con «${label}» y salida obtenida. Cambia uno de los datos para comprobar cómo esa instrucción transforma el resultado.`;
     if(section.title.startsWith('CSS'))return `Relaciona el selector con el elemento HTML que posee la etiqueta, clase o id correspondiente. Después cambia una propiedad y compara el código con el resultado para reconocer su efecto visual.`;
-    const attributes=item.attrs?.length?` Revisa también ${item.attrs.join(', ')}, porque estos atributos precisan su comportamiento.`:'';
-    return `Localiza «${label}» en el código y observa qué contenido organiza o qué función semántica cumple; después compáralo con el resultado renderizado.${attributes}`;
+    return htmlTagDetail(item,label);
   };
 
   sections.forEach(section=>{
