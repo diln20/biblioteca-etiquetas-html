@@ -1,3 +1,5 @@
 # Biblioteca de Etiquetas HTML5
 
-Biblioteca interactiva de HTML5 con diseño responsive, ejemplos visuales, semántica, editor en vivo y material práctico.
+Biblioteca interactiva de HTML5 con estilo neón, semántica, atributos, ejemplos, favoritos, buscador, ejercicios y editor en vivo.
+
+Abre `index.html` o publícalo con GitHub Pages.
