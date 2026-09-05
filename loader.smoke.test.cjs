@@ -24,18 +24,20 @@ setTimeout(() => {
   } catch (error) {
     scriptSyntax = error.stack;
   }
-  const attributeBox = { innerHTML: '' };
+  const attributeBox = { innerHTML: '', hidden: true };
   document.createElement = () => ({ textContent: '' });
   document.head = { appendChild() {} };
   global.esc = value => value;
   global.highlight = value => value;
   global.render = () => {};
+  const attributeToggle = { textContent: '', onclick: null };
   global.createCard = () => ({
-    querySelector: selector => selector === '.attributes-box' ? attributeBox : null,
+    querySelector: selector => selector === '.attributes-box' ? attributeBox : selector === '.attributes-toggle' ? attributeToggle : null,
   });
   window.__htmlAttributeExamplesEnhanced = false;
   (0, eval)(fs.readFileSync('attribute-examples.js', 'utf8'));
   createCard({ tag: '<input>', code: '<input>', attrs: ['required'] });
+  const attributeUsageExample = attributeBox.innerHTML;
   global.sections = [];
   global.T = (tag, name, description, code, preview = code, attrs = [], meta = {}) => ({ tag, name, description, code, preview, attrs, ...meta });
   global.buildNav = () => {};
@@ -52,6 +54,10 @@ setTimeout(() => {
   (0, eval)(fs.readFileSync('html-css-section.js', 'utf8'));
   window.__integrationSectionsAdded = false;
   (0, eval)(fs.readFileSync('integration-sections.js', 'utf8'));
+  window.__cssPropertiesExplained = false;
+  (0, eval)(fs.readFileSync('css-property-explanations.js', 'utf8'));
+  createCard(sections[1].items.find(item => item.name === 'Color y fondo'));
+  const cssPropertyExplanation = attributeBox.innerHTML;
   const formattingSection = { title: 'Introducción', description: '', items: [{ code: '<main><section><h2>Ejemplo</h2><p>Texto</p></section></main>' }] };
   sections.unshift(formattingSection);
   window.__htmlExamplesFormatted = false;
@@ -92,12 +98,13 @@ setTimeout(() => {
     domScript: written.includes('dom-section.js?v=1'),
     htmlCssScript: written.includes('html-css-section.js?v=1'),
     integrationScript: written.includes('integration-sections.js?v=1'),
+    cssPropertyScript: written.includes('css-property-explanations.js?v=1'),
     formattingScript: written.includes('example-code-formatter.js?v=1'),
     explanationScript: written.includes('explanation-enhancer.js?v=2'),
     courseUiScript: written.includes('course-ui.js?v=6'),
     styles: written.includes('theme-modern.css?v=2'),
     scriptSyntax,
-    attributeUsageExample: attributeBox.innerHTML.includes('<input required>'),
+    attributeUsageExample: attributeUsageExample.includes('<input required>'),
     webFoundations: sections[0]?.title === 'Fundamentos web' && sections[0].items.length === 5 && sections[0].items.at(-1).name === 'Patrones de diseño',
     cssSections: sections.slice(1, 4).map(section => `${section.title}:${section.items.length}`).join('|') === 'CSS · Principiante:10|CSS · Intermedio:7|CSS · Avanzado:7',
     cssTargetElement: sections[1]?.items.find(item => item.name === 'Selectores básicos')?.code.includes('<h2 id="titulo">') && sections[1].items.find(item => item.name === 'Selectores básicos').code.includes('<style>'),
@@ -108,6 +115,7 @@ setTimeout(() => {
     allSectionGuidance: sections.every(section => section.description.includes('Orden recomendado:')),
     formattedTagExample: formattedTagExample === '<main>\n  <section>\n    <h2>Ejemplo</h2>\n    <p>Texto</p>\n  </section>\n</main>',
     detailedHtmlTag: ['Sintaxis:','Tipo y significado:','Atributos destacados:','Ejemplo:'].every(part => detailedHtmlTag.includes(part)),
+    cssPropertyExplanation: cssPropertyExplanation.includes('background: #2563eb;') && cssPropertyExplanation.includes('Establece el fondo del elemento') && attributeToggle.textContent.startsWith('Ver propiedades'),
     javascriptSections: sections.slice(4, 7).map(section => `${section.title}:${section.items.length}`).join('|') === 'JavaScript · Principiante:10|JavaScript · Intermedio:8|JavaScript · Avanzado:6',
     domSection: sections[7]?.title === 'Manejo del DOM' && sections[7].items.length === 7,
     htmlCssSection: sections[8]?.title === 'HTML + CSS' && sections[8].items.length === 12,
@@ -117,7 +125,7 @@ setTimeout(() => {
     error: document.body.innerHTML,
   };
   console.log(result);
-  if (!written || result.actualClosingScripts !== 11 || result.escapedClosingScripts !== 3 || !result.attributeExamples || !result.webFoundationsScript || !result.cssScript || !result.javascriptScript || !result.domScript || !result.htmlCssScript || !result.integrationScript || !result.formattingScript || !result.explanationScript || !result.courseUiScript || scriptSyntax !== 'ok' || !result.attributeUsageExample || !result.webFoundations || !result.cssSections || !result.cssTargetElement || !result.cssApplicationMethods || !result.cssIntegratedExamples || !result.cssDetailedExplanations || !result.allDetailedExplanations || !result.allSectionGuidance || !result.formattedTagExample || !result.detailedHtmlTag || !result.javascriptSections || !result.domSection || !result.htmlCssSection || !result.integrationSections || !result.courseUiGrouped || !result.courseTheme) {
+  if (!written || result.actualClosingScripts !== 12 || result.escapedClosingScripts !== 3 || !result.attributeExamples || !result.webFoundationsScript || !result.cssScript || !result.javascriptScript || !result.domScript || !result.htmlCssScript || !result.integrationScript || !result.cssPropertyScript || !result.formattingScript || !result.explanationScript || !result.courseUiScript || scriptSyntax !== 'ok' || !result.attributeUsageExample || !result.webFoundations || !result.cssSections || !result.cssTargetElement || !result.cssApplicationMethods || !result.cssIntegratedExamples || !result.cssDetailedExplanations || !result.allDetailedExplanations || !result.allSectionGuidance || !result.formattedTagExample || !result.detailedHtmlTag || !result.cssPropertyExplanation || !result.javascriptSections || !result.domSection || !result.htmlCssSection || !result.integrationSections || !result.courseUiGrouped || !result.courseTheme) {
     process.exitCode = 1;
   }
 }, 200);

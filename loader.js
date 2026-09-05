@@ -24,7 +24,7 @@
     const example='<a class="ghost-btn" href="ejemplo.html" style="display:inline-flex;align-items:center;justify-content:center;min-height:40px;text-decoration:none;white-space:nowrap" title="Abrir ejemplo completo de HTML5">HTML de ejemplo</a>';
     html=html.replace(editor,example+editor);
 
-    const extraScripts='<scr'+'ipt src="attribute-examples.js?v=6"></scr'+'ipt><scr'+'ipt src="web-foundations-section.js?v=2"></scr'+'ipt><scr'+'ipt src="css-section.js?v=4"></scr'+'ipt><scr'+'ipt src="javascript-section.js?v=2"></scr'+'ipt><scr'+'ipt src="dom-section.js?v=1"></scr'+'ipt><scr'+'ipt src="html-css-section.js?v=1"></scr'+'ipt><scr'+'ipt src="integration-sections.js?v=1"></scr'+'ipt><scr'+'ipt src="example-code-formatter.js?v=1"></scr'+'ipt><scr'+'ipt src="explanation-enhancer.js?v=2"></scr'+'ipt><scr'+'ipt src="course-ui.js?v=6"></scr'+'ipt>';
+    const extraScripts='<scr'+'ipt src="attribute-examples.js?v=6"></scr'+'ipt><scr'+'ipt src="web-foundations-section.js?v=2"></scr'+'ipt><scr'+'ipt src="css-section.js?v=4"></scr'+'ipt><scr'+'ipt src="javascript-section.js?v=2"></scr'+'ipt><scr'+'ipt src="dom-section.js?v=1"></scr'+'ipt><scr'+'ipt src="html-css-section.js?v=1"></scr'+'ipt><scr'+'ipt src="integration-sections.js?v=1"></scr'+'ipt><scr'+'ipt src="css-property-explanations.js?v=1"></scr'+'ipt><scr'+'ipt src="example-code-formatter.js?v=1"></scr'+'ipt><scr'+'ipt src="explanation-enhancer.js?v=2"></scr'+'ipt><scr'+'ipt src="course-ui.js?v=6"></scr'+'ipt>';
     const bodyClose=html.lastIndexOf('</body>');
     html=html.slice(0,bodyClose)+extraScripts+html.slice(bodyClose);
     document.open();
