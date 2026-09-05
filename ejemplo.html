@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ejemplo completo de una página HTML5 semántica">
+  <title>Ejemplo HTML5 completo</title>
+  <style>
+    :root{--bg:#070b14;--panel:#0d1422;--panel2:#111b2e;--line:#2dd4bf;--cyan:#38bdf8;--violet:#8b5cf6;--text:#f8fafc;--muted:#94a3b8;--orange:#f97316}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 80% 0,rgba(56,189,248,.13),transparent 28%),radial-gradient(circle at 12% 10%,rgba(139,92,246,.12),transparent 25%),var(--bg);color:var(--text);font-family:Inter,Segoe UI,Arial,sans-serif;line-height:1.6}a{color:var(--cyan)}.wrap{width:min(1180px,calc(100% - 32px));margin:auto}.top{position:sticky;top:0;z-index:20;background:rgba(7,11,20,.88);backdrop-filter:blur(14px);border-bottom:1px solid rgba(56,189,248,.18)}.nav{min-height:68px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{font-weight:900;letter-spacing:.04em}.brand span{color:var(--line)}nav ul{display:flex;gap:18px;list-style:none;padding:0;margin:0;flex-wrap:wrap}nav a{text-decoration:none;color:#cbd5e1}.hero{padding:72px 0 42px;display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center}.hero h1{font-size:clamp(38px,6vw,72px);line-height:.95;margin:0 0 18px}.hero p{color:#b8c6d9;font-size:18px;max-width:720px}.badge{display:inline-flex;border:1px solid rgba(45,212,191,.35);background:rgba(45,212,191,.08);color:#7eead9;border-radius:999px;padding:6px 10px;font-size:13px}.hero-card,.card,.aside,.code-card{background:linear-gradient(145deg,rgba(17,27,46,.92),rgba(10,17,31,.95));border:1px solid rgba(148,163,184,.16);border-radius:20px;box-shadow:0 24px 70px rgba(0,0,0,.25)}.hero-card{padding:24px}.hero-card strong{color:#fff}.hero-card ul{padding-left:20px;color:#bac8da}.section{padding:42px 0}.section h2{font-size:30px;margin:0 0 8px}.lead{color:var(--muted);margin:0 0 22px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{padding:20px}.card h3{margin-top:0}.card p{color:#b7c4d6}.semantic-layout{display:grid;grid-template-columns:1fr 300px;gap:18px}.article{display:grid;gap:16px}.article article{padding:22px;border:1px solid rgba(56,189,248,.17);border-radius:16px;background:rgba(13,20,34,.72)}.article article h3{margin-top:0}.aside{padding:22px;height:max-content}.aside h3{margin-top:0}.quote{border-left:4px solid var(--violet);margin:18px 0;padding:14px 18px;background:rgba(139,92,246,.08);border-radius:0 12px 12px 0}.table-wrap{overflow:auto;border-radius:16px;border:1px solid rgba(148,163,184,.16)}table{width:100%;border-collapse:collapse;background:rgba(13,20,34,.78)}th,td{padding:13px 15px;text-align:left;border-bottom:1px solid rgba(148,163,184,.12)}th{background:rgba(56,189,248,.08);color:#dff5ff}form{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:grid;gap:7px}.field.full{grid-column:1/-1}input,select,textarea,button{font:inherit}input,select,textarea{width:100%;border:1px solid rgba(148,163,184,.22);border-radius:11px;background:#090f1c;color:white;padding:11px 12px;outline:none}input:focus,select:focus,textarea:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(56,189,248,.08)}button,.back{border:1px solid rgba(45,212,191,.4);background:linear-gradient(135deg,rgba(45,212,191,.18),rgba(56,189,248,.12));color:#eafffa;border-radius:11px;padding:10px 15px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}.code-card{padding:0;overflow:hidden}.code-head{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid rgba(148,163,184,.14);background:#111a2b}.code-head span{color:#9fb2cc}.code-card pre{margin:0;padding:20px;overflow:auto;background:#060b13;color:#d8e7ff;font:13px/1.6 Consolas,monospace}.tag{color:#f472b6}.attr{color:#67e8f9}.value{color:#facc15}details{border:1px solid rgba(148,163,184,.16);border-radius:12px;padding:12px 14px;background:rgba(13,20,34,.7)}summary{cursor:pointer;font-weight:700}.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.metric{padding:16px;border-radius:14px;background:rgba(56,189,248,.06);border:1px solid rgba(56,189,248,.14)}progress{width:100%;accent-color:var(--line)}footer{margin-top:36px;border-top:1px solid rgba(148,163,184,.14);padding:28px 0 40px;color:var(--muted)}@media(max-width:900px){.hero,.semantic-layout{grid-template-columns:1fr}.grid,.metrics{grid-template-columns:1fr 1fr}.aside{height:auto}}@media(max-width:620px){.nav{align-items:flex-start;padding:14px 0;flex-direction:column}.hero{padding-top:42px}.grid,.metrics,form{grid-template-columns:1fr}.field.full{grid-column:auto}.wrap{width:min(100% - 20px,1180px)}}
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="wrap nav">
+      <div class="brand">HTML<span>5</span> · Ejemplo completo</div>
+      <nav aria-label="Navegación principal">
+        <ul>
+          <li><a href="#semantica">Semántica</a></li>
+          <li><a href="#tabla">Tabla</a></li>
+          <li><a href="#formulario">Formulario</a></li>
+          <li><a href="#codigo">Código</a></li>
+        </ul>
+      </nav>
+      <a class="back" href="index.html">← Volver a la biblioteca</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero wrap">
+      <div>
+        <span class="badge">Ejemplo práctico · HTML5 semántico</span>
+        <h1>Una página HTML completa y bien estructurada.</h1>
+        <p>Este ejemplo reúne las etiquetas más importantes en un solo documento: encabezado, navegación, contenido principal, secciones, artículos, listas, tabla, formulario, elementos interactivos y pie de página.</p>
+      </div>
+      <aside class="hero-card" aria-label="Contenido del ejemplo">
+        <strong>En este ejemplo encontrarás:</strong>
+        <ul>
+          <li><code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code></li>
+          <li><code>&lt;section&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;aside&gt;</code></li>
+          <li>listas, enlaces, citas y detalles</li>
+          <li>tabla accesible</li>
+          <li>formulario con etiquetas</li>
+          <li><code>&lt;footer&gt;</code></li>
+        </ul>
+      </aside>
+    </section>
+
+    <section class="section wrap" id="semantica">
+      <h2>Estructura semántica</h2>
+      <p class="lead">Cada bloque usa una etiqueta según el significado del contenido y no solamente por su apariencia.</p>
+      <div class="semantic-layout">
+        <div class="article">
+          <article>
+            <h3>¿Por qué usar HTML semántico?</h3>
+            <p>Ayuda al navegador, a los motores de búsqueda y a las tecnologías de asistencia a comprender qué función cumple cada parte de la página.</p>
+            <blockquote class="quote">Una estructura clara hace que el contenido sea más fácil de mantener, navegar y comprender.</blockquote>
+            <h4>Ventajas principales</h4>
+            <ul>
+              <li>Mejora la accesibilidad.</li>
+              <li>Facilita el SEO.</li>
+              <li>Hace el código más legible.</li>
+            </ul>
+          </article>
+          <article>
+            <h3>Artículo independiente</h3>
+            <p>Un <code>&lt;article&gt;</code> representa contenido que podría tener sentido por sí mismo, como una noticia, una publicación o una entrada de blog.</p>
+            <p><strong>HTML</strong> define la estructura, mientras que <em>CSS</em> se encarga de la presentación visual.</p>
+          </article>
+        </div>
+        <aside class="aside">
+          <h3>Dato relacionado</h3>
+          <p>El elemento <code>&lt;aside&gt;</code> contiene información complementaria al contenido principal.</p>
+          <details>
+            <summary>Ver recomendación</summary>
+            <p>Evita usar <code>&lt;div&gt;</code> para todo. Primero revisa si existe una etiqueta semántica que represente mejor el contenido.</p>
+          </details>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section wrap">
+      <h2>Tarjetas de contenido</h2>
+      <p class="lead">Un mismo documento puede combinar encabezados, párrafos, enlaces y otros elementos.</p>
+      <div class="grid">
+        <article class="card">
+          <h3>Enlaces</h3>
+          <p>Los enlaces se crean con <code>&lt;a&gt;</code> y permiten conectar páginas o recursos.</p>
+          <a href="https://developer.mozilla.org/es/docs/Web/HTML" target="_blank" rel="noopener noreferrer">Documentación HTML ↗</a>
+        </article>
+        <article class="card">
+          <h3>Texto con significado</h3>
+          <p>Podemos usar <strong>strong</strong> para importancia y <em>em</em> para énfasis.</p>
+          <p><mark>mark</mark> también permite resaltar una parte relevante.</p>
+        </article>
+        <article class="card">
+          <h3>Progreso</h3>
+          <label for="avance">Avance del curso: 72%</label>
+          <progress id="avance" value="72" max="100">72%</progress>
+        </article>
+      </div>
+    </section>
+
+    <section class="section wrap" id="tabla">
+      <h2>Tabla de ejemplo</h2>
+      <p class="lead">Una tabla debe utilizarse para datos tabulares, con encabezados que describan cada columna.</p>
+      <div class="table-wrap">
+        <table>
+          <caption style="padding:12px;color:#94a3b8;text-align:left">Plan de estudio básico</caption>
+          <thead>
+            <tr><th scope="col">Tema</th><th scope="col">Nivel</th><th scope="col">Estado</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>HTML semántico</td><td>Básico</td><td>Completado</td></tr>
+            <tr><td>Formularios</td><td>Intermedio</td><td>En progreso</td></tr>
+            <tr><td>Accesibilidad</td><td>Intermedio</td><td>Pendiente</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section wrap" id="formulario">
+      <h2>Formulario accesible</h2>
+      <p class="lead">Cada control está asociado con su etiqueta <code>&lt;label&gt;</code>.</p>
+      <div class="card">
+        <form action="#" method="post" onsubmit="event.preventDefault(); document.getElementById('mensaje').textContent='Formulario enviado correctamente (demostración).';">
+          <div class="field">
+            <label for="nombre">Nombre</label>
+            <input id="nombre" name="nombre" type="text" placeholder="Escribe tu nombre" required>
+          </div>
+          <div class="field">
+            <label for="correo">Correo electrónico</label>
+            <input id="correo" name="correo" type="email" placeholder="usuario@ejemplo.com" required>
+          </div>
+          <div class="field">
+            <label for="tema">Tema favorito</label>
+            <select id="tema" name="tema">
+              <option>Semántica HTML</option>
+              <option>Formularios</option>
+              <option>Tablas</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="fecha">Fecha</label>
+            <input id="fecha" name="fecha" type="date">
+          </div>
+          <div class="field full">
+            <label for="comentario">Comentario</label>
+            <textarea id="comentario" name="comentario" rows="4" placeholder="Escribe un comentario..."></textarea>
+          </div>
+          <div class="field full">
+            <button type="submit">Enviar formulario</button>
+            <output id="mensaje" aria-live="polite"></output>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="section wrap" id="codigo">
+      <h2>Esqueleto del documento</h2>
+      <p class="lead">Esta es la estructura base que deberías reconocer en cualquier página HTML moderna.</p>
+      <div class="code-card">
+        <div class="code-head"><strong>Código HTML</strong><span>estructura-base.html</span></div>
+        <pre><code><span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="value">"es"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;head&gt;</span>
+    <span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="value">"UTF-8"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;meta</span> <span class="attr">name</span>=<span class="value">"viewport"</span> <span class="attr">content</span>=<span class="value">"width=device-width, initial-scale=1.0"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;title&gt;</span>Mi página<span class="tag">&lt;/title&gt;</span>
+  <span class="tag">&lt;/head&gt;</span>
+  <span class="tag">&lt;body&gt;</span>
+    <span class="tag">&lt;header&gt;</span>...<span class="tag">&lt;/header&gt;</span>
+    <span class="tag">&lt;nav&gt;</span>...<span class="tag">&lt;/nav&gt;</span>
+    <span class="tag">&lt;main&gt;</span>
+      <span class="tag">&lt;section&gt;</span>
+        <span class="tag">&lt;article&gt;</span>...<span class="tag">&lt;/article&gt;</span>
+      <span class="tag">&lt;/section&gt;</span>
+    <span class="tag">&lt;/main&gt;</span>
+    <span class="tag">&lt;footer&gt;</span>...<span class="tag">&lt;/footer&gt;</span>
+  <span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></code></pre>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">Ejemplo educativo de HTML5 · Biblioteca interactiva</div>
+  </footer>
+</body>
+</html>
