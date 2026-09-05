@@ -64,6 +64,36 @@
     }
   );
 
+  const explanations={
+    'Estilos en línea':'En el ejemplo, el navegador encuentra color y font-weight dentro del propio párrafo, por eso solo ese elemento cambia. Conviene para una prueba rápida, pero repetirlo dificulta actualizar el diseño.',
+    'Estilos internos':'En el ejemplo, la regla .interno está dentro de <style> y se aplica al párrafo que tiene esa clase. Todas las reglas quedan disponibles únicamente para los elementos de esta página.',
+    'Hoja de estilos externa':'En el ejemplo, <link> carga estilos.css mediante href. La clase .externo conecta el párrafo con la regla del archivo, que también puede reutilizarse desde otras páginas.',
+    'Selectores básicos':'p alcanza todos los párrafos, .destacado alcanza cualquier elemento con esa clase y #titulo busca el elemento con ese id. Se prefieren clases para estilos que se repetirán.',
+    'Color y fondo':'En el ejemplo, color pinta las letras y background pinta el área de la caja. El padding separa el texto de los bordes para que el fondo tenga espacio visible.',
+    'Tipografía':'Cada propiedad controla una parte de la lectura: font-family el tipo de letra, font-size su tamaño, font-weight su grosor, line-height el espacio entre líneas y text-align la alineación.',
+    'Modelo de caja':'El contenido ocupa el centro; padding crea espacio interior, border marca el límite y margin separa la caja de otros elementos. En el resultado pueden distinguirse esas capas.',
+    'Tamaños y unidades':'width: 80% hace que el panel dependa de su contenedor, mientras max-width evita que crezca más de 420px. rem toma como referencia el tamaño de letra raíz.',
+    'Bordes y esquinas':'border dibuja el contorno, border-radius suaviza las esquinas y box-shadow agrega profundidad sin modificar el tamaño real de la caja.',
+    'Ejemplo integrador · Principiante':'Primero HTML crea el article, el título y el párrafo. Después .tarjeta-inicial diseña el contenedor, mientras los selectores h3 y p ajustan por separado sus textos.',
+    'Flujo y display':'inline-block permite que los span compartan una línea conservando ancho, padding y margin. display: none retira por completo el tercer elemento del diseño.',
+    'Flexbox':'display: flex convierte .fila en contenedor flexible. justify-content distribuye el espacio horizontal, align-items alinea los elementos y gap mantiene una separación uniforme.',
+    'CSS Grid':'display: grid crea la rejilla y repeat(3, 1fr) divide el ancho disponible en tres columnas iguales. gap separa las celdas sin añadir márgenes individuales.',
+    'Posicionamiento':'El contenedor relative sirve como referencia. Por eso la insignia absolute se ubica a 8px de su esquina superior derecha y no de toda la página.',
+    'Estados y pseudoclases':'La apariencia inicial pertenece a .boton. :hover se activa con el puntero y :focus al navegar con teclado; ambos estados dan una respuesta visual al usuario.',
+    'Diseño responsive':'La rejilla muestra dos columnas normalmente. Cuando el espacio disponible baja de 600px, @media reemplaza esa distribución por una sola columna.',
+    'Ejemplo integrador · Intermedio':'El encabezado usa Flexbox porque organiza una fila; los cursos usan Grid porque necesitan columnas. Cada producto referencia su insignia y la media query adapta el conjunto a pantallas pequeñas.',
+    'Variables CSS':'--principal y --radio guardan valores con nombre en :root. var() los recupera dentro del componente, de modo que cambiar el tema requiere editar cada valor una sola vez.',
+    'Valores fluidos':'clamp(24px, 5vw, 52px) elige un tamaño flexible basado en la pantalla, pero nunca menor que 24px ni mayor que 52px.',
+    'Transformaciones y transiciones':'Al pasar el puntero, transform desplaza y amplía el elemento sin alterar el flujo del documento. transition interpola el cambio para evitar un salto instantáneo.',
+    'Animaciones':'@keyframes describe el estado final del pulso. animation repite ese recorrido alternando entre el estado inicial y final cada 1.2 segundos.',
+    'Cascada y especificidad':'Las tres reglas coinciden con distinto alcance. La clase vence a la etiqueta y el id vence a ambas; por eso cada párrafo termina con un color diferente.',
+    'Movimiento accesible':'La animación se ejecuta normalmente, pero prefers-reduced-motion detecta la preferencia del sistema y la desactiva para evitar movimiento innecesario.',
+    'Ejemplo integrador · Avanzado':'El componente toma colores y radios de variables, adapta sus medidas con clamp y anima su entrada. El hover añade respuesta y la media query conserva la experiencia para quien reduce animaciones.'
+  };
+  sections.slice(-3).forEach(section=>section.items.forEach(item=>{
+    if(explanations[item.name])item.description+=` ${explanations[item.name]}`;
+  }));
+
   buildNav();
   render();
 })();
