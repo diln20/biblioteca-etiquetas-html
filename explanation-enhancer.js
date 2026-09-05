@@ -44,6 +44,7 @@
     if(section.title==='Manejo del DOM')return `Primero identifica el elemento creado por HTML; luego observa cómo JavaScript usa «${label}» para encontrarlo, recorrerlo o modificarlo. Ejecuta el control del resultado y comprueba qué parte del DOM cambia.`;
     if(section.title.startsWith('JavaScript'))return `Lee el ejemplo en este orden: valores iniciales, operación con «${label}» y salida obtenida. Cambia uno de los datos para comprobar cómo esa instrucción transforma el resultado.`;
     if(section.title.startsWith('CSS'))return `Relaciona el selector con el elemento HTML que posee la etiqueta, clase o id correspondiente. Después cambia una propiedad y compara el código con el resultado para reconocer su efecto visual.`;
+    if(section.title.startsWith('Git'))return `Lee primero el estado inicial, ejecuta mentalmente «${label}» y compara la salida esperada. Antes de usarlo en un proyecto real, confirma la rama activa y los archivos afectados con git status.`;
     return htmlTagDetail(item,label);
   };
 

@@ -54,6 +54,8 @@ setTimeout(() => {
   (0, eval)(fs.readFileSync('html-css-section.js', 'utf8'));
   window.__integrationSectionsAdded = false;
   (0, eval)(fs.readFileSync('integration-sections.js', 'utf8'));
+  window.__gitSectionAdded = false;
+  (0, eval)(fs.readFileSync('git-section.js', 'utf8'));
   window.__cssPropertiesExplained = false;
   (0, eval)(fs.readFileSync('css-property-explanations.js', 'utf8'));
   createCard(sections[1].items.find(item => item.name === 'Color y fondo'));
@@ -98,11 +100,12 @@ setTimeout(() => {
     domScript: written.includes('dom-section.js?v=1'),
     htmlCssScript: written.includes('html-css-section.js?v=1'),
     integrationScript: written.includes('integration-sections.js?v=1'),
+    gitScript: written.includes('git-section.js?v=1'),
     cssPropertyScript: written.includes('css-property-explanations.js?v=1'),
     formattingScript: written.includes('example-code-formatter.js?v=1'),
-    explanationScript: written.includes('explanation-enhancer.js?v=2'),
-    courseUiScript: written.includes('course-ui.js?v=6'),
-    styles: written.includes('theme-modern.css?v=2'),
+    explanationScript: written.includes('explanation-enhancer.js?v=3'),
+    courseUiScript: written.includes('course-ui.js?v=7'),
+    styles: written.includes('theme-modern.css?v=3'),
     scriptSyntax,
     attributeUsageExample: attributeUsageExample.includes('<input required>'),
     webFoundations: sections[0]?.title === 'Fundamentos web' && sections[0].items.length === 5 && sections[0].items.at(-1).name === 'Patrones de diseño',
@@ -120,12 +123,13 @@ setTimeout(() => {
     domSection: sections[7]?.title === 'Manejo del DOM' && sections[7].items.length === 7,
     htmlCssSection: sections[8]?.title === 'HTML + CSS' && sections[8].items.length === 12,
     integrationSections: sections.slice(9, 15).map(section => `${section.title}:${section.items.length}`).join('|') === 'HTML + JavaScript · Principiante:3|HTML + JavaScript · Intermedio:3|HTML + JavaScript · Avanzado:3|HTML + CSS + JavaScript · Principiante:3|HTML + CSS + JavaScript · Intermedio:3|HTML + CSS + JavaScript · Avanzado:3',
-    courseUiGrouped: navButtons.filter(button => button.classList.values.includes('group-start')).length === 6 && navButtons[0].label.textContent === 'HTML' && navButtons[4].text.textContent === 'Principiante',
+    gitSections: sections.slice(15, 18).map(section => `${section.title}:${section.items.length}`).join('|') === 'Git · Principiante:8|Git · Intermedio:9|Git · Avanzado:7',
+    courseUiGrouped: navButtons.filter(button => button.classList.values.includes('group-start')).length === 7 && navButtons[0].label.textContent === 'HTML' && navButtons[4].text.textContent === 'Principiante' && navButtons[15].label.textContent === 'Git',
     courseTheme: document.body.dataset.course === 'HTML',
     error: document.body.innerHTML,
   };
   console.log(result);
-  if (!written || result.actualClosingScripts !== 12 || result.escapedClosingScripts !== 3 || !result.attributeExamples || !result.webFoundationsScript || !result.cssScript || !result.javascriptScript || !result.domScript || !result.htmlCssScript || !result.integrationScript || !result.cssPropertyScript || !result.formattingScript || !result.explanationScript || !result.courseUiScript || scriptSyntax !== 'ok' || !result.attributeUsageExample || !result.webFoundations || !result.cssSections || !result.cssTargetElement || !result.cssApplicationMethods || !result.cssIntegratedExamples || !result.cssDetailedExplanations || !result.allDetailedExplanations || !result.allSectionGuidance || !result.formattedTagExample || !result.detailedHtmlTag || !result.cssPropertyExplanation || !result.javascriptSections || !result.domSection || !result.htmlCssSection || !result.integrationSections || !result.courseUiGrouped || !result.courseTheme) {
+  if (!written || result.actualClosingScripts !== 13 || result.escapedClosingScripts !== 3 || !result.attributeExamples || !result.webFoundationsScript || !result.cssScript || !result.javascriptScript || !result.domScript || !result.htmlCssScript || !result.integrationScript || !result.gitScript || !result.cssPropertyScript || !result.formattingScript || !result.explanationScript || !result.courseUiScript || scriptSyntax !== 'ok' || !result.attributeUsageExample || !result.webFoundations || !result.cssSections || !result.cssTargetElement || !result.cssApplicationMethods || !result.cssIntegratedExamples || !result.cssDetailedExplanations || !result.allDetailedExplanations || !result.allSectionGuidance || !result.formattedTagExample || !result.detailedHtmlTag || !result.cssPropertyExplanation || !result.javascriptSections || !result.domSection || !result.htmlCssSection || !result.integrationSections || !result.gitSections || !result.courseUiGrouped || !result.courseTheme) {
     process.exitCode = 1;
   }
 }, 200);

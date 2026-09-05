@@ -9,6 +9,7 @@
     if(title.startsWith('HTML + CSS + JavaScript'))return 'Proyecto completo';
     if(title.startsWith('HTML + JavaScript'))return 'HTML + JavaScript';
     if(title==='HTML + CSS')return 'HTML + CSS';
+    if(title.startsWith('Git'))return 'Git';
     if(title.startsWith('JavaScript')||title==='Manejo del DOM')return 'JavaScript';
     if(title.startsWith('CSS'))return 'CSS';
     return 'HTML';

@@ -27,6 +27,7 @@ body[data-course="JavaScript"]{--course-accent:#facc15;--course-soft:rgba(250,20
 body[data-course="HTML + CSS"]{--course-accent:#a78bfa;--course-soft:rgba(167,139,250,.13);--course-line:rgba(167,139,250,.4)}
 body[data-course="HTML + JavaScript"]{--course-accent:#34d399;--course-soft:rgba(52,211,153,.12);--course-line:rgba(52,211,153,.4)}
 body[data-course="Proyecto completo"]{--course-accent:#22d3ee;--course-soft:rgba(34,211,238,.12);--course-line:rgba(34,211,238,.4)}
+body[data-course="Git"]{--course-accent:#f97316;--course-soft:rgba(249,115,22,.12);--course-line:rgba(249,115,22,.42)}
 
 .hero{background:linear-gradient(118deg,#101a36 0%,#172950 52%,#0c1935 100%)}
 .sidebar,.content-panel{background:linear-gradient(180deg,rgba(14,23,42,.97),rgba(7,13,26,.99));border-color:#263753}
