@@ -17,7 +17,7 @@
     const rx=new RegExp('(?:\\s|<)'+escRx(attr)+'(?:\\s*=|\\s|>|$)','i');
     const line=(item.code||'').split('\n').find(l=>rx.test(l));
     if(line)return line.trim();
-    const tag=((item.tag||'').match(/<([a-z][\\w-]*)/i)||[])[1]||'elemento';
+    const tag=((item.tag||'').match(/<([a-z][\w-]*)/i)||[])[1]||'elemento';
     if(booleanAttrs.has(attr))return `<${tag} ${attr}>`;
     return `<${tag} ${attr}="${values[attr]||'valor'}">`;
   };

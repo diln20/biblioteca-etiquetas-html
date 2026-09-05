@@ -13,19 +13,20 @@
     const close=html.lastIndexOf('</script>');
     if(open>=0&&close>open){
       const start=open+8;
-      const js=html.slice(start,close).replaceAll('</script>','<\/script>');
+      const js=html.slice(start,close).replaceAll('</script>','<\\/script>');
       html=html.slice(0,start)+js+html.slice(close);
     }
 
-    const styles='<link rel="stylesheet" href="screen-fit.css"><link rel="stylesheet" href="theme-modern.css">';
+    const styles='<link rel="stylesheet" href="screen-fit.css"><link rel="stylesheet" href="theme-modern.css?v=2">';
     html=html.replace('</head>',styles+'</head>');
 
     const editor='<button class="ghost-btn" id="editorBtn" type="button">Editor en vivo</button>';
     const example='<a class="ghost-btn" href="ejemplo.html" style="display:inline-flex;align-items:center;justify-content:center;min-height:40px;text-decoration:none;white-space:nowrap" title="Abrir ejemplo completo de HTML5">HTML de ejemplo</a>';
     html=html.replace(editor,example+editor);
 
-    // Los ejemplos de atributos ya forman parte del bundle principal.
-    // No se inyectan scripts externos para evitar romper la inicialización.
+    const extraScripts='<scr'+'ipt src="attribute-examples.js?v=6"></scr'+'ipt><scr'+'ipt src="web-foundations-section.js?v=2"></scr'+'ipt><scr'+'ipt src="css-section.js?v=3"></scr'+'ipt><scr'+'ipt src="javascript-section.js?v=2"></scr'+'ipt><scr'+'ipt src="dom-section.js?v=1"></scr'+'ipt><scr'+'ipt src="html-css-section.js?v=1"></scr'+'ipt><scr'+'ipt src="integration-sections.js?v=1"></scr'+'ipt><scr'+'ipt src="course-ui.js?v=6"></scr'+'ipt>';
+    const bodyClose=html.lastIndexOf('</body>');
+    html=html.slice(0,bodyClose)+extraScripts+html.slice(bodyClose);
     document.open();
     document.write(html);
     document.close();
