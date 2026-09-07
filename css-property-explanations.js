@@ -61,13 +61,18 @@
     const box=fragment.querySelector('.attributes-box');
     const toggle=fragment.querySelector('.attributes-toggle');
     const properties=propertiesOf(item);
+    if(!properties.length){
+      if(box)box.hidden=true;
+      if(toggle)toggle.hidden=true;
+      return fragment;
+    }
     if(box)box.innerHTML=properties.map(({name,values})=>{
       const explanation=name.startsWith('--')
         ? 'Declara una variable CSS reutilizable; var() permite aplicar su valor en otras reglas.'
         : info[name]||'Configura una característica visual o de distribución del elemento seleccionado.';
       const examples=values.map(value=>`${name}: ${value};`).join('\n');
       return `<div class="attribute-item"><div class="attribute-head"><code>${esc(name)}</code><span>${esc(explanation)}</span></div><div class="attribute-example-label">Valor usado y efecto en este ejemplo</div><pre class="attribute-example"><code>${highlight(examples)}</code></pre></div>`;
-    }).join('')||'<span>Este ejemplo explica una forma de aplicar CSS; no contiene declaraciones adicionales para analizar.</span>';
+    }).join('');
     if(toggle){
       const label=()=>toggle.textContent=box.hidden?`Ver propiedades (${properties.length})`:'Ocultar propiedades';
       label();

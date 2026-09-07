@@ -44,12 +44,22 @@ setTimeout(() => {
   global.render = () => {};
   window.__webFoundationsAdded = false;
   (0, eval)(fs.readFileSync('web-foundations-section.js', 'utf8'));
+  window.__htmlPracticeAdded = false;
+  (0, eval)(fs.readFileSync('html-practice-section.js', 'utf8'));
   window.__cssSectionAdded = false;
   (0, eval)(fs.readFileSync('css-section.js', 'utf8'));
+  window.__cssFrameworksAdded = false;
+  (0, eval)(fs.readFileSync('css-frameworks-section.js', 'utf8'));
   window.__javascriptSectionAdded = false;
   (0, eval)(fs.readFileSync('javascript-section.js', 'utf8'));
   window.__domSectionAdded = false;
   (0, eval)(fs.readFileSync('dom-section.js', 'utf8'));
+  window.__frontendFrameworksAdded = false;
+  (0, eval)(fs.readFileSync('frontend-frameworks-section.js', 'utf8'));
+  window.__frameworkProjectsAdded = false;
+  (0, eval)(fs.readFileSync('framework-projects-section.js', 'utf8'));
+  window.__backendFastApiAdded = false;
+  (0, eval)(fs.readFileSync('backend-fastapi-section.js', 'utf8'));
   window.__htmlCssSectionAdded = false;
   (0, eval)(fs.readFileSync('html-css-section.js', 'utf8'));
   window.__integrationSectionsAdded = false;
@@ -58,7 +68,7 @@ setTimeout(() => {
   (0, eval)(fs.readFileSync('git-section.js', 'utf8'));
   window.__cssPropertiesExplained = false;
   (0, eval)(fs.readFileSync('css-property-explanations.js', 'utf8'));
-  createCard(sections[1].items.find(item => item.name === 'Color y fondo'));
+  createCard(sections.find(section => section.title === 'CSS · Principiante').items.find(item => item.name === 'Color y fondo'));
   const cssPropertyExplanation = attributeBox.innerHTML;
   const formattingSection = { title: 'Introducción', description: '', items: [{ code: '<main><section><h2>Ejemplo</h2><p>Texto</p></section></main>' }] };
   sections.unshift(formattingSection);
@@ -95,41 +105,52 @@ setTimeout(() => {
     escapedClosingScripts: (written.match(/<\\\/script>/g) || []).length,
     attributeExamples: written.includes('attribute-examples.js?v=6'),
     webFoundationsScript: written.includes('web-foundations-section.js?v=2'),
+    htmlPracticeScript: written.includes('html-practice-section.js?v=1'),
     cssScript: written.includes('css-section.js?v=4'),
+    cssFrameworksScript: written.includes('css-frameworks-section.js?v=4'),
     javascriptScript: written.includes('javascript-section.js?v=2'),
+    frontendFrameworksScript: written.includes('frontend-frameworks-section.js?v=4'),
+    frameworkProjectsScript: written.includes('framework-projects-section.js?v=3'),
+    backendFastApiScript: written.includes('backend-fastapi-section.js?v=11'),
     domScript: written.includes('dom-section.js?v=1'),
     htmlCssScript: written.includes('html-css-section.js?v=1'),
     integrationScript: written.includes('integration-sections.js?v=1'),
     gitScript: written.includes('git-section.js?v=1'),
-    cssPropertyScript: written.includes('css-property-explanations.js?v=1'),
+    cssPropertyScript: written.includes('css-property-explanations.js?v=2'),
     formattingScript: written.includes('example-code-formatter.js?v=1'),
-    explanationScript: written.includes('explanation-enhancer.js?v=3'),
-    courseUiScript: written.includes('course-ui.js?v=7'),
-    styles: written.includes('theme-modern.css?v=3'),
+    explanationScript: written.includes('explanation-enhancer.js?v=9'),
+    courseUiScript: written.includes('course-ui.js?v=12'),
+    styles: written.includes('screen-fit.css?v=2') && written.includes('theme-modern.css?v=6'),
     scriptSyntax,
     attributeUsageExample: attributeUsageExample.includes('<input required>'),
     webFoundations: sections[0]?.title === 'Fundamentos web' && sections[0].items.length === 5 && sections[0].items.at(-1).name === 'Patrones de diseño',
-    cssSections: sections.slice(1, 4).map(section => `${section.title}:${section.items.length}`).join('|') === 'CSS · Principiante:10|CSS · Intermedio:7|CSS · Avanzado:7',
-    cssTargetElement: sections[1]?.items.find(item => item.name === 'Selectores básicos')?.code.includes('<h2 id="titulo">') && sections[1].items.find(item => item.name === 'Selectores básicos').code.includes('<style>'),
-    cssApplicationMethods: ['Estilos en línea','Estilos internos','Hoja de estilos externa'].every(name => sections[1]?.items.some(item => item.name === name)),
-    cssIntegratedExamples: sections.slice(1, 4).every(section => section.items.at(-1)?.name.startsWith('Ejemplo integrador')),
-    cssDetailedExplanations: sections.slice(1, 4).every(section => section.items.every(item => item.description.length > 150)),
+    htmlPractice: sections.find(section => section.title === 'Práctica HTML paso a paso')?.items.length === 7,
+    cssSections: ['CSS · Principiante','CSS · Intermedio','CSS · Avanzado'].map(title => `${title}:${sections.find(section => section.title === title)?.items.length}`).join('|') === 'CSS · Principiante:10|CSS · Intermedio:7|CSS · Avanzado:7',
+    cssFrameworks: ['Introducción:8','Bootstrap:13','Tailwind:13','Bulma:13','Foundation:13'].every(expected => { const [level,count] = expected.split(':'); return sections.find(section => section.title === `Frameworks CSS · ${level}`)?.items.length === Number(count); }),
+    cssTargetElement: sections.find(section => section.title === 'CSS · Principiante')?.items.find(item => item.name === 'Selectores básicos')?.code.includes('<h2 id="titulo">') && sections.find(section => section.title === 'CSS · Principiante').items.find(item => item.name === 'Selectores básicos').code.includes('<style>'),
+    cssApplicationMethods: ['Estilos en línea','Estilos internos','Hoja de estilos externa'].every(name => sections.find(section => section.title === 'CSS · Principiante')?.items.some(item => item.name === name)),
+    cssIntegratedExamples: ['CSS · Principiante','CSS · Intermedio','CSS · Avanzado'].every(title => sections.find(section => section.title === title)?.items.at(-1)?.name.startsWith('Ejemplo integrador')),
+    cssDetailedExplanations: ['CSS · Principiante','CSS · Intermedio','CSS · Avanzado'].every(title => sections.find(section => section.title === title)?.items.every(item => item.description.length > 150)),
     allDetailedExplanations: sections.every(section => section.items.every(item => item.description.includes('Para leer este ejemplo:'))),
     allSectionGuidance: sections.every(section => section.description.includes('Orden recomendado:')),
     formattedTagExample: formattedTagExample === '<main>\n  <section>\n    <h2>Ejemplo</h2>\n    <p>Texto</p>\n  </section>\n</main>',
     detailedHtmlTag: ['Sintaxis:','Tipo y significado:','Atributos destacados:','Ejemplo:'].every(part => detailedHtmlTag.includes(part)),
     cssPropertyExplanation: cssPropertyExplanation.includes('background: #2563eb;') && cssPropertyExplanation.includes('Establece el fondo del elemento') && attributeToggle.textContent.startsWith('Ver propiedades'),
-    javascriptSections: sections.slice(4, 7).map(section => `${section.title}:${section.items.length}`).join('|') === 'JavaScript · Principiante:10|JavaScript · Intermedio:8|JavaScript · Avanzado:6',
-    domSection: sections[7]?.title === 'Manejo del DOM' && sections[7].items.length === 7,
-    htmlCssSection: sections[8]?.title === 'HTML + CSS' && sections[8].items.length === 12,
-    integrationSections: sections.slice(9, 15).map(section => `${section.title}:${section.items.length}`).join('|') === 'HTML + JavaScript · Principiante:3|HTML + JavaScript · Intermedio:3|HTML + JavaScript · Avanzado:3|HTML + CSS + JavaScript · Principiante:3|HTML + CSS + JavaScript · Intermedio:3|HTML + CSS + JavaScript · Avanzado:3',
-    gitSections: sections.slice(15, 18).map(section => `${section.title}:${section.items.length}`).join('|') === 'Git · Principiante:8|Git · Intermedio:9|Git · Avanzado:7',
-    courseUiGrouped: navButtons.filter(button => button.classList.values.includes('group-start')).length === 7 && navButtons[0].label.textContent === 'HTML' && navButtons[4].text.textContent === 'Principiante' && navButtons[15].label.textContent === 'Git',
+    javascriptSections: ['JavaScript · Principiante','JavaScript · Intermedio','JavaScript · Avanzado'].map(title => `${title}:${sections.find(section => section.title === title)?.items.length}`).join('|') === 'JavaScript · Principiante:10|JavaScript · Intermedio:8|JavaScript · Avanzado:6',
+    frontendFrameworks: ['Introducción:8','React:13','Angular:13','Vue:13','Svelte:13'].every(expected => { const [level,count] = expected.split(':'); return sections.find(section => section.title === `Frameworks frontend · ${level}`)?.items.length === Number(count); }),
+    frameworkFolderStructures: ['React','Angular','Vue','Svelte'].every(level => sections.find(section => section.title === `Frameworks frontend · ${level}`)?.items.some(item => item.name.startsWith('Estructura recomendada'))) && ['Bootstrap','Tailwind','Bulma','Foundation'].every(level => sections.find(section => section.title === `Frameworks CSS · ${level}`)?.items.some(item => item.name.startsWith('Estructura de un proyecto'))),
+    frameworkProjects: ['Introducción:5','React + Tailwind:8','Angular + Bootstrap:8','Vue + Bulma:8','Svelte + Foundation:8'].every(expected => { const [level,count] = expected.split(':'); return sections.find(section => section.title === `Proyectos con frameworks · ${level}`)?.items.length === Number(count); }) && sections.find(section => section.title === 'Proyectos con frameworks · Introducción')?.items.some(item => item.name === 'Cómo crear carpetas desde el Explorador') && ['React + Tailwind','Angular + Bootstrap','Vue + Bulma','Svelte + Foundation'].every(level => sections.find(section => section.title === `Proyectos con frameworks · ${level}`)?.items.some(item => item.name.startsWith('Armar las carpetas de'))),
+    backendFastApi: ['Introducción:6','Armar el proyecto:11','Preparación:9','Instalar PostgreSQL:12','API:9','PostgreSQL:9','CRUD:9','React + Tailwind:11','Patrones de diseño:15','Producción:9'].every(expected => { const [level,count] = expected.split(':'); return sections.find(section => section.title === `Backend FastAPI · ${level}`)?.items.length === Number(count); }) && !sections.some(section => section.title === 'Backend FastAPI · Caso cotidiano') && ['Introducción','Armar el proyecto','Preparación','Instalar PostgreSQL','API','PostgreSQL','CRUD','React + Tailwind','Patrones de diseño','Producción'].map(level => sections.findIndex(section => section.title === `Backend FastAPI · ${level}`)).every((index,position,indexes) => position === 0 || index === indexes[position-1] + 1) && sections.filter(section => section.title.startsWith('Backend FastAPI · ')).every((section,index) => section.description.startsWith(`Fase ${index+1} de 10.`) && section.items[0]?.tag === 'Construcción guiada' && section.items[0]?.name.startsWith(`Paso ${index+1} `) && section.items[0]?.guide?.every(entry => entry.length === 3) && section.items.at(-1)?.name.startsWith(`Hito ${index+1} `)),
+    domSection: sections.find(section => section.title === 'Manejo del DOM')?.items.length === 7,
+    htmlCssSection: sections.find(section => section.title === 'HTML + CSS')?.items.length === 12,
+    integrationSections: sections.filter(section => section.title.startsWith('HTML + JavaScript')||section.title.startsWith('HTML + CSS + JavaScript')).length === 6,
+    gitSections: ['Git · Principiante','Git · Intermedio','Git · Avanzado'].map(title => `${title}:${sections.find(section => section.title === title)?.items.length}`).join('|') === 'Git · Principiante:8|Git · Intermedio:9|Git · Avanzado:7',
+    courseUiGrouped: navButtons.filter(button => button.classList.values.includes('group-start')).length === 11 && navButtons[0].label.textContent === 'HTML' && navButtons[sections.findIndex(section => section.title === 'CSS · Principiante')].text.textContent === 'Principiante' && navButtons[sections.findIndex(section => section.title === 'Frameworks CSS · Bootstrap')].text.textContent === 'Bootstrap' && navButtons[sections.findIndex(section => section.title === 'Frameworks CSS · Introducción')].label.textContent === 'Frameworks CSS' && navButtons[sections.findIndex(section => section.title === 'Frameworks frontend · React')].text.textContent === 'React' && navButtons[sections.findIndex(section => section.title === 'Frameworks frontend · Introducción')].label.textContent === 'Frameworks frontend' && navButtons[sections.findIndex(section => section.title === 'Proyectos con frameworks · React + Tailwind')].text.textContent === 'React + Tailwind' && navButtons[sections.findIndex(section => section.title === 'Proyectos con frameworks · Introducción')].label.textContent === 'Proyectos con frameworks' && navButtons[sections.findIndex(section => section.title === 'Backend FastAPI · PostgreSQL')].text.textContent === 'PostgreSQL' && navButtons[sections.findIndex(section => section.title === 'Backend FastAPI · Introducción')].label.textContent === 'Backend FastAPI' && navButtons[sections.findIndex(section => section.title === 'Git · Principiante')].label.textContent === 'Git',
     courseTheme: document.body.dataset.course === 'HTML',
     error: document.body.innerHTML,
   };
   console.log(result);
-  if (!written || result.actualClosingScripts !== 13 || result.escapedClosingScripts !== 3 || !result.attributeExamples || !result.webFoundationsScript || !result.cssScript || !result.javascriptScript || !result.domScript || !result.htmlCssScript || !result.integrationScript || !result.gitScript || !result.cssPropertyScript || !result.formattingScript || !result.explanationScript || !result.courseUiScript || scriptSyntax !== 'ok' || !result.attributeUsageExample || !result.webFoundations || !result.cssSections || !result.cssTargetElement || !result.cssApplicationMethods || !result.cssIntegratedExamples || !result.cssDetailedExplanations || !result.allDetailedExplanations || !result.allSectionGuidance || !result.formattedTagExample || !result.detailedHtmlTag || !result.cssPropertyExplanation || !result.javascriptSections || !result.domSection || !result.htmlCssSection || !result.integrationSections || !result.gitSections || !result.courseUiGrouped || !result.courseTheme) {
+  if (!written || result.actualClosingScripts !== 18 || result.escapedClosingScripts !== 3 || !result.attributeExamples || !result.webFoundationsScript || !result.htmlPracticeScript || !result.cssScript || !result.cssFrameworksScript || !result.javascriptScript || !result.frontendFrameworksScript || !result.frameworkProjectsScript || !result.backendFastApiScript || !result.domScript || !result.htmlCssScript || !result.integrationScript || !result.gitScript || !result.cssPropertyScript || !result.formattingScript || !result.explanationScript || !result.courseUiScript || scriptSyntax !== 'ok' || !result.attributeUsageExample || !result.webFoundations || !result.htmlPractice || !result.cssSections || !result.cssFrameworks || !result.cssTargetElement || !result.cssApplicationMethods || !result.cssIntegratedExamples || !result.cssDetailedExplanations || !result.allDetailedExplanations || !result.allSectionGuidance || !result.formattedTagExample || !result.detailedHtmlTag || !result.cssPropertyExplanation || !result.javascriptSections || !result.frontendFrameworks || !result.frameworkFolderStructures || !result.frameworkProjects || !result.backendFastApi || !result.domSection || !result.htmlCssSection || !result.integrationSections || !result.gitSections || !result.courseUiGrouped || !result.courseTheme) {
     process.exitCode = 1;
   }
 }, 200);
