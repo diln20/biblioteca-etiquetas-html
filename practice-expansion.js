@@ -17,7 +17,7 @@
   );
 
   const divSection={
-    title:'Manipulación de DIV',
+    title:'HTML · Manipulación de DIV',
     description:'Aprende a crear, identificar, organizar, diseñar y modificar elementos div con HTML, CSS y JavaScript. Los ejemplos avanzan desde una caja normal hasta componentes creados y reordenados desde el DOM.',
     quote:'“Un div es un contenedor genérico: adquiere sentido mediante su contenido, sus clases y el contexto donde se utiliza.”',
     challenge:'Construye un panel con varias cajas, distribúyelas con CSS y agrega controles para crear, ocultar, mover y eliminar elementos.',
@@ -94,8 +94,8 @@
     ]
   };
 
-  const htmlCssIndex=sections.findIndex(section=>section.title==='HTML + CSS');
-  sections.splice(htmlCssIndex,0,divSection);
+  const cssStart=sections.findIndex(section=>section.title==='CSS · Principiante');
+  sections.splice(cssStart,0,divSection);
   Object.entries(cssAdditions).forEach(([title,items])=>{
     const section=sections.find(section=>section.title===title);
     if(section)section.items.splice(-1,0,...items);
