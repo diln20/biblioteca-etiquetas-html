@@ -8,7 +8,7 @@
   const groupOf=title=>{
     if(title.startsWith('HTML + CSS + JavaScript'))return 'Proyecto completo';
     if(title.startsWith('HTML + JavaScript'))return 'HTML + JavaScript';
-    if(title==='HTML + CSS')return 'HTML + CSS';
+    if(title==='HTML + CSS'||title==='Manipulación de DIV')return 'HTML + CSS';
     if(title.startsWith('Git'))return 'Git';
     if(title.startsWith('Frameworks frontend'))return 'Frameworks frontend';
     if(title.startsWith('Frameworks CSS'))return 'Frameworks CSS';

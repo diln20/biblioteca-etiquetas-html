@@ -64,6 +64,8 @@ setTimeout(() => {
   (0, eval)(fs.readFileSync('html-css-section.js', 'utf8'));
   window.__integrationSectionsAdded = false;
   (0, eval)(fs.readFileSync('integration-sections.js', 'utf8'));
+  window.__practiceExpansionAdded = false;
+  (0, eval)(fs.readFileSync('practice-expansion.js', 'utf8'));
   window.__gitSectionAdded = false;
   (0, eval)(fs.readFileSync('git-section.js', 'utf8'));
   window.__cssPropertiesExplained = false;
@@ -115,17 +117,18 @@ setTimeout(() => {
     domScript: written.includes('dom-section.js?v=1'),
     htmlCssScript: written.includes('html-css-section.js?v=1'),
     integrationScript: written.includes('integration-sections.js?v=1'),
+    practiceExpansionScript: written.includes('practice-expansion.js?v=1'),
     gitScript: written.includes('git-section.js?v=1'),
-    cssPropertyScript: written.includes('css-property-explanations.js?v=2'),
+    cssPropertyScript: written.includes('css-property-explanations.js?v=3'),
     formattingScript: written.includes('example-code-formatter.js?v=1'),
     explanationScript: written.includes('explanation-enhancer.js?v=9'),
-    courseUiScript: written.includes('course-ui.js?v=12'),
+    courseUiScript: written.includes('course-ui.js?v=13'),
     styles: written.includes('screen-fit.css?v=2') && written.includes('theme-modern.css?v=6'),
     scriptSyntax,
     attributeUsageExample: attributeUsageExample.includes('<input required>'),
     webFoundations: sections[0]?.title === 'Fundamentos web' && sections[0].items.length === 5 && sections[0].items.at(-1).name === 'Patrones de diseño',
     htmlPractice: sections.find(section => section.title === 'Práctica HTML paso a paso')?.items.length === 7,
-    cssSections: ['CSS · Principiante','CSS · Intermedio','CSS · Avanzado'].map(title => `${title}:${sections.find(section => section.title === title)?.items.length}`).join('|') === 'CSS · Principiante:10|CSS · Intermedio:7|CSS · Avanzado:7',
+    cssSections: ['CSS · Principiante','CSS · Intermedio','CSS · Avanzado'].map(title => `${title}:${sections.find(section => section.title === title)?.items.length}`).join('|') === 'CSS · Principiante:15|CSS · Intermedio:12|CSS · Avanzado:12',
     cssFrameworks: ['Introducción:8','Bootstrap:13','Tailwind:13','Bulma:13','Foundation:13'].every(expected => { const [level,count] = expected.split(':'); return sections.find(section => section.title === `Frameworks CSS · ${level}`)?.items.length === Number(count); }),
     cssTargetElement: sections.find(section => section.title === 'CSS · Principiante')?.items.find(item => item.name === 'Selectores básicos')?.code.includes('<h2 id="titulo">') && sections.find(section => section.title === 'CSS · Principiante').items.find(item => item.name === 'Selectores básicos').code.includes('<style>'),
     cssApplicationMethods: ['Estilos en línea','Estilos internos','Hoja de estilos externa'].every(name => sections.find(section => section.title === 'CSS · Principiante')?.items.some(item => item.name === name)),
@@ -136,13 +139,14 @@ setTimeout(() => {
     formattedTagExample: formattedTagExample === '<main>\n  <section>\n    <h2>Ejemplo</h2>\n    <p>Texto</p>\n  </section>\n</main>',
     detailedHtmlTag: ['Sintaxis:','Tipo y significado:','Atributos destacados:','Ejemplo:'].every(part => detailedHtmlTag.includes(part)),
     cssPropertyExplanation: cssPropertyExplanation.includes('background: #2563eb;') && cssPropertyExplanation.includes('Establece el fondo del elemento') && attributeToggle.textContent.startsWith('Ver propiedades'),
-    javascriptSections: ['JavaScript · Principiante','JavaScript · Intermedio','JavaScript · Avanzado'].map(title => `${title}:${sections.find(section => section.title === title)?.items.length}`).join('|') === 'JavaScript · Principiante:10|JavaScript · Intermedio:8|JavaScript · Avanzado:6',
+    javascriptSections: ['JavaScript · Principiante','JavaScript · Intermedio','JavaScript · Avanzado'].map(title => `${title}:${sections.find(section => section.title === title)?.items.length}`).join('|') === 'JavaScript · Principiante:15|JavaScript · Intermedio:13|JavaScript · Avanzado:11',
     frontendFrameworks: ['Introducción:8','React:13','Angular:13','Vue:13','Svelte:13'].every(expected => { const [level,count] = expected.split(':'); return sections.find(section => section.title === `Frameworks frontend · ${level}`)?.items.length === Number(count); }),
     frameworkFolderStructures: ['React','Angular','Vue','Svelte'].every(level => sections.find(section => section.title === `Frameworks frontend · ${level}`)?.items.some(item => item.name.startsWith('Estructura recomendada'))) && ['Bootstrap','Tailwind','Bulma','Foundation'].every(level => sections.find(section => section.title === `Frameworks CSS · ${level}`)?.items.some(item => item.name.startsWith('Estructura de un proyecto'))),
     frameworkProjects: ['Introducción:5','React + Tailwind:8','Angular + Bootstrap:8','Vue + Bulma:8','Svelte + Foundation:8'].every(expected => { const [level,count] = expected.split(':'); return sections.find(section => section.title === `Proyectos con frameworks · ${level}`)?.items.length === Number(count); }) && sections.find(section => section.title === 'Proyectos con frameworks · Introducción')?.items.some(item => item.name === 'Cómo crear carpetas desde el Explorador') && ['React + Tailwind','Angular + Bootstrap','Vue + Bulma','Svelte + Foundation'].every(level => sections.find(section => section.title === `Proyectos con frameworks · ${level}`)?.items.some(item => item.name.startsWith('Armar las carpetas de'))),
     backendFastApi: ['Introducción:6','Armar el proyecto:11','Preparación:9','Instalar PostgreSQL:12','API:9','PostgreSQL:9','CRUD:9','React + Tailwind:11','Patrones de diseño:15','Producción:9'].every(expected => { const [level,count] = expected.split(':'); return sections.find(section => section.title === `Backend FastAPI · ${level}`)?.items.length === Number(count); }) && !sections.some(section => section.title === 'Backend FastAPI · Caso cotidiano') && ['Introducción','Armar el proyecto','Preparación','Instalar PostgreSQL','API','PostgreSQL','CRUD','React + Tailwind','Patrones de diseño','Producción'].map(level => sections.findIndex(section => section.title === `Backend FastAPI · ${level}`)).every((index,position,indexes) => position === 0 || index === indexes[position-1] + 1) && sections.filter(section => section.title.startsWith('Backend FastAPI · ')).every((section,index) => section.description.startsWith(`Fase ${index+1} de 10.`) && section.items[0]?.tag === 'Construcción guiada' && section.items[0]?.name.startsWith(`Paso ${index+1} `) && section.items[0]?.guide?.every(entry => entry.length === 3) && section.items.at(-1)?.name.startsWith(`Hito ${index+1} `)),
     domSection: sections.find(section => section.title === 'Manejo del DOM')?.items.length === 7,
-    htmlCssSection: sections.find(section => section.title === 'HTML + CSS')?.items.length === 12,
+    divManipulation: sections.find(section => section.title === 'Manipulación de DIV')?.items.length === 12 && ['HTML','CSS','JavaScript'].every(term => sections.find(section => section.title === 'Manipulación de DIV')?.items.some(item => item.code.includes(term))),
+    htmlCssSection: sections.find(section => section.title === 'HTML + CSS')?.items.length === 18,
     integrationSections: sections.filter(section => section.title.startsWith('HTML + JavaScript')||section.title.startsWith('HTML + CSS + JavaScript')).length === 6,
     gitSections: ['Git · Principiante','Git · Intermedio','Git · Avanzado'].map(title => `${title}:${sections.find(section => section.title === title)?.items.length}`).join('|') === 'Git · Principiante:8|Git · Intermedio:9|Git · Avanzado:7',
     courseUiGrouped: navButtons.filter(button => button.classList.values.includes('group-start')).length === 11 && navButtons[0].label.textContent === 'HTML' && navButtons[sections.findIndex(section => section.title === 'CSS · Principiante')].text.textContent === 'Principiante' && navButtons[sections.findIndex(section => section.title === 'Frameworks CSS · Bootstrap')].text.textContent === 'Bootstrap' && navButtons[sections.findIndex(section => section.title === 'Frameworks CSS · Introducción')].label.textContent === 'Frameworks CSS' && navButtons[sections.findIndex(section => section.title === 'Frameworks frontend · React')].text.textContent === 'React' && navButtons[sections.findIndex(section => section.title === 'Frameworks frontend · Introducción')].label.textContent === 'Frameworks frontend' && navButtons[sections.findIndex(section => section.title === 'Proyectos con frameworks · React + Tailwind')].text.textContent === 'React + Tailwind' && navButtons[sections.findIndex(section => section.title === 'Proyectos con frameworks · Introducción')].label.textContent === 'Proyectos con frameworks' && navButtons[sections.findIndex(section => section.title === 'Backend FastAPI · PostgreSQL')].text.textContent === 'PostgreSQL' && navButtons[sections.findIndex(section => section.title === 'Backend FastAPI · Introducción')].label.textContent === 'Backend FastAPI' && navButtons[sections.findIndex(section => section.title === 'Git · Principiante')].label.textContent === 'Git',
