@@ -10,14 +10,63 @@
   const originalCreateCard=createCard;
   createCard=function(item){
     const fragment=originalCreateCard(item);
-    const guideEntries=Array.isArray(item?.guide)?item.guide.filter(entry=>Array.isArray(entry)&&entry.length>=2):[];
-    if(!guideEntries.length)return fragment;
+    const allGuideEntries=Array.isArray(item?.guide)
+      ? item.guide.filter(entry=>Array.isArray(entry)&&entry.length>=2)
+      : [];
+    const creationEntries=Array.isArray(item?.filesToCreate)?item.filesToCreate:[];
+    const isAngularItem=item?.codeLabel==='Código Angular'||/Angular/i.test(String(item?.kind||''));
+    const guideEntries=creationEntries.length
+      ? allGuideEntries.filter(([action])=>!/^crear/i.test(String(action||'')))
+      : allGuideEntries;
+
+    if(!allGuideEntries.length&&!isAngularItem)return fragment;
 
     const card=fragment.querySelector?.('.tag-card');
     if(!card)return fragment;
     card.classList.add('has-file-guide');
 
-    if(!card.querySelector('.file-guide')){
+    const codePanel=card.querySelector('.code-panel');
+    const panelGroup=codePanel?.parentElement;
+    const insertBeforeCode=element=>{
+      if(panelGroup&&panelGroup!==card)panelGroup.before(element);
+      else if(codePanel)codePanel.before(element);
+      else card.querySelector('.tip')?.before(element)||card.append(element);
+    };
+
+    if(isAngularItem&&!card.querySelector('.file-create-guide')){
+      const creation=document.createElement('section');
+      creation.className=`file-create-guide${creationEntries.length?'':' is-empty'}`;
+      creation.dataset.fileCreateGuide='true';
+      creation.setAttribute('aria-label',item.filesToCreateTitle||'Archivos que se crean en esta lección');
+
+      const list=creationEntries.length
+        ? `<ul>${creationEntries.map(entry=>{
+            const path=entry?.path||'Archivo por definir';
+            const method=entry?.method||'MANUAL';
+            const command=entry?.command||'';
+            const detail=entry?.detail||'';
+            return `
+              <li>
+                <span class="file-create-icon" aria-hidden="true">＋</span>
+                <span class="file-create-method">${escape(method)}</span>
+                <code class="file-create-path">${escape(path)}</code>
+                ${detail?`<p>${escape(detail)}</p>`:''}
+                ${command?`<div class="file-create-command"><span>Comando</span><code>${escape(command)}</code></div>`:''}
+              </li>`;
+          }).join('')}</ul>`
+        : `<p class="file-create-empty">${escape(item.filesToCreateStatus||'No debes crear archivos nuevos en esta lección; usa los archivos existentes indicados abajo.')}</p>`;
+
+      creation.innerHTML=`
+        <div class="file-create-title">
+          <span aria-hidden="true">🗂️</span>
+          <span>${escape(item.filesToCreateTitle||'Archivos que se crean en esta lección')}</span>
+          ${creationEntries.length?`<strong>${creationEntries.length}</strong>`:''}
+        </div>
+        ${list}`;
+      insertBeforeCode(creation);
+    }
+
+    if(guideEntries.length&&!card.querySelector('.file-guide')){
       const guide=document.createElement('section');
       guide.className='file-guide';
       guide.dataset.fileGuide='true';
@@ -36,12 +85,7 @@
             </li>
           `).join('')}
         </ol>`;
-
-      const codePanel=card.querySelector('.code-panel');
-      const panelGroup=codePanel?.parentElement;
-      if(panelGroup&&panelGroup!==card)panelGroup.before(guide);
-      else if(codePanel)codePanel.before(guide);
-      else card.querySelector('.tip')?.before(guide)||card.append(guide);
+      insertBeforeCode(guide);
     }
 
     const codeLabel=card.querySelector('.code-panel .panel-label');
