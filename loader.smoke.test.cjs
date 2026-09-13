@@ -8,19 +8,21 @@ const index = read('index.html');
 const order = read('section-order.js');
 const courseUi = read('course-ui.js');
 const areaUi = read('primary-area-ui.js');
+const areaCss = read('primary-area-ui.css');
+const fileGuideUi = read('file-guide-ui.js');
 
 const resources = [
-  'screen-fit.css?v=2','theme-modern.css?v=6','course-ui-enhancements.css?v=1','primary-area-ui.css?v=1',
+  'screen-fit.css?v=2','theme-modern.css?v=6','course-ui-enhancements.css?v=1','primary-area-ui.css?v=2',
   'learning-visuals.js?v=1','course-ux-form-keyboard.js?v=1','course-ux-form-errors.js?v=1','course-ux-form-project.js?v=1',
   'angular-from-zero-section.js?v=1','angular-overview-section.js?v=1','angular-beginner-environment.js?v=1','course-angular-components.js?v=1','course-angular-bindings.js?v=1','angular-beginner-signals.js?v=1','course-angular-forms.js?v=1',
   'course-angular-exercises-01.js?v=1','course-angular-exercises-02.js?v=1','course-angular-exercises-03.js?v=1',
   'course-angular-intermediate-architecture.js?v=1','course-angular-intermediate-data.js?v=1','course-angular-intermediate-reactivity.js?v=1',
   'course-angular-exercises-04.js?v=1','course-angular-exercises-05.js?v=1','course-angular-exercises-06.js?v=1',
   'course-angular-advanced-architecture.js?v=1','course-angular-advanced-performance.js?v=1','course-angular-advanced-quality.js?v=1',
-  'course-angular-exercises-07.js?v=1','course-angular-exercises-08.js?v=1','course-angular-exercises-09.js?v=1',
+  'course-angular-exercises-07.js?v=1','course-angular-exercises-08.js?v=1','course-angular-exercises-09.js?v=1','angular-category-guide.js?v=1',
   'course-solid-introduction.js?v=1','course-solid-reactivity.js?v=1','course-solid-exercises-01.js?v=1','course-solid-exercises-02.js?v=1',
   'course-backend-scaling-basics.js?v=1','course-backend-scaling-architecture.js?v=1','course-backend-scaling-resilience.js?v=1',
-  'exact-explanation-enhancer.js?v=1','section-order.js?v=3','course-ui.js?v=15','primary-area-ui.js?v=1'
+  'exact-explanation-enhancer.js?v=1','section-order.js?v=4','course-ui.js?v=15','file-guide-ui.js?v=1','primary-area-ui.js?v=1'
 ];
 assert.deepEqual(resources.filter(resource => !loader.includes(resource)), []);
 
@@ -33,27 +35,34 @@ assert.ok(loader.includes("const scriptClose=bootEnd>=0?html.indexOf('</script>'
 assert.ok(loader.includes('const mainScript=html.slice(scriptStart,scriptClose).replace('));
 assert.ok(loader.includes('No se pudo localizar el script principal del bundle'));
 assert.ok(!loader.includes("const close=html.lastIndexOf('</script>')"));
-assert.ok(index.includes('loader.js?v=7'));
+assert.ok(index.includes('loader.js?v=8'));
 
-const expectedAreas = ['HTML','CSS','JavaScript','Git','APIs','Frameworks','Backend'];
+const expectedAreas = ['HTML','CSS','JavaScript','Git','APIs','Angular','Frameworks','Backend'];
 expectedAreas.forEach(area => assert.ok(order.includes(`'${area}'`), `falta el área ${area}`));
+assert.ok(order.includes("if(/(?:^| · )Angular(?: ·|$)/i.test(title))return 'Angular'"));
+assert.ok(order.includes("if(area==='Angular')"));
 assert.ok(order.includes('Number.isFinite(section?.areaOrder)'));
 assert.ok(order.includes('if(section?.primaryArea)return section.primaryArea'));
 assert.ok(order.includes('sections.sort('));
 assert.ok(courseUi.includes('if(section?.group)return section.group'));
 assert.ok(areaUi.includes('section.routeAreaPosition=position'));
+assert.ok(areaCss.includes('body[data-course="Angular"]'));
+assert.ok(areaCss.includes('.nav-item[data-group="Angular"]'));
+assert.ok(areaCss.includes('.file-guide'));
+assert.ok(fileGuideUi.includes('item.guideTitle'));
+assert.ok(fileGuideUi.includes('Dónde colocar cada código'));
 
-const courseFiles = resources
+const scriptFiles = resources
   .filter(resource => resource.endsWith('.js?v=1'))
-  .map(resource => resource.replace('?v=1',''))
-  .filter(file => !['primary-area-ui.js'].includes(file));
+  .map(resource => resource.replace('?v=1',''));
 
-for(const file of courseFiles){
+for(const file of scriptFiles){
   assert.ok(fs.existsSync(file), `falta ${file}`);
   assert.ok(read(file).trim().length > 0, `${file} está vacío`);
   assert.doesNotThrow(() => new vm.Script(read(file), { filename:file }), `${file} contiene sintaxis inválida`);
 }
 
+const courseFiles = scriptFiles.filter(file => !['primary-area-ui.js','file-guide-ui.js'].includes(file));
 const context = {
   console,
   sections: [],
@@ -76,9 +85,23 @@ const titles = context.sections.map(section => section.title);
   'Backend APIs · Escalabilidad · 1. Medir y optimizar'
 ].forEach(title => assert.ok(titles.includes(title), `falta la sección: ${title}`));
 
-const angularItems = context.sections
-  .filter(section => section.title.includes('Angular ·'))
-  .flatMap(section => section.items);
+const angularSections = context.sections.filter(section => section.title.includes('Angular'));
+assert.ok(angularSections.length >= 10, 'la ruta Angular debe conservar sus secciones propias');
+assert.ok(angularSections.every(section => section.group === 'Angular'));
+assert.ok(angularSections.every(section => section.primaryArea === 'Angular'));
+assert.ok(angularSections.every(section => !String(section.navLabel).startsWith('Angular ·')));
+
+const angularItems = angularSections.flatMap(section => section.items);
+assert.ok(angularItems.length > 0);
+assert.ok(angularItems.every(item => Array.isArray(item.guide) && item.guide.length > 0));
+assert.ok(angularItems.every(item => item.guideTitle === 'Dónde se hace cada modificación'));
+assert.ok(angularItems.every(item => item.codeLabel === 'Código Angular'));
+assert.ok(angularItems.some(item => item.guide.some(([,path]) => String(path).startsWith('src/app/'))));
+assert.ok(angularItems.some(item => item.guide.some(([,path]) => String(path).startsWith('Terminal'))));
+assert.ok(angularItems.some(item => item.guide.some(([,path]) => path === 'src/app/app.config.ts')));
+assert.ok(angularItems.some(item => item.guide.some(([,path]) => path === 'src/app/app.routes.ts')));
+assert.ok(context.AngularCourse?.sections?.length === angularSections.length);
+
 const angularExercises = angularItems.filter(item => item.kind === 'Ejercicio Angular');
 assert.equal(angularExercises.length, 18, `se esperaban 18 ejercicios Angular y se encontraron ${angularExercises.length}`);
 assert.equal(angularExercises[0].name, 'Hola Mundo');
@@ -122,6 +145,8 @@ console.log({
   status:'ok',
   resources:resources.length,
   newSections:context.sections.length,
+  angularSections:angularSections.length,
+  angularFileGuides:angularItems.length,
   exactExplanations:allItems.length,
   angularExercises:angularExercises.length,
   solidExercises:solidItems.filter(item => item.kind === 'Ejercicio Solid.js').length
