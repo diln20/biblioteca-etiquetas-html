@@ -1,0 +1,46 @@
+name: Runtime DOM dump
+
+on:
+  push:
+    branches: [debug/browser-runtime]
+
+permissions:
+  contents: read
+
+jobs:
+  dump:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Start local server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 >server.log 2>&1 &
+          sleep 2
+      - name: Execute application in Chrome
+        run: |
+          google-chrome --headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage --disable-extensions --window-size=1600,1200 --virtual-time-budget=12000 --enable-logging=stderr --v=1 --dump-dom 'http://127.0.0.1:4173/index.html?runtime-dump=1' >runtime-dom.html 2>chrome.log || true
+          google-chrome --headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage --disable-extensions --window-size=1600,1200 --virtual-time-budget=12000 --screenshot=runtime-dump.png 'http://127.0.0.1:4173/index.html?runtime-dump=2' || true
+      - name: Print diagnosis
+        run: |
+          echo '--- sizes ---'
+          wc -c runtime-dom.html chrome.log server.log || true
+          echo '--- key DOM markers ---'
+          grep -o 'RUTA DE APRENDIZAJE' runtime-dom.html | head || true
+          grep -o 'Angular · Desde cero' runtime-dom.html | head || true
+          grep -o 'tag-card' runtime-dom.html | wc -l || true
+          grep -o 'nav-item' runtime-dom.html | wc -l || true
+          echo '--- browser errors ---'
+          grep -Ei 'uncaught|exception|referenceerror|typeerror|syntaxerror|failed to load|404' chrome.log | tail -120 || true
+          echo '--- DOM tail ---'
+          tail -c 5000 runtime-dom.html || true
+      - name: Upload diagnosis
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: runtime-dom-dump
+          path: |
+            runtime-dom.html
+            runtime-dump.png
+            chrome.log
+            server.log
+          if-no-files-found: ignore
