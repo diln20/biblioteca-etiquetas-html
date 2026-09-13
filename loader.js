@@ -56,7 +56,7 @@ if(typeof esc==='function')window.esc=esc;
       'course-angular-advanced-architecture.js?v=1','course-angular-advanced-performance.js?v=1','course-angular-advanced-quality.js?v=1',
       'course-angular-exercises-07.js?v=1','course-angular-exercises-08.js?v=1','course-angular-exercises-09.js?v=1','angular-category-guide.js?v=1',
       'course-solid-introduction.js?v=1','course-solid-reactivity.js?v=1','course-solid-exercises-01.js?v=1','course-solid-exercises-02.js?v=1',
-      'framework-projects-section.js?v=3','angular-category-finalizer.js?v=1','angular-file-guide-corrections.js?v=1','course-backend-scaling-basics.js?v=1','course-backend-scaling-architecture.js?v=1','course-backend-scaling-resilience.js?v=1',
+      'framework-projects-section.js?v=3','angular-category-finalizer.js?v=1','angular-file-guide-corrections.js?v=2','course-backend-scaling-basics.js?v=1','course-backend-scaling-architecture.js?v=1','course-backend-scaling-resilience.js?v=1',
       'backend-fastapi-section.js?v=11','backend-django-rest-section.js?v=1','django-html-css-section.js?v=1','html-css-section.js?v=1','integration-sections.js?v=1','practice-expansion.js?v=2','git-section.js?v=1','content-corrections.js?v=1',
       'section-order.js?v=4','css-property-explanations.js?v=3','example-code-formatter.js?v=1','explanation-enhancer.js?v=9','exact-explanation-enhancer.js?v=1','course-ui.js?v=15','file-guide-ui.js?v=1','primary-area-ui.js?v=1'
     ];
