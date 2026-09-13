@@ -24,6 +24,49 @@
     section.routeAreaTotal=totals.get(group)||1;
   });
 
+  const cleanSequence=value=>String(value||'')
+    .replace(/^\s*\d{1,2}[A-Z]?\.\s*/i,'')
+    .replace(/(·\s*)\d{1,2}[A-Z]?\.\s*/gi,'$1')
+    .replace(/\s*·\s*$/,'')
+    .replace(/\s{2,}/g,' ')
+    .trim();
+
+  const navLabelOf=(section,group)=>{
+    let label=String(section.navLabel||section.title||'').trim();
+
+    if(group==='HTML'){
+      label=label.replace(/^HTML\s*·\s*/i,'');
+    }else if(group==='CSS'){
+      label=label.replace(/^CSS\s*·\s*/i,'');
+    }else if(group==='JavaScript'){
+      label=label.replace(/^JavaScript\s*·\s*/i,'');
+    }else if(group==='Git'){
+      label=label.replace(/^Git\s*·\s*/i,'');
+    }else if(group==='APIs'){
+      label=label
+        .replace(/^APIs?\s+gratuitas?\s*·\s*/i,'')
+        .replace(/^Consumo\s+de\s+APIs?\s*·\s*/i,'')
+        .replace(/^APIs?\s*·\s*/i,'');
+    }else if(group==='Angular'){
+      label=label
+        .replace(/^Frameworks\s+frontend\s*·\s*Angular\s*·?\s*/i,'')
+        .replace(/^Angular\s*·\s*/i,'');
+    }else if(group==='Frameworks'){
+      label=label
+        .replace(/^Frameworks\s+frontend\s*·\s*/i,'')
+        .replace(/^Proyectos\s+con\s+frameworks\s*·\s*/i,'');
+    }else if(group==='Backend'){
+      label=label
+        .replace(/^Backend\s+APIs?\s*·\s*/i,'')
+        .replace(/^Backend\s+FastAPI\s*·\s*/i,'FastAPI · ')
+        .replace(/^Backend\s*·\s*/i,'');
+    }
+
+    return cleanSequence(label)||String(section.title||'Tema');
+  };
+
+  window.formatCourseNavLabel=navLabelOf;
+
   const buttons=[...nav.children];
   nav.querySelectorAll('.nav-group-label').forEach(label=>label.remove());
 
@@ -36,15 +79,16 @@
     button.title=section.title;
 
     const text=button.querySelector('span:last-child');
-    if(text)text.textContent=`${String(section.routeAreaPosition).padStart(2,'0')}. ${section.navLabel||section.title}`;
+    const label=navLabelOf(section,group);
+    if(text)text.textContent=`${String(section.routeAreaPosition).padStart(2,'0')}. ${label}`;
 
     if(group!==previous){
       const meta=areas.find(area=>area.id===group)||{order:1,total:section.routeAreaTotal};
-      const label=document.createElement('span');
-      label.className='nav-group-label';
-      label.textContent=`${String(meta.order).padStart(2,'0')} · ${group} · ${meta.total} temas`;
+      const groupLabel=document.createElement('span');
+      groupLabel.className='nav-group-label';
+      groupLabel.textContent=`${String(meta.order).padStart(2,'0')} · ${group} · ${meta.total} temas`;
       button.classList.add('group-start');
-      button.prepend(label);
+      button.prepend(groupLabel);
       previous=group;
     }
   });
