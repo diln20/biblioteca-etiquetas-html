@@ -122,6 +122,45 @@
         guide.push(parentTypeScript,parentTemplate);
       }
 
+      // La ruta "Desde cero" trabaja con el componente raíz. No debe inventar
+      // components/demo: cada bloque señala exactamente el archivo real que el
+      // estudiante modifica o el lugar donde ejecuta el comando.
+      if(String(section.title).includes('Angular · Desde cero')){
+        const terminal=['Ejecutar','Terminal · raíz del proyecto Angular','Ejecuta aquí los comandos ng serve, ng build y demás comandos del proyecto.'];
+        const appTs=['Modificar','src/app/app.ts','Coloca aquí imports, propiedades, signals y métodos del componente raíz.'];
+        const appHtml=['Modificar','src/app/app.html','Coloca aquí el HTML, interpolaciones, bindings y eventos que se muestran en pantalla.'];
+        const appScss=['Modificar','src/app/app.scss','Coloca aquí los estilos que pertenecen al componente raíz.'];
+
+        if(item.name==='Qué debes instalar y por qué'){
+          guide=[['Ejecutar','Terminal · cualquier carpeta','Comprueba Node.js y npm e instala Angular CLI globalmente. Todavía no modificas archivos del proyecto.']];
+        }else if(item.name==='Qué hace exactamente ng new'){
+          guide=[['Ejecutar','Terminal · carpeta donde crearás el proyecto','Ejecuta ng new aquí. Angular CLI creará la carpeta del proyecto y los archivos iniciales automáticamente.']];
+        }else if(item.name==='Qué función cumple cada archivo principal'){
+          guide=[
+            ['Revisar','src/main.ts','Punto de arranque de Angular.'],
+            ['Revisar','src/app/app.ts','Clase, estado y comportamiento del componente raíz.'],
+            ['Revisar','src/app/app.html','Plantilla HTML del componente raíz.'],
+            ['Revisar','src/app/app.scss','Estilos locales del componente raíz.'],
+            ['Revisar','src/app/app.config.ts','Providers globales de la aplicación.'],
+            ['Revisar','src/app/app.routes.ts','Rutas principales de la aplicación.']
+          ];
+        }else if(item.name==='Qué ocurre cuando ejecutas ng serve'){
+          guide=[terminal,['Revisar','angular.json','Angular CLI lee este archivo para conocer la configuración de build y serve.']];
+        }else if(item.name==='Cómo llega un dato desde TypeScript hasta la pantalla'){
+          guide=[appTs,appHtml,appScss];
+        }else if(item.name==='Cómo funciona un clic con signal'){
+          guide=[['Modificar','src/app/app.ts','En este ejemplo la plantilla está inline dentro de @Component; coloca aquí la signal, el método y template.']];
+        }else if(item.name==='Mini aplicación desde una carpeta vacía'){
+          guide=[
+            ['Ejecutar','Terminal · carpeta donde crearás el proyecto','Ejecuta ng new perfil-angular, entra con cd perfil-angular y usa ng serve.'],
+            appTs,
+            appHtml,
+            appScss,
+            ['Ejecutar','Terminal · raíz de perfil-angular','Cuando termine el ejercicio, ejecuta ng build para comprobar la compilación de producción.']
+          ];
+        }
+      }
+
       const unique=[];
       const seen=new Set();
       guide.forEach(entry=>{
