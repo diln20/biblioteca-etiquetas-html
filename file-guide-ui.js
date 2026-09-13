@@ -6,8 +6,8 @@
   const escape=value=>String(value??'').replace(/[&<>"']/g,char=>({
     '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
   })[char]);
-  const guidedCourse=item=>/Código\s+(?:Angular|React|Vue|Svelte|Solid\.js)/i.test(String(item?.codeLabel||''))
-    || /^(?:Angular|React|Vue|Svelte|Solid\.js)$/i.test(String(item?.kind||''));
+  const guidedCourse=item=>/Código\s+(?:Angular|React|Vue|Svelte|Solid\.js|FastAPI|Django REST)/i.test(String(item?.codeLabel||''))
+    || /^(?:Angular|React|Vue|Svelte|Solid\.js|FastAPI|Django REST)$/i.test(String(item?.kind||''));
 
   const originalCreateCard=createCard;
   createCard=function(item){

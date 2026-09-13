@@ -11,8 +11,8 @@ const fileUi=read('file-guide-ui.js');
 assert.doesNotThrow(()=>new vm.Script(guide,{filename:'framework-category-guide.js'}));
 assert.doesNotThrow(()=>new vm.Script(fileUi,{filename:'file-guide-ui.js'}));
 assert.ok(loader.includes('framework-category-guide.js?v=1'));
-assert.ok(loader.includes('file-guide-ui.js?v=2&frameworks=1'));
-assert.ok(index.includes('loader.js?v=16&fix=3'));
+assert.ok(loader.includes('file-guide-ui.js?v=2&frameworks=2'));
+assert.ok(index.includes('loader.js?v=16&fix=4'));
 
 ['React','Vue','Svelte','Solid.js'].forEach(name=>assert.ok(guide.includes(`'${name}'`),`falta la categoría ${name}`));
 assert.ok(guide.includes("'HTML','CSS','JavaScript','Git','APIs','Angular','React','Vue','Svelte','Solid.js','Frameworks','Backend'"));
