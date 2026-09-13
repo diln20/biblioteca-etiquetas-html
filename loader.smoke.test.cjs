@@ -21,7 +21,7 @@ const resources = [
   'course-angular-intermediate-architecture.js?v=1','course-angular-intermediate-data.js?v=1','course-angular-intermediate-reactivity.js?v=1',
   'course-angular-exercises-04.js?v=1','course-angular-exercises-05.js?v=1','course-angular-exercises-06.js?v=1',
   'course-angular-advanced-architecture.js?v=1','course-angular-advanced-performance.js?v=1','course-angular-advanced-quality.js?v=1',
-  'course-angular-exercises-07.js?v=1','course-angular-exercises-08.js?v=1','course-angular-exercises-09.js?v=1','angular-category-guide.js?v=1','angular-category-finalizer.js?v=1','angular-file-guide-corrections.js?v=3',
+  'course-angular-exercises-07.js?v=1','course-angular-exercises-08.js?v=1','course-angular-exercises-09.js?v=1','angular-category-guide.js?v=1','angular-category-finalizer.js?v=1','angular-file-guide-corrections.js?v=4',
   'course-solid-introduction.js?v=1','course-solid-reactivity.js?v=1','course-solid-exercises-01.js?v=1','course-solid-exercises-02.js?v=1',
   'course-backend-scaling-basics.js?v=1','course-backend-scaling-architecture.js?v=1','course-backend-scaling-resilience.js?v=1',
   'exact-explanation-enhancer.js?v=1','section-order.js?v=4','course-ui.js?v=15','file-guide-ui.js?v=1','primary-area-ui.js?v=1'
@@ -41,7 +41,7 @@ assert.ok(loader.includes("if(typeof T==='function')window.T=T;"));
 assert.ok(loader.includes("if(typeof createCard==='function')window.createCard=createCard;"));
 assert.ok(loader.includes("if(typeof render==='function')window.render=render;"));
 assert.ok(loader.includes("if(typeof buildNav==='function')window.buildNav=buildNav;"));
-assert.ok(index.includes('loader.js?v=13'));
+assert.ok(index.includes('loader.js?v=14'));
 
 const expectedAreas = ['HTML','CSS','JavaScript','Git','APIs','Angular','Frameworks','Backend'];
 expectedAreas.forEach(area => assert.ok(order.includes(`'${area}'`), `falta el área ${area}`));
@@ -61,9 +61,10 @@ assert.ok(angularGuideCorrections.includes('src/app/app.ts'));
 assert.ok(angularGuideCorrections.includes('src/app/app.html'));
 assert.ok(angularGuideCorrections.includes('componentName}.spec.ts'));
 assert.ok(angularGuideCorrections.includes("selector&&selector!=='root'"));
+assert.ok(angularGuideCorrections.includes('(?:app-root|root)'));
 
 const courseResourceNames = resources.filter(resource =>
-  resource.endsWith('.js?v=1') || resource === 'angular-file-guide-corrections.js?v=3'
+  resource.endsWith('.js?v=1') || resource === 'angular-file-guide-corrections.js?v=4'
 );
 const scriptFiles = courseResourceNames.map(resource => resource.replace(/\?v=\d+$/,''));
 for(const file of scriptFiles){
@@ -116,6 +117,7 @@ const componentPaths = componentAnatomy.guide.map(([,path]) => path);
 
 const rootExample = angularItems.find(item => item.name === 'Cómo llega un dato desde TypeScript hasta la pantalla');
 assert.ok(rootExample.guide.some(([,path]) => path === 'src/app/app.ts'));
+assert.ok(!rootExample.guide.some(([,path]) => String(path).includes('/root/root')));
 assert.ok(!rootExample.guide.some(([,path]) => String(path).includes('app-root/app-root')));
 assert.ok(!rootExample.guide.some(([,path,detail]) => path === 'src/app/app.ts' && String(detail).includes('Importa App')));
 
