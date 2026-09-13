@@ -19,7 +19,25 @@
     if(scriptStart<=0||scriptClose<=scriptStart){
       throw new Error('No se pudo localizar el script principal del bundle');
     }
-    const mainScript=html.slice(scriptStart,scriptClose).replace(/<\/script\s*>/gi,'<\\/script>');
+
+    const mainSource=html.slice(scriptStart,scriptClose);
+    const bootOffset=mainSource.indexOf(bootMarker);
+    if(bootOffset<0)throw new Error('No se pudo localizar el arranque de la biblioteca');
+
+    // `const sections`, T y las funciones base son bindings globales léxicos:
+    // otros scripts clásicos pueden leerlos por nombre, pero no aparecen en window.
+    // Las rutas externas validan window.sections/window.T antes de ejecutarse, así
+    // que publicamos referencias explícitas justo antes del primer render.
+    const globalBridge=`
+window.sections=sections;
+if(typeof T==='function')window.T=T;
+if(typeof createCard==='function')window.createCard=createCard;
+if(typeof render==='function')window.render=render;
+if(typeof buildNav==='function')window.buildNav=buildNav;
+if(typeof esc==='function')window.esc=esc;
+`;
+    const bridgedSource=mainSource.slice(0,bootOffset)+globalBridge+mainSource.slice(bootOffset);
+    const mainScript=bridgedSource.replace(/<\/script\s*>/gi,'<\\/script>');
     html=html.slice(0,scriptStart)+mainScript+html.slice(scriptClose);
 
     const styles='<link rel="stylesheet" href="screen-fit.css?v=2"><link rel="stylesheet" href="theme-modern.css?v=6"><link rel="stylesheet" href="course-ui-enhancements.css?v=1"><link rel="stylesheet" href="primary-area-ui.css?v=2">';
