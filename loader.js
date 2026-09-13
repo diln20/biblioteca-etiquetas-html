@@ -31,7 +31,7 @@ if(typeof esc==='function')window.esc=esc;
     const mainScript=bridgedSource.replace(/<\/script\s*>/gi,'<\\/script>');
     html=html.slice(0,scriptStart)+mainScript+html.slice(scriptClose);
 
-    const styles='<link rel="stylesheet" href="screen-fit.css?v=2"><link rel="stylesheet" href="theme-modern.css?v=6"><link rel="stylesheet" href="course-ui-enhancements.css?v=2"><link rel="stylesheet" href="primary-area-ui.css?v=4">';
+    const styles='<link rel="stylesheet" href="screen-fit.css?v=2"><link rel="stylesheet" href="theme-modern.css?v=6"><link rel="stylesheet" href="course-ui-enhancements.css?v=1&django=1"><link rel="stylesheet" href="primary-area-ui.css?v=4">';
     html=html.replace('</head>',styles+'</head>');
     const editor='<button class="ghost-btn" id="editorBtn" type="button">Editor en vivo</button>';
     const example='<a class="ghost-btn" href="ejemplo.html" style="display:inline-flex;align-items:center;justify-content:center;min-height:40px;text-decoration:none;white-space:nowrap" title="Abrir ejemplo completo de HTML5">HTML de ejemplo</a>';
