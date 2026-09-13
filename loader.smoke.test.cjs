@@ -11,7 +11,7 @@ const areaUi = read('primary-area-ui.js');
 const resources = [
   'screen-fit.css?v=2','theme-modern.css?v=6','course-ui-enhancements.css?v=1','primary-area-ui.css?v=1',
   'learning-visuals.js?v=1','course-ux-form-keyboard.js?v=1','course-ux-form-errors.js?v=1','course-ux-form-project.js?v=1',
-  'angular-overview-section.js?v=1','angular-beginner-environment.js?v=1','course-angular-components.js?v=1','course-angular-bindings.js?v=1','angular-beginner-signals.js?v=1','course-angular-forms.js?v=1',
+  'angular-from-zero-section.js?v=1','angular-overview-section.js?v=1','angular-beginner-environment.js?v=1','course-angular-components.js?v=1','course-angular-bindings.js?v=1','angular-beginner-signals.js?v=1','course-angular-forms.js?v=1',
   'course-angular-exercises-01.js?v=1','course-angular-exercises-02.js?v=1','course-angular-exercises-03.js?v=1',
   'course-angular-intermediate-architecture.js?v=1','course-angular-intermediate-data.js?v=1','course-angular-intermediate-reactivity.js?v=1',
   'course-angular-exercises-04.js?v=1','course-angular-exercises-05.js?v=1','course-angular-exercises-06.js?v=1',
@@ -19,7 +19,7 @@ const resources = [
   'course-angular-exercises-07.js?v=1','course-angular-exercises-08.js?v=1','course-angular-exercises-09.js?v=1',
   'course-solid-introduction.js?v=1','course-solid-reactivity.js?v=1','course-solid-exercises-01.js?v=1','course-solid-exercises-02.js?v=1',
   'course-backend-scaling-basics.js?v=1','course-backend-scaling-architecture.js?v=1','course-backend-scaling-resilience.js?v=1',
-  'section-order.js?v=3','course-ui.js?v=15','primary-area-ui.js?v=1'
+  'exact-explanation-enhancer.js?v=1','section-order.js?v=3','course-ui.js?v=15','primary-area-ui.js?v=1'
 ];
 assert.deepEqual(resources.filter(resource => !loader.includes(resource)), []);
 
@@ -55,6 +55,7 @@ for(const file of courseFiles){
 
 const titles = context.sections.map(section => section.title);
 [
+  'Frameworks frontend · Angular · Desde cero',
   'Frameworks frontend · Angular · 0. Cómo funciona',
   'Frameworks frontend · Angular · 3A. Arquitectura intermedia',
   'Frameworks frontend · Angular · 5A. Arquitectura avanzada',
@@ -73,8 +74,13 @@ assert.equal(angularExercises.at(-1).name, 'Proyecto final y CI/CD');
 assert.ok(angularItems.some(item => item.code.includes('ng new tienda-angular')));
 assert.ok(angularItems.some(item => item.code.includes('provideHttpClient')));
 assert.ok(angularItems.some(item => item.code.includes('ng add @angular/ssr')));
+assert.ok(angularItems.some(item => item.name === 'Qué hace exactamente ng new'));
+assert.ok(angularItems.some(item => item.name === 'Cómo llega un dato desde TypeScript hasta la pantalla'));
 
 const allItems = context.sections.flatMap(section => section.items);
+assert.ok(allItems.length > 0);
+assert.ok(allItems.every(item => String(item.description).includes('Cómo funciona exactamente:')));
+assert.ok(allItems.every(item => String(item.description).includes('Cómo comprobarlo:')));
 assert.ok(allItems.filter(item => String(item.preview).includes('data-visual="diagram"')).length >= 20);
 assert.ok(allItems.filter(item => String(item.preview).includes('data-visual="folder-tree"')).length >= 3);
 
@@ -104,6 +110,7 @@ console.log({
   status:'ok',
   resources:resources.length,
   newSections:context.sections.length,
+  exactExplanations:allItems.length,
   angularExercises:angularExercises.length,
   solidExercises:solidItems.filter(item => item.kind === 'Ejercicio Solid.js').length
 });
