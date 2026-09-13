@@ -6,6 +6,7 @@ body[data-course="UI/UX"]{--course-accent:#e879f9;--course-soft:rgba(232,121,249
 body[data-course="APIs"]{--course-accent:#22d3ee;--course-soft:rgba(34,211,238,.12);--course-line:rgba(34,211,238,.42)}
 body[data-course="Backend Python"]{--course-accent:#4ade80;--course-soft:rgba(74,222,128,.12);--course-line:rgba(74,222,128,.42)}
 body[data-course="Django REST"]{--course-accent:#34d399;--course-soft:rgba(52,211,153,.12);--course-line:rgba(52,211,153,.42)}
+body[data-course="Django Framework"]{--course-accent:#44b78b;--course-soft:rgba(68,183,139,.12);--course-line:rgba(68,183,139,.42)}
 body[data-course="Django + Frontend"]{--course-accent:#a3e635;--course-soft:rgba(163,230,53,.12);--course-line:rgba(163,230,53,.42)}
 
 .nav-item[data-group]{--nav-accent:#94a3b8}
@@ -23,6 +24,7 @@ body[data-course="Django + Frontend"]{--course-accent:#a3e635;--course-soft:rgba
 .nav-item[data-group="Backend Python"]{--nav-accent:#4ade80}
 .nav-item[data-group="Backend FastAPI"]{--nav-accent:#2dd4bf}
 .nav-item[data-group="Django REST"]{--nav-accent:#34d399}
+.nav-item[data-group="Django Framework"]{--nav-accent:#44b78b}
 .nav-item[data-group="Django + Frontend"]{--nav-accent:#a3e635}
 .nav-item[data-group="Git"]{--nav-accent:#f97316}
 

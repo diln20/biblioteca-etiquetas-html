@@ -24,6 +24,8 @@ jobs:
         run: node framework-category.smoke.test.cjs
       - name: Run backend category smoke test
         run: node backend-category.smoke.test.cjs
+      - name: Run Django Framework smoke test
+        run: node django-framework-category.smoke.test.cjs
       - name: Run browser smoke test
         run: |
           python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/biblioteca-server.log 2>&1 &
@@ -38,13 +40,14 @@ jobs:
             --disable-dev-shm-usage \
             --disable-extensions \
             --window-size=1600,1200 \
-            --virtual-time-budget=14000 \
+            --virtual-time-budget=16000 \
             --dump-dom \
             'http://127.0.0.1:4173/index.html?ci-browser=1' \
             > /tmp/biblioteca-runtime.html
 
           nav_count=$(grep -o 'nav-item' /tmp/biblioteca-runtime.html | wc -l)
           angular_count=$(grep -o 'data-group="Angular"' /tmp/biblioteca-runtime.html | wc -l)
+          django_framework_count=$(grep -o 'data-group="Django Framework"' /tmp/biblioteca-runtime.html | wc -l)
           fastapi_count=$(grep -o 'data-group="FastAPI"' /tmp/biblioteca-runtime.html | wc -l)
           django_count=$(grep -o 'data-group="Django REST"' /tmp/biblioteca-runtime.html | wc -l)
           card_count=$(grep -o 'tag-card' /tmp/biblioteca-runtime.html | wc -l)
@@ -55,18 +58,21 @@ jobs:
           grep -q 'data-group="Vue"' /tmp/biblioteca-runtime.html
           grep -q 'data-group="Svelte"' /tmp/biblioteca-runtime.html
           grep -q 'data-group="Solid.js"' /tmp/biblioteca-runtime.html
+          grep -q 'data-group="Django Framework"' /tmp/biblioteca-runtime.html
           grep -q 'data-group="FastAPI"' /tmp/biblioteca-runtime.html
           grep -q 'data-group="Django REST"' /tmp/biblioteca-runtime.html
           grep -q 'Angular · Desde cero' /tmp/biblioteca-runtime.html
+          grep -q 'Django Framework · 0. Desde cero' /tmp/biblioteca-runtime.html
           grep -q 'Backend FastAPI · 0. Desde cero' /tmp/biblioteca-runtime.html
           grep -q 'Django REST · 0. Desde cero' /tmp/biblioteca-runtime.html
           grep -q '<span class="nav-title">01. Primeros pasos</span>' /tmp/biblioteca-runtime.html
           ! grep -Eq '<span class="nav-title">[0-9]{2}\. JavaScript · [0-9]{1,2}\.' /tmp/biblioteca-runtime.html
-          test "$nav_count" -ge 100
+          test "$nav_count" -ge 105
           test "$angular_count" -ge 20
+          test "$django_framework_count" -ge 5
           test "$fastapi_count" -ge 2
           test "$django_count" -ge 5
           test "$card_count" -ge 1
           ! grep -q '</sections.length-1)' /tmp/biblioteca-runtime.html
 
-          echo "Browser smoke OK: ${nav_count} temas, Angular=${angular_count}, FastAPI=${fastapi_count}, DjangoREST=${django_count}, tarjetas=${card_count}."
+          echo "Browser smoke OK: ${nav_count} temas, Angular=${angular_count}, DjangoFramework=${django_framework_count}, FastAPI=${fastapi_count}, DjangoREST=${django_count}, tarjetas=${card_count}."
