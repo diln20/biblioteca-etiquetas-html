@@ -20,7 +20,8 @@ assert.deepEqual(resources.filter(resource => !loader.includes(resource)), []);
 
 const expectedAreas = ['HTML', 'CSS', 'JavaScript', 'Git', 'APIs', 'Frameworks', 'Backend'];
 expectedAreas.forEach(area => assert.ok(order.includes(`'${area}'`), `falta el área ${area}`));
-assert.ok(order.includes("section.group=section.primaryArea"));
+assert.ok(order.includes('section.group=areaOf(section)'));
+assert.ok(order.includes('section.primaryArea=section.group'));
 assert.ok(order.includes('sections.sort('));
 assert.ok(order.includes('section.routeOrder=index+1'));
 assert.ok(order.includes("title.startsWith('HTML + JavaScript')"));
@@ -30,8 +31,9 @@ assert.ok(order.includes("title==='Manejo del DOM'"));
 assert.ok(order.includes("title.startsWith('Django REST')"));
 
 assert.ok(courseUi.includes('if(section?.group)return section.group'));
+assert.ok(areaUi.includes('section.routeAreaPosition=position'));
 assert.ok(areaUi.includes("label.textContent=`${String(meta.order).padStart(2,'0')} · ${group} · ${meta.total} temas`"));
-assert.ok(areaUi.includes("text.textContent=`${String(section.routeAreaPosition||index+1).padStart(2,'0')}."));
+assert.ok(areaUi.includes("text.textContent=`${String(section.routeAreaPosition).padStart(2,'0')}."));
 assert.ok(areaUi.includes('RUTA ${meta.order}/${areas.length}'));
 
 ['primary-area-ui.css', 'content-corrections.js'].forEach(file => {
