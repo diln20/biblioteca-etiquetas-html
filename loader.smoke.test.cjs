@@ -4,6 +4,7 @@ const vm = require('node:vm');
 
 const read = file => fs.readFileSync(file, 'utf8');
 const loader = read('loader.js');
+const index = read('index.html');
 const order = read('section-order.js');
 const courseUi = read('course-ui.js');
 const areaUi = read('primary-area-ui.js');
@@ -22,6 +23,17 @@ const resources = [
   'exact-explanation-enhancer.js?v=1','section-order.js?v=3','course-ui.js?v=15','primary-area-ui.js?v=1'
 ];
 assert.deepEqual(resources.filter(resource => !loader.includes(resource)), []);
+
+// Regresión: el bundle contiene ejemplos con </script> dentro de cadenas.
+// El cargador debe localizar el script principal por marcadores de código y
+// escapar solo los cierres internos, sin depender del último </script> del HTML.
+assert.ok(loader.includes("const sectionMarker=html.indexOf('const sections')"));
+assert.ok(loader.includes("const bootMarker='buildNav();saveFavs();resetEditor();render();'"));
+assert.ok(loader.includes("const scriptClose=bootEnd>=0?html.indexOf('</script>'"));
+assert.ok(loader.includes('const mainScript=html.slice(scriptStart,scriptClose).replace('));
+assert.ok(loader.includes('No se pudo localizar el script principal del bundle'));
+assert.ok(!loader.includes("const close=html.lastIndexOf('</script>')"));
+assert.ok(index.includes('loader.js?v=7'));
 
 const expectedAreas = ['HTML','CSS','JavaScript','Git','APIs','Frameworks','Backend'];
 expectedAreas.forEach(area => assert.ok(order.includes(`'${area}'`), `falta el área ${area}`));
