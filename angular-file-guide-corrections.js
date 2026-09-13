@@ -56,14 +56,16 @@
 
       if(selector==='root'){
         const rootPath=path=>String(path)
-          .replace(/^src\/app\/components\/app-root\/app-root\.(ts|html|scss|css|spec\.ts)$/,'src/app/app.$1')
-          .replace(/^src\/app\/features\/greeting\/ui\/app-root\/app-root\.(ts|html|scss|css|spec\.ts)$/,'src/app/app.$1');
+          .replace(/^src\/app\/components\/(?:app-root|root)\/(?:app-root|root)\.(ts|html|scss|css|spec\.ts)$/,'src/app/app.$1')
+          .replace(/^src\/app\/features\/greeting\/ui\/(?:app-root|root)\/(?:app-root|root)\.(ts|html|scss|css|spec\.ts)$/,'src/app/app.$1');
         guide=guide.map(([action,path,detail])=>[action,rootPath(path),detail]);
         if(/template\s*:\s*[`'"]/.test(code))guide=guide.filter(([,path])=>path!=='src/app/app.html');
-        guide=guide.filter(([,path,detail])=>!(String(path).startsWith('Terminal')&&String(detail).includes('component app-root')));
+        guide=guide.filter(([,path,detail])=>!(String(path).startsWith('Terminal')&&String(detail).includes('component root')));
         if(typeof item.description==='string'){
           item.description=item.description
+            .replaceAll('src/app/components/root/root.ts','src/app/app.ts')
             .replaceAll('src/app/components/app-root/app-root.ts','src/app/app.ts')
+            .replaceAll('src/app/features/greeting/ui/root/root.ts','src/app/app.ts')
             .replaceAll('src/app/features/greeting/ui/app-root/app-root.ts','src/app/app.ts');
         }
       }
