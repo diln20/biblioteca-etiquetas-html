@@ -4,7 +4,26 @@
   const nav=document.querySelector('#categoryNav');
   if(!nav||!Array.isArray(window.sections))return;
 
-  const areas=Array.isArray(window.learningPath?.areas)?window.learningPath.areas:[];
+  const rawAreas=Array.isArray(window.learningPath?.areas)?window.learningPath.areas:[];
+  const areaNames=rawAreas.map(area=>typeof area==='string'?area:area?.id).filter(Boolean);
+  const totals=new Map();
+  sections.forEach(section=>{
+    const group=section.primaryArea||section.group||'HTML';
+    totals.set(group,(totals.get(group)||0)+1);
+  });
+  const areas=areaNames.map((id,index)=>({id,order:index+1,total:totals.get(id)||0}));
+
+  const positions=new Map();
+  sections.forEach(section=>{
+    const group=section.primaryArea||section.group||'HTML';
+    const position=(positions.get(group)||0)+1;
+    positions.set(group,position);
+    section.primaryArea=group;
+    section.group=group;
+    section.routeAreaPosition=position;
+    section.routeAreaTotal=totals.get(group)||1;
+  });
+
   const buttons=[...nav.children];
   nav.querySelectorAll('.nav-group-label').forEach(label=>label.remove());
 
@@ -12,16 +31,15 @@
   buttons.forEach((button,index)=>{
     const section=sections[index];
     const group=section.primaryArea||'HTML';
-    section.group=group;
     button.classList.remove('group-start');
     button.dataset.group=group;
     button.title=section.title;
 
     const text=button.querySelector('span:last-child');
-    if(text)text.textContent=`${String(section.routeAreaPosition||index+1).padStart(2,'0')}. ${section.navLabel||section.title}`;
+    if(text)text.textContent=`${String(section.routeAreaPosition).padStart(2,'0')}. ${section.navLabel||section.title}`;
 
     if(group!==previous){
-      const meta=areas.find(area=>area.id===group)||{order:1,total:section.routeAreaTotal||0};
+      const meta=areas.find(area=>area.id===group)||{order:1,total:section.routeAreaTotal};
       const label=document.createElement('span');
       label.className='nav-group-label';
       label.textContent=`${String(meta.order).padStart(2,'0')} · ${group} · ${meta.total} temas`;
@@ -65,8 +83,8 @@
       context.dataset.routeContext='true';
       heading.prepend(context);
     }
-    const meta=areas.find(area=>area.id===group)||{order:1,total:section.routeAreaTotal||1};
-    context.textContent=`RUTA ${meta.order}/${areas.length} · ${group} · TEMA ${section.routeAreaPosition||1}/${section.routeAreaTotal||meta.total}`;
+    const meta=areas.find(area=>area.id===group)||{order:1,total:section.routeAreaTotal};
+    context.textContent=`RUTA ${meta.order}/${areas.length} · ${group} · TEMA ${section.routeAreaPosition}/${section.routeAreaTotal}`;
   };
 
   nav.addEventListener('click',()=>setTimeout(sync,0));
