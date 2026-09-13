@@ -44,6 +44,12 @@ jobs:
           card_count=$(grep -o 'tag-card' /tmp/biblioteca-runtime.html | wc -l)
 
           echo "Diagnóstico: ${nav_count} temas, ${angular_count} referencias Angular y ${card_count} tarjetas visibles."
+          echo '--- grupos encontrados ---'
+          grep -o 'data-group="[^"]*"' /tmp/biblioteca-runtime.html | sort | uniq -c || true
+          echo '--- referencias Angular en DOM ---'
+          grep -n -m 12 'Angular' /tmp/biblioteca-runtime.html || true
+          echo '--- solicitudes del organizador ---'
+          grep 'angular-category-guide' /tmp/biblioteca-server.log || true
 
           grep -q 'RUTA DE APRENDIZAJE' /tmp/biblioteca-runtime.html
           grep -q 'data-group="Angular"' /tmp/biblioteca-runtime.html
