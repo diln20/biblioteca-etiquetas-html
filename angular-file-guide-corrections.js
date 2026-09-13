@@ -54,6 +54,20 @@
           .replaceAll('src/app/features/counter/ui/','src/app/components/');
       }
 
+      if(selector==='root'){
+        const rootPath=path=>String(path)
+          .replace(/^src\/app\/components\/app-root\/app-root\.(ts|html|scss|css|spec\.ts)$/,'src/app/app.$1')
+          .replace(/^src\/app\/features\/greeting\/ui\/app-root\/app-root\.(ts|html|scss|css|spec\.ts)$/,'src/app/app.$1');
+        guide=guide.map(([action,path,detail])=>[action,rootPath(path),detail]);
+        if(/template\s*:\s*[`'"]/.test(code))guide=guide.filter(([,path])=>path!=='src/app/app.html');
+        guide=guide.filter(([,path,detail])=>!(String(path).startsWith('Terminal')&&String(detail).includes('component app-root')));
+        if(typeof item.description==='string'){
+          item.description=item.description
+            .replaceAll('src/app/components/app-root/app-root.ts','src/app/app.ts')
+            .replaceAll('src/app/features/greeting/ui/app-root/app-root.ts','src/app/app.ts');
+        }
+      }
+
       if(componentCommand){
         const parts=componentCommand.split('/').filter(Boolean);
         const componentName=parts.at(-1);
@@ -69,7 +83,7 @@
         });
       }
 
-      if(selector){
+      if(selector&&selector!=='root'){
         const componentEntry=guide.find(([,path])=>String(path).endsWith(`/${selector}.ts`));
         const componentPath=componentEntry?.[1]||(
           simpleFeatures.has(feature)
