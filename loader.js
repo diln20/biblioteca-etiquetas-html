@@ -6,13 +6,22 @@
     const b=Uint8Array.from(atob(encoded),c=>c.charCodeAt(0));
     const ds=new DecompressionStream('gzip');
     let html=await new Response(new Blob([b]).stream().pipeThrough(ds)).text();
-    const open=html.indexOf('<script>');
-    const close=html.lastIndexOf('</script>');
-    if(open>=0&&close>open){
-      const start=open+8;
-      const js=html.slice(start,close).replaceAll('</script>','<\/script>');
-      html=html.slice(0,start)+js+html.slice(close);
+
+    // El bundle contiene ejemplos con etiquetas <script> dentro de cadenas.
+    // Localizamos el script principal mediante marcadores de su código y escapamos
+    // únicamente sus cierres internos, preservando el cierre real del elemento.
+    const sectionMarker=html.indexOf('const sections');
+    const bootMarker='buildNav();saveFavs();resetEditor();render();';
+    const bootEnd=html.indexOf(bootMarker,sectionMarker);
+    const scriptOpen=html.lastIndexOf('<script',sectionMarker);
+    const scriptStart=scriptOpen>=0?html.indexOf('>',scriptOpen)+1:-1;
+    const scriptClose=bootEnd>=0?html.indexOf('</script>',bootEnd+bootMarker.length):-1;
+    if(scriptStart<=0||scriptClose<=scriptStart){
+      throw new Error('No se pudo localizar el script principal del bundle');
     }
+    const mainScript=html.slice(scriptStart,scriptClose).replace(/<\/script\s*>/gi,'<\\/script>');
+    html=html.slice(0,scriptStart)+mainScript+html.slice(scriptClose);
+
     const styles='<link rel="stylesheet" href="screen-fit.css?v=2"><link rel="stylesheet" href="theme-modern.css?v=6"><link rel="stylesheet" href="course-ui-enhancements.css?v=1"><link rel="stylesheet" href="primary-area-ui.css?v=1">';
     html=html.replace('</head>',styles+'</head>');
     const editor='<button class="ghost-btn" id="editorBtn" type="button">Editor en vivo</button>';
