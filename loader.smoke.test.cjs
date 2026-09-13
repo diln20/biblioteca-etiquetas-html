@@ -14,7 +14,7 @@ const angularFinalizer = read('angular-category-finalizer.js');
 const angularGuideCorrections = read('angular-file-guide-corrections.js');
 
 const resources = [
-  'screen-fit.css?v=2','theme-modern.css?v=6','course-ui-enhancements.css?v=1','primary-area-ui.css?v=2',
+  'screen-fit.css?v=2','theme-modern.css?v=6','course-ui-enhancements.css?v=1','primary-area-ui.css?v=3',
   'learning-visuals.js?v=1','course-ux-form-keyboard.js?v=1','course-ux-form-errors.js?v=1','course-ux-form-project.js?v=1',
   'angular-from-zero-section.js?v=1','angular-overview-section.js?v=1','angular-beginner-environment.js?v=1','course-angular-components.js?v=1','course-angular-bindings.js?v=1','angular-beginner-signals.js?v=1','course-angular-forms.js?v=1',
   'course-angular-exercises-01.js?v=1','course-angular-exercises-02.js?v=1','course-angular-exercises-03.js?v=1',
@@ -24,7 +24,7 @@ const resources = [
   'course-angular-exercises-07.js?v=1','course-angular-exercises-08.js?v=1','course-angular-exercises-09.js?v=1','angular-category-guide.js?v=1','angular-category-finalizer.js?v=1','angular-file-guide-corrections.js?v=4',
   'course-solid-introduction.js?v=1','course-solid-reactivity.js?v=1','course-solid-exercises-01.js?v=1','course-solid-exercises-02.js?v=1',
   'course-backend-scaling-basics.js?v=1','course-backend-scaling-architecture.js?v=1','course-backend-scaling-resilience.js?v=1',
-  'exact-explanation-enhancer.js?v=1','section-order.js?v=4','course-ui.js?v=15','file-guide-ui.js?v=1','primary-area-ui.js?v=1'
+  'exact-explanation-enhancer.js?v=1','section-order.js?v=4','course-ui.js?v=15','file-guide-ui.js?v=1','primary-area-ui.js?v=2'
 ];
 assert.deepEqual(resources.filter(resource => !loader.includes(resource)), []);
 
@@ -41,7 +41,7 @@ assert.ok(loader.includes("if(typeof T==='function')window.T=T;"));
 assert.ok(loader.includes("if(typeof createCard==='function')window.createCard=createCard;"));
 assert.ok(loader.includes("if(typeof render==='function')window.render=render;"));
 assert.ok(loader.includes("if(typeof buildNav==='function')window.buildNav=buildNav;"));
-assert.ok(index.includes('loader.js?v=14'));
+assert.ok(index.includes('loader.js?v=15'));
 
 const expectedAreas = ['HTML','CSS','JavaScript','Git','APIs','Angular','Frameworks','Backend'];
 expectedAreas.forEach(area => assert.ok(order.includes(`'${area}'`), `falta el área ${area}`));
@@ -50,9 +50,16 @@ assert.ok(order.includes("if(area==='Angular')"));
 assert.ok(order.includes('sections.sort('));
 assert.ok(courseUi.includes('if(section?.group)return section.group'));
 assert.ok(areaUi.includes('section.routeAreaPosition=position'));
+assert.ok(areaUi.includes('const navLabelOf='));
+assert.ok(areaUi.includes("label=label.replace(/^JavaScript"));
+assert.ok(areaUi.includes(".replace(/^\\s*\\d{1,2}[A-Z]?\\.\\s*/i,''"));
+assert.ok(areaUi.includes('window.formatCourseNavLabel=navLabelOf'));
 assert.ok(areaCss.includes('body[data-course="Angular"]'));
 assert.ok(areaCss.includes('.nav-item[data-group="Angular"]'));
-assert.ok(areaCss.includes('.file-guide'));
+assert.ok(areaCss.includes('counter-reset:file-guide-step'));
+assert.ok(areaCss.includes('grid-template-areas:"action path" "detail detail"'));
+assert.ok(areaCss.includes('.tag-card .file-guide ol>li::before'));
+assert.ok(areaCss.includes('inset:13px auto auto 13px'));
 assert.ok(fileGuideUi.includes('item.guideTitle'));
 assert.ok(fileGuideUi.includes('Dónde colocar cada código'));
 assert.ok(angularFinalizer.includes('/\\bAngular\\b/i'));
@@ -64,7 +71,9 @@ assert.ok(angularGuideCorrections.includes("selector&&selector!=='root'"));
 assert.ok(angularGuideCorrections.includes('(?:app-root|root)'));
 
 const courseResourceNames = resources.filter(resource =>
-  resource.endsWith('.js?v=1') || resource === 'angular-file-guide-corrections.js?v=4'
+  resource.endsWith('.js?v=1') ||
+  resource === 'angular-file-guide-corrections.js?v=4' ||
+  resource === 'primary-area-ui.js?v=2'
 );
 const scriptFiles = courseResourceNames.map(resource => resource.replace(/\?v=\d+$/,''));
 for(const file of scriptFiles){
