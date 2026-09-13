@@ -40,7 +40,7 @@ if(typeof esc==='function')window.esc=esc;
     const mainScript=bridgedSource.replace(/<\/script\s*>/gi,'<\\/script>');
     html=html.slice(0,scriptStart)+mainScript+html.slice(scriptClose);
 
-    const styles='<link rel="stylesheet" href="screen-fit.css?v=2"><link rel="stylesheet" href="theme-modern.css?v=6"><link rel="stylesheet" href="course-ui-enhancements.css?v=1"><link rel="stylesheet" href="primary-area-ui.css?v=2">';
+    const styles='<link rel="stylesheet" href="screen-fit.css?v=2"><link rel="stylesheet" href="theme-modern.css?v=6"><link rel="stylesheet" href="course-ui-enhancements.css?v=1"><link rel="stylesheet" href="primary-area-ui.css?v=3">';
     html=html.replace('</head>',styles+'</head>');
     const editor='<button class="ghost-btn" id="editorBtn" type="button">Editor en vivo</button>';
     const example='<a class="ghost-btn" href="ejemplo.html" style="display:inline-flex;align-items:center;justify-content:center;min-height:40px;text-decoration:none;white-space:nowrap" title="Abrir ejemplo completo de HTML5">HTML de ejemplo</a>';
@@ -58,7 +58,7 @@ if(typeof esc==='function')window.esc=esc;
       'course-solid-introduction.js?v=1','course-solid-reactivity.js?v=1','course-solid-exercises-01.js?v=1','course-solid-exercises-02.js?v=1',
       'framework-projects-section.js?v=3','angular-category-finalizer.js?v=1','angular-file-guide-corrections.js?v=4','course-backend-scaling-basics.js?v=1','course-backend-scaling-architecture.js?v=1','course-backend-scaling-resilience.js?v=1',
       'backend-fastapi-section.js?v=11','backend-django-rest-section.js?v=1','django-html-css-section.js?v=1','html-css-section.js?v=1','integration-sections.js?v=1','practice-expansion.js?v=2','git-section.js?v=1','content-corrections.js?v=1',
-      'section-order.js?v=4','css-property-explanations.js?v=3','example-code-formatter.js?v=1','explanation-enhancer.js?v=9','exact-explanation-enhancer.js?v=1','course-ui.js?v=15','file-guide-ui.js?v=1','primary-area-ui.js?v=1'
+      'section-order.js?v=4','css-property-explanations.js?v=3','example-code-formatter.js?v=1','explanation-enhancer.js?v=9','exact-explanation-enhancer.js?v=1','course-ui.js?v=15','file-guide-ui.js?v=1','primary-area-ui.js?v=2'
     ];
     const extraScripts=scripts.map(src=>'<scr'+'ipt src="'+src+'"></scr'+'ipt>').join('');
     const bodyClose=html.lastIndexOf('</body>');
