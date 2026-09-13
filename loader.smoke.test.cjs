@@ -32,10 +32,20 @@ assert.deepEqual(resources.filter(resource => !loader.includes(resource)), []);
 assert.ok(loader.includes("const sectionMarker=html.indexOf('const sections')"));
 assert.ok(loader.includes("const bootMarker='buildNav();saveFavs();resetEditor();render();'"));
 assert.ok(loader.includes("const scriptClose=bootEnd>=0?html.indexOf('</script>'"));
-assert.ok(loader.includes('const mainScript=html.slice(scriptStart,scriptClose).replace('));
+assert.ok(loader.includes('const mainScript=bridgedSource.replace('));
 assert.ok(loader.includes('No se pudo localizar el script principal del bundle'));
+assert.ok(loader.includes('No se pudo localizar el arranque de la biblioteca'));
 assert.ok(!loader.includes("const close=html.lastIndexOf('</script>')"));
-assert.ok(index.includes('loader.js?v=8'));
+
+// Las declaraciones globales const del bundle no son propiedades de window.
+// Este puente es indispensable para que las rutas externas puedan ejecutarse
+// realmente en el navegador y no solo dentro del contexto de las pruebas VM.
+assert.ok(loader.includes('window.sections=sections;'));
+assert.ok(loader.includes("if(typeof T==='function')window.T=T;"));
+assert.ok(loader.includes("if(typeof createCard==='function')window.createCard=createCard;"));
+assert.ok(loader.includes("if(typeof render==='function')window.render=render;"));
+assert.ok(loader.includes("if(typeof buildNav==='function')window.buildNav=buildNav;"));
+assert.ok(index.includes('loader.js?v=9'));
 
 const expectedAreas = ['HTML','CSS','JavaScript','Git','APIs','Angular','Frameworks','Backend'];
 expectedAreas.forEach(area => assert.ok(order.includes(`'${area}'`), `falta el área ${area}`));
