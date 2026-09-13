@@ -10,6 +10,7 @@ const courseUi = read('course-ui.js');
 const areaUi = read('primary-area-ui.js');
 const areaCss = read('primary-area-ui.css');
 const fileGuideUi = read('file-guide-ui.js');
+const angularFinalizer = read('angular-category-finalizer.js');
 
 const resources = [
   'screen-fit.css?v=2','theme-modern.css?v=6','course-ui-enhancements.css?v=1','primary-area-ui.css?v=2',
@@ -19,7 +20,7 @@ const resources = [
   'course-angular-intermediate-architecture.js?v=1','course-angular-intermediate-data.js?v=1','course-angular-intermediate-reactivity.js?v=1',
   'course-angular-exercises-04.js?v=1','course-angular-exercises-05.js?v=1','course-angular-exercises-06.js?v=1',
   'course-angular-advanced-architecture.js?v=1','course-angular-advanced-performance.js?v=1','course-angular-advanced-quality.js?v=1',
-  'course-angular-exercises-07.js?v=1','course-angular-exercises-08.js?v=1','course-angular-exercises-09.js?v=1','angular-category-guide.js?v=1',
+  'course-angular-exercises-07.js?v=1','course-angular-exercises-08.js?v=1','course-angular-exercises-09.js?v=1','angular-category-guide.js?v=1','angular-category-finalizer.js?v=1',
   'course-solid-introduction.js?v=1','course-solid-reactivity.js?v=1','course-solid-exercises-01.js?v=1','course-solid-exercises-02.js?v=1',
   'course-backend-scaling-basics.js?v=1','course-backend-scaling-architecture.js?v=1','course-backend-scaling-resilience.js?v=1',
   'exact-explanation-enhancer.js?v=1','section-order.js?v=4','course-ui.js?v=15','file-guide-ui.js?v=1','primary-area-ui.js?v=1'
@@ -45,7 +46,7 @@ assert.ok(loader.includes("if(typeof T==='function')window.T=T;"));
 assert.ok(loader.includes("if(typeof createCard==='function')window.createCard=createCard;"));
 assert.ok(loader.includes("if(typeof render==='function')window.render=render;"));
 assert.ok(loader.includes("if(typeof buildNav==='function')window.buildNav=buildNav;"));
-assert.ok(index.includes('loader.js?v=9'));
+assert.ok(index.includes('loader.js?v=10'));
 
 const expectedAreas = ['HTML','CSS','JavaScript','Git','APIs','Angular','Frameworks','Backend'];
 expectedAreas.forEach(area => assert.ok(order.includes(`'${area}'`), `falta el área ${area}`));
@@ -61,6 +62,9 @@ assert.ok(areaCss.includes('.nav-item[data-group="Angular"]'));
 assert.ok(areaCss.includes('.file-guide'));
 assert.ok(fileGuideUi.includes('item.guideTitle'));
 assert.ok(fileGuideUi.includes('Dónde colocar cada código'));
+assert.ok(angularFinalizer.includes('/\\bAngular\\b/i'));
+assert.ok(angularFinalizer.includes("section.primaryArea='Angular'"));
+assert.ok(angularFinalizer.includes("section.navLabel=`Proyecto · ${projectName}`"));
 
 const scriptFiles = resources
   .filter(resource => resource.endsWith('.js?v=1'))
