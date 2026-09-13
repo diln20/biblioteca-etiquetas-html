@@ -134,7 +134,7 @@ setTimeout(() => {
       'Fundamentos web',
       'Práctica HTML paso a paso',
       'CSS · Principiante',
-      'JavaScript · Principiante',
+      'JavaScript · 1. Primeros pasos',
       'Manejo del DOM',
       'Backend FastAPI · Introducción',
       'Django REST · 1. Conceptos desde cero',
