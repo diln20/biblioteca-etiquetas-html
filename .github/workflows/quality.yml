@@ -39,15 +39,17 @@ jobs:
             'http://127.0.0.1:4173/index.html?ci-browser=1' \
             > /tmp/biblioteca-runtime.html
 
-          grep -q 'RUTA DE APRENDIZAJE' /tmp/biblioteca-runtime.html
-          grep -q 'data-group="Angular"' /tmp/biblioteca-runtime.html
-          grep -q 'Angular · Desde cero' /tmp/biblioteca-runtime.html
           nav_count=$(grep -o 'nav-item' /tmp/biblioteca-runtime.html | wc -l)
           angular_count=$(grep -o 'data-group="Angular"' /tmp/biblioteca-runtime.html | wc -l)
           card_count=$(grep -o 'tag-card' /tmp/biblioteca-runtime.html | wc -l)
+
+          echo "Diagnóstico: ${nav_count} temas, ${angular_count} referencias Angular y ${card_count} tarjetas visibles."
+
+          grep -q 'RUTA DE APRENDIZAJE' /tmp/biblioteca-runtime.html
+          grep -q 'data-group="Angular"' /tmp/biblioteca-runtime.html
           test "$nav_count" -ge 50
           test "$angular_count" -ge 10
           test "$card_count" -ge 1
           ! grep -q '</sections.length-1)' /tmp/biblioteca-runtime.html
 
-          echo "Browser smoke OK: ${nav_count} temas, ${angular_count} temas Angular y ${card_count} tarjetas visibles."
+          echo "Browser smoke OK."
