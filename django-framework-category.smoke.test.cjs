@@ -26,7 +26,9 @@ assert.ok(guide.includes("'Django Framework','FastAPI','Django REST'"));
 const context={
   console,
   sections:[],
-  T:(tag,name,description,code,preview=code,attrs=[],meta={})=>({tag,name,description,code,preview,attrs,...meta})
+  T:(tag,name,description,code,preview=code,attrs=[],meta={})=>({tag,name,description,code,preview,attrs,...meta}),
+  buildNav:()=>{},
+  render:()=>{}
 };
 context.window=context;
 vm.createContext(context);
