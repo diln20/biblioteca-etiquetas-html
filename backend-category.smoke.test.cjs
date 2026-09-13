@@ -19,7 +19,7 @@ assert.ok(loader.includes('fastapi-from-zero-section.js?v=1'));
 assert.ok(loader.includes('django-rest-from-zero-section.js?v=1'));
 assert.ok(loader.includes('backend-category-guide.js?v=1'));
 assert.ok(loader.includes('file-guide-ui.js?v=2&frameworks=3'));
-assert.ok(index.includes('loader.js?v=16&fix=5'));
+assert.ok(index.includes('loader.js?v=16&fix=6'));
 assert.ok(fileUi.includes('FastAPI|Django REST'));
 
 const context={
