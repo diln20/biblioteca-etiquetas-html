@@ -1,0 +1,32 @@
+name: Runtime diagnose
+
+on:
+  push:
+    branches: [debug/browser-runtime]
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Show browser version
+        run: |
+          which google-chrome || which google-chrome-stable || which chromium || true
+          google-chrome --version || google-chrome-stable --version || chromium --version || true
+      - name: Run browser diagnosis
+        run: node runtime-diagnose.mjs
+      - name: Upload screenshot
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: runtime-diagnose
+          path: runtime-diagnose.png
+          if-no-files-found: ignore
