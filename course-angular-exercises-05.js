@@ -1,0 +1,10 @@
+(()=>{
+  if(window.__angularExercises05Added)return;
+  window.__angularExercises05Added=true;
+  if(!Array.isArray(window.sections)||typeof window.T!=='function')return;
+  const ex=(n,name,description,code,preview,tip)=>T(`Ejercicio ${n}`,name,description,code,preview,[],{kind:'Ejercicio Angular',tip});
+  sections.push({title:'Frameworks frontend · Angular · 4B. Ejercicios de datos',navLabel:'Angular · Ejercicios 9–10',group:'Frameworks',primaryArea:'Frameworks',areaOrder:241,description:'Formulario reactivo y API tipada con estados completos.',quote:'“Los contratos claros reducen errores entre vista y backend.”',challenge:'Implementa creación, edición y listado con validación accesible.',items:[
+    ex(9,'Formulario reactivo','Crea nombre, precio y stock con validaciones. Muestra mensajes específicos, usa aria-describedby y reutiliza el formulario para crear y editar.','form = this.fb.group({\n  name:["",[Validators.required,Validators.minLength(3)]],\n  price:[0,[Validators.required,Validators.min(1)]],\n  stock:[0,[Validators.required,Validators.min(0)]]\n});\n\nsave(){\n  if(this.form.invalid){ this.form.markAllAsTouched(); return; }\n  const command = this.form.getRawValue();\n}','<form style="font-family:system-ui"><label>Nombre<input value="Te" style="display:block;border:1px solid #dc2626;padding:8px"></label><small style="color:#dc2626">Falta 1 carácter.</small></form>','Extra: crea un validador entre precio normal y precio promocional.'),
+    ex(10,'API con HttpClient','Implementa list, findById, create, update y remove. La UI debe representar loading, error, empty y success.','list(){ return this.http.get<Product[]>(`${this.url}/products`); }\nfindById(id:string){ return this.http.get<Product>(`${this.url}/products/${id}`); }\ncreate(command:CreateProduct){ return this.http.post<Product>(`${this.url}/products`,command); }','<p style="font-family:system-ui">API → ProductsApi → Store → Page</p>','Extra: diferencia 404, 409 y 500 con mensajes y acciones distintas.')
+  ]});
+})();
