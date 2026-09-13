@@ -11,6 +11,7 @@
   const level=title=>({introduccion:10,principiante:20,intermedio:30,avanzado:40,produccion:90})[normalize(detail(title))]??0;
 
   const areaOf=section=>{
+    if(section?.primaryArea)return section.primaryArea;
     const title=String(section?.title||'');
     if(title.startsWith('Backend ')||title.startsWith('Django '))return 'Backend';
     if(title.startsWith('Frameworks frontend')||title.startsWith('Proyectos con frameworks'))return 'Frameworks';
@@ -22,6 +23,7 @@
   };
 
   const orderInArea=section=>{
+    if(Number.isFinite(section?.areaOrder))return section.areaOrder;
     const title=String(section?.title||'');
     const area=areaOf(section);
     const source=sourceIndex.get(section)||0;
