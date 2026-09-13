@@ -35,6 +35,10 @@
       const feature=featureOf(text);
       const selector=code.match(/selector\s*:\s*['"]app-([^'"]+)['"]/i)?.[1];
       const className=code.match(/export\s+class\s+([A-Za-z0-9_]+)/)?.[1]||'El componente';
+      const componentCommand=code.match(/ng\s+(?:g|generate)\s+(?:c|component)\s+([^\s#]+)/i)?.[1]
+        ?.replace(/^\.\//,'')
+        .replace(/^src\/app\//,'')
+        .replace(/\/$/,'');
 
       let guide=(Array.isArray(item.guide)?item.guide:[]).map(([action,path,detail])=>[
         action,
@@ -48,6 +52,21 @@
         item.description=item.description
           .replaceAll('src/app/features/greeting/ui/','src/app/components/')
           .replaceAll('src/app/features/counter/ui/','src/app/components/');
+      }
+
+      if(componentCommand){
+        const parts=componentCommand.split('/').filter(Boolean);
+        const componentName=parts.at(-1);
+        const componentRoot=`src/app/${componentCommand}`;
+        const generated=[
+          ['Crear',`${componentRoot}/${componentName}.ts`,'Aquí quedan el decorador @Component, la clase TypeScript, el estado, los inputs, los outputs y los métodos.'],
+          ['Crear',`${componentRoot}/${componentName}.html`,'Aquí queda la plantilla HTML cuando el componente usa templateUrl.'],
+          ['Crear',`${componentRoot}/${componentName}.scss`,'Aquí quedan los estilos locales del componente cuando el proyecto utiliza SCSS.'],
+          ['Crear',`${componentRoot}/${componentName}.spec.ts`,'Aquí quedan las pruebas del componente generadas por Angular CLI.']
+        ];
+        generated.forEach(entry=>{
+          if(!guide.some(([,path])=>path===entry[1]))guide.push(entry);
+        });
       }
 
       if(selector){
@@ -93,6 +112,6 @@
         const key=`${entry?.[0]}|${entry?.[1]}`;
         if(!seen.has(key)){seen.add(key);unique.push(entry);}
       });
-      item.guide=unique.slice(0,7);
+      item.guide=unique.slice(0,8);
     }));
 })();
