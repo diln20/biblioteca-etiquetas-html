@@ -1,1 +1,9 @@
-/* Estilos de las áreas principales de aprendizaje. */
+/* Organización principal de la ruta: HTML, CSS, JavaScript, Git, APIs, Frameworks y Backend. */
+body[data-course="Frameworks"]{--course-accent:#818cf8;--course-soft:rgba(129,140,248,.12);--course-line:rgba(129,140,248,.42)}
+body[data-course="Backend"]{--course-accent:#34d399;--course-soft:rgba(52,211,153,.12);--course-line:rgba(52,211,153,.42)}
+.nav-item[data-group="Frameworks"]{--nav-accent:#818cf8}
+.nav-item[data-group="Backend"]{--nav-accent:#34d399}
+.route-context{grid-column:1/-1;margin:0 0 8px;color:var(--course-accent);font-size:11px;font-weight:850;letter-spacing:.09em;text-transform:uppercase}
+.nav-group-label{font-size:11px;letter-spacing:.08em}
+.nav-title{overflow-wrap:anywhere}
+@media(max-width:760px){.route-context{font-size:10px;letter-spacing:.06em}}
