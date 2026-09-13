@@ -2,6 +2,9 @@
   if(window.__angularOverviewAdded)return;
   window.__angularOverviewAdded=true;
   if(!Array.isArray(window.sections)||typeof window.T!=='function'||!window.CourseVisuals)return;
+  for(let index=sections.length-1;index>=0;index--){
+    if(sections[index]?.title==='Frameworks frontend · Angular')sections.splice(index,1);
+  }
   const V=window.CourseVisuals;
   const A=(topic,name,description,code,preview,tip)=>T(topic,name,description,code,preview,[],{kind:'Angular',tip});
   sections.push({
