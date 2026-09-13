@@ -2,7 +2,7 @@
   if(window.__sectionOrderApplied||!Array.isArray(window.sections))return;
   window.__sectionOrderApplied=true;
 
-  const areas=['HTML','CSS','JavaScript','Git','APIs','Frameworks','Backend'];
+  const areas=['HTML','CSS','JavaScript','Git','APIs','Angular','Frameworks','Backend'];
   const areaIndex=new Map(areas.map((area,index)=>[area,index]));
   const sourceIndex=new Map(sections.map((section,index)=>[section,index]));
   const normalize=value=>String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
@@ -14,6 +14,7 @@
     if(section?.primaryArea)return section.primaryArea;
     const title=String(section?.title||'');
     if(title.startsWith('Backend ')||title.startsWith('Django '))return 'Backend';
+    if(/(?:^| · )Angular(?: ·|$)/i.test(title))return 'Angular';
     if(title.startsWith('Frameworks frontend')||title.startsWith('Proyectos con frameworks'))return 'Frameworks';
     if(title.startsWith('Git'))return 'Git';
     if(title.startsWith('API')||title.startsWith('Consumo de API')||title.startsWith('Proyecto básico · API'))return 'APIs';
@@ -44,6 +45,7 @@
     if(area==='JavaScript')return title==='Manejo del DOM'?900:(number(title)*10||level(title)||100+source);
     if(area==='Git')return level(title)||number(title)||100+source;
     if(area==='APIs')return title.startsWith('Proyecto básico · API')?900:(number(title)*10||100+source);
+    if(area==='Angular')return number(title)*10||level(title)||100+source;
     if(area==='Frameworks')return title.startsWith('Proyectos con frameworks')?500+source:100+source;
     if(area==='Backend'){
       if(title.startsWith('Backend APIs'))return 0;
