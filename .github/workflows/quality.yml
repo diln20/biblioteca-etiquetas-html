@@ -20,6 +20,8 @@ jobs:
           node-version: 22
       - name: Run loader smoke test
         run: node loader.smoke.test.cjs
+      - name: Run framework category smoke test
+        run: node framework-category.smoke.test.cjs
       - name: Run browser smoke test
         run: |
           python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/biblioteca-server.log 2>&1 &
@@ -45,6 +47,10 @@ jobs:
 
           grep -q 'RUTA DE APRENDIZAJE' /tmp/biblioteca-runtime.html
           grep -q 'data-group="Angular"' /tmp/biblioteca-runtime.html
+          grep -q 'data-group="React"' /tmp/biblioteca-runtime.html
+          grep -q 'data-group="Vue"' /tmp/biblioteca-runtime.html
+          grep -q 'data-group="Svelte"' /tmp/biblioteca-runtime.html
+          grep -q 'data-group="Solid.js"' /tmp/biblioteca-runtime.html
           grep -q 'Angular · Desde cero' /tmp/biblioteca-runtime.html
           grep -q '<span class="nav-title">01. Primeros pasos</span>' /tmp/biblioteca-runtime.html
           ! grep -Eq '<span class="nav-title">[0-9]{2}\. JavaScript · [0-9]{1,2}\.' /tmp/biblioteca-runtime.html
