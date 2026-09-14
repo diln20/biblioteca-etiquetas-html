@@ -67,7 +67,7 @@ jobs:
           echo "Browser counts: nav=${nav_count}, TypeScript=${typescript_count}, Angular=${angular_count}, DjangoFramework=${django_framework_count}, FastAPI=${fastapi_count}, DjangoREST=${django_count}, BasesDatos=${database_count}, tarjetas=${card_count}."
 
           grep -Fq 'RUTA DE APRENDIZAJE' /tmp/biblioteca-runtime.html
-          grep -Fq 'data-group="TypeScript"' /tmp/biblioteca-runtime.html || grep -Fq 'data-group="TypeScript"' /tmp/biblioteca-runtime.html
+          grep -q 'data-group="TypeScript"' /tmp/biblioteca-runtime.html
           grep -q 'data-group="Angular"' /tmp/biblioteca-runtime.html
           grep -q 'data-group="React"' /tmp/biblioteca-runtime.html
           grep -q 'data-group="Vue"' /tmp/biblioteca-runtime.html
