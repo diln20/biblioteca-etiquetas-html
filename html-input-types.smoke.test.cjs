@@ -14,8 +14,8 @@ assert.doesNotThrow(()=>new vm.Script(enhancer,{filename:'html-input-attribute-e
 assert.doesNotThrow(()=>new vm.Script(order,{filename:'section-order.js'}));
 assert.ok(loader.includes('html-input-types-section.js?v=1'));
 assert.ok(loader.includes('html-input-attribute-explanations.js?v=1'));
-assert.ok(loader.includes('section-order.js?v=6'));
-assert.ok(index.includes('loader.js?v=16&fix=8&order=3'));
+assert.ok(loader.includes('section-order.js?v=7'));
+assert.ok(index.includes('loader.js?v=17&fix=9&htmlorder=2'));
 
 [
   "for:'En un <label>",
@@ -38,8 +38,9 @@ assert.ok(enhancer.includes('Explicar ${count} atributo'));
 const context={
   console,
   sections:[
+    {title:'Tablas',primaryArea:'HTML',items:[]},
     {title:'Formularios',primaryArea:'HTML',items:[]},
-    {title:'Tablas',primaryArea:'HTML',items:[]}
+    {title:'Multimedia',primaryArea:'HTML',items:[]}
   ],
   T:(tag,name,description,code,preview=code,attrs=[],meta={})=>({tag,name,description,code,preview,attrs,...meta}),
   buildNav:()=>{},
@@ -61,7 +62,7 @@ const formsIndex=htmlTitles.indexOf('Formularios');
 const inputsIndex=htmlTitles.indexOf('HTML · Formularios · Tipos de input');
 assert.ok(formsIndex>=0,'falta la sección Formularios de referencia');
 assert.equal(inputsIndex,formsIndex+1,'Tipos de input debe aparecer inmediatamente después de Formularios');
-assert.equal(htmlTitles[inputsIndex+1],'Tablas','Tipos de input debe quedar antes del siguiente tema HTML');
+assert.equal(htmlTitles[inputsIndex+1],'Multimedia','Tipos de input debe quedar antes del siguiente tema HTML');
 
 const code=section.items.map(item=>item.code).join('\n');
 [
