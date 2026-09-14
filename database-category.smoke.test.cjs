@@ -11,7 +11,7 @@ const fileUi=read('file-guide-ui.js');
 assert.doesNotThrow(()=>new vm.Script(source,{filename:'database-from-zero-section.js'}));
 assert.doesNotThrow(()=>new vm.Script(guide,{filename:'database-category-guide.js'}));
 assert.ok(loader.includes('database-from-zero-section.js?v=1'));
-assert.ok(loader.includes('database-category-guide.js?v=1'));
+assert.ok(loader.includes('database-category-guide.js?v=2'));
 assert.ok(fileUi.includes('Base de datos'));
 
 const context={
