@@ -38,7 +38,7 @@ assert.ok(source.includes('getElementById'));
 assert.ok(source.includes('querySelector'));
 assert.ok(source.includes('data-ciudad'));
 assert.ok(source.includes('componente Perfil'));
-assert.ok(source.includes('endpoint /perfil'));
-assert.ok(source.includes('guarda un perfil'));
+assert.ok(source.includes("title:'Ejercicio para ti · endpoint de perfil'"));
+assert.ok(source.includes("title:'Ejercicio para ti · guarda un perfil'"));
 
 console.log('Personalized exercises smoke OK');
