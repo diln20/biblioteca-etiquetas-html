@@ -22,12 +22,16 @@ jobs:
         run: node loader.smoke.test.cjs
       - name: Run HTML input types smoke test
         run: node html-input-types.smoke.test.cjs
+      - name: Run visual topics smoke test
+        run: node visual-topics.smoke.test.cjs
       - name: Run framework category smoke test
         run: node framework-category.smoke.test.cjs
       - name: Run backend category smoke test
         run: node backend-category.smoke.test.cjs
       - name: Run Django Framework smoke test
         run: node django-framework-category.smoke.test.cjs
+      - name: Run database category smoke test
+        run: node database-category.smoke.test.cjs
       - name: Run browser smoke test
         run: |
           python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/biblioteca-server.log 2>&1 &
@@ -42,7 +46,7 @@ jobs:
             --disable-dev-shm-usage \
             --disable-extensions \
             --window-size=1600,1200 \
-            --virtual-time-budget=16000 \
+            --virtual-time-budget=18000 \
             --dump-dom \
             'http://127.0.0.1:4173/index.html?ci-browser=1' \
             > /tmp/biblioteca-runtime.html
@@ -52,6 +56,7 @@ jobs:
           django_framework_count=$(grep -o 'data-group="Django Framework"' /tmp/biblioteca-runtime.html | wc -l)
           fastapi_count=$(grep -o 'data-group="FastAPI"' /tmp/biblioteca-runtime.html | wc -l)
           django_count=$(grep -o 'data-group="Django REST"' /tmp/biblioteca-runtime.html | wc -l)
+          database_count=$(grep -o 'data-group="Base de datos"' /tmp/biblioteca-runtime.html | wc -l)
           card_count=$(grep -o 'tag-card' /tmp/biblioteca-runtime.html | wc -l)
 
           grep -q 'RUTA DE APRENDIZAJE' /tmp/biblioteca-runtime.html
@@ -63,19 +68,30 @@ jobs:
           grep -q 'data-group="Django Framework"' /tmp/biblioteca-runtime.html
           grep -q 'data-group="FastAPI"' /tmp/biblioteca-runtime.html
           grep -q 'data-group="Django REST"' /tmp/biblioteca-runtime.html
+          grep -q 'data-group="Base de datos"' /tmp/biblioteca-runtime.html
           grep -q 'HTML · Formularios · Tipos de input' /tmp/biblioteca-runtime.html
+          grep -q 'HTML · Imágenes · Atributos de img' /tmp/biblioteca-runtime.html
+          grep -q 'CSS · Pseudoclases' /tmp/biblioteca-runtime.html
           grep -q 'Angular · Desde cero' /tmp/biblioteca-runtime.html
           grep -q 'Django Framework · 0. Desde cero' /tmp/biblioteca-runtime.html
           grep -q 'Backend FastAPI · 0. Desde cero' /tmp/biblioteca-runtime.html
           grep -q 'Django REST · 0. Desde cero' /tmp/biblioteca-runtime.html
+          grep -q 'Base de datos · 0. Desde cero' /tmp/biblioteca-runtime.html
+          grep -q 'Base de datos · 1. Oracle desde cero' /tmp/biblioteca-runtime.html
+          grep -q 'Base de datos · 2. PostgreSQL desde cero' /tmp/biblioteca-runtime.html
+          grep -q 'Base de datos · 3. MongoDB desde cero' /tmp/biblioteca-runtime.html
+          grep -q 'Base de datos · 4. Neo4j desde cero' /tmp/biblioteca-runtime.html
+          grep -q 'Base de datos · 5. Redis desde cero' /tmp/biblioteca-runtime.html
+          grep -q 'Base de datos · 6. Cassandra desde cero' /tmp/biblioteca-runtime.html
           grep -q '<span class="nav-title">01. Primeros pasos</span>' /tmp/biblioteca-runtime.html
           ! grep -Eq '<span class="nav-title">[0-9]{2}\. JavaScript · [0-9]{1,2}\.' /tmp/biblioteca-runtime.html
-          test "$nav_count" -ge 106
+          test "$nav_count" -ge 116
           test "$angular_count" -ge 20
           test "$django_framework_count" -ge 5
           test "$fastapi_count" -ge 2
           test "$django_count" -ge 5
+          test "$database_count" -ge 8
           test "$card_count" -ge 1
           ! grep -q '</sections.length-1)' /tmp/biblioteca-runtime.html
 
-          echo "Browser smoke OK: ${nav_count} temas, Angular=${angular_count}, DjangoFramework=${django_framework_count}, FastAPI=${fastapi_count}, DjangoREST=${django_count}, tarjetas=${card_count}."
+          echo "Browser smoke OK: ${nav_count} temas, Angular=${angular_count}, DjangoFramework=${django_framework_count}, FastAPI=${fastapi_count}, DjangoREST=${django_count}, BasesDatos=${database_count}, tarjetas=${card_count}."
