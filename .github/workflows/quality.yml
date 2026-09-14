@@ -66,6 +66,8 @@ jobs:
           card_count=$(grep -o 'tag-card' /tmp/biblioteca-runtime.html | wc -l)
           first_nav_title=$(grep -o '<span class="nav-title">[^<]*</span>' /tmp/biblioteca-runtime.html | sed -n '1p')
 
+          echo "Browser diagnostics: nav=${nav_count}; first=${first_nav_title}; TypeScript=${typescript_count}; Angular=${angular_count}; React=${react_count}; DjangoFramework=${django_framework_count}; FastAPI=${fastapi_count}; DjangoREST=${django_count}; BasesDatos=${database_count}; tarjetas=${card_count}."
+
           grep -q 'RUTA DE APRENDIZAJE' /tmp/biblioteca-runtime.html
           grep -q 'data-group="TypeScript"' /tmp/biblioteca-runtime.html
           grep -q 'data-group="Angular"' /tmp/biblioteca-runtime.html
