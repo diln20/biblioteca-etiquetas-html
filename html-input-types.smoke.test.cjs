@@ -15,7 +15,8 @@ assert.doesNotThrow(()=>new vm.Script(order,{filename:'section-order.js'}));
 assert.ok(loader.includes('html-input-types-section.js?v=1'));
 assert.ok(loader.includes('html-input-attribute-explanations.js?v=1'));
 assert.ok(loader.includes('section-order.js?v=7'));
-assert.ok(index.includes('loader.js?v=17&fix=9&htmlorder=2'));
+assert.ok(loader.includes('html-order-finalizer.js?v=1'));
+assert.ok(index.includes('loader.js?v=18&fix=10&htmlfinal=1'));
 
 [
   "for:'En un <label>",
