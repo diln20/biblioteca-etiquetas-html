@@ -9,6 +9,9 @@ const htmlPython = read('html-python-section.js');
 
 assert.ok(loader.includes('javascript-functions-detailed.js?v=1'));
 assert.ok(loader.includes('html-python-section.js?v=1'));
+assert.ok(loader.includes('javascript-foundations-extra-1.js?v=1'));
+assert.ok(loader.includes('javascript-foundations-extra-2.js?v=1'));
+assert.ok(loader.includes('javascript-runtime-review.js?v=1'));
 assert.ok(loader.indexOf('javascript-functions-detailed.js?v=1') < loader.indexOf('section-order.js?v=7'));
 assert.ok(loader.indexOf('html-python-section.js?v=1') < loader.indexOf('section-order.js?v=7'));
 assert.doesNotThrow(() => new vm.Script(jsFunctions, { filename:'javascript-functions-detailed.js' }));
@@ -76,3 +79,5 @@ console.log({
   javascriptFunctionLessons:functionsSection.items.length,
   pythonHtmlLessons:pythonSection.items.length
 });
+
+require('./javascript-foundations-depth.smoke.test.cjs');
