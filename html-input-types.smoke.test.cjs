@@ -5,14 +5,17 @@ const vm=require('node:vm');
 const read=file=>fs.readFileSync(file,'utf8');
 const source=read('html-input-types-section.js');
 const enhancer=read('html-input-attribute-explanations.js');
+const order=read('section-order.js');
 const loader=read('loader.js');
 const index=read('index.html');
 
 assert.doesNotThrow(()=>new vm.Script(source,{filename:'html-input-types-section.js'}));
 assert.doesNotThrow(()=>new vm.Script(enhancer,{filename:'html-input-attribute-explanations.js'}));
+assert.doesNotThrow(()=>new vm.Script(order,{filename:'section-order.js'}));
 assert.ok(loader.includes('html-input-types-section.js?v=1'));
 assert.ok(loader.includes('html-input-attribute-explanations.js?v=1'));
-assert.ok(index.includes('loader.js?v=16&fix=8'));
+assert.ok(loader.includes('section-order.js?v=5'));
+assert.ok(index.includes('loader.js?v=16&fix=9'));
 
 [
   "for:'En un <label>",
@@ -34,7 +37,10 @@ assert.ok(enhancer.includes('Explicar ${count} atributo'));
 
 const context={
   console,
-  sections:[],
+  sections:[
+    {title:'Formularios',primaryArea:'HTML',items:[]},
+    {title:'Tablas',primaryArea:'HTML',items:[]}
+  ],
   T:(tag,name,description,code,preview=code,attrs=[],meta={})=>({tag,name,description,code,preview,attrs,...meta}),
   buildNav:()=>{},
   render:()=>{}
@@ -47,6 +53,15 @@ const section=context.sections.find(item=>item.title==='HTML · Formularios · T
 assert.ok(section,'falta la sección de tipos de input');
 assert.equal(section.primaryArea,'HTML');
 assert.ok(section.items.length>=10,`se esperaban al menos 10 lecciones y hay ${section.items.length}`);
+
+context.__sectionOrderApplied=false;
+new vm.Script(order,{filename:'section-order.js'}).runInContext(context);
+const htmlTitles=context.sections.filter(item=>item.primaryArea==='HTML').map(item=>item.title);
+const formsIndex=htmlTitles.indexOf('Formularios');
+const inputsIndex=htmlTitles.indexOf('HTML · Formularios · Tipos de input');
+assert.ok(formsIndex>=0,'falta la sección Formularios de referencia');
+assert.equal(inputsIndex,formsIndex+1,'Tipos de input debe aparecer inmediatamente después de Formularios');
+assert.equal(htmlTitles[inputsIndex+1],'Tablas','Tipos de input debe quedar antes del siguiente tema HTML');
 
 const code=section.items.map(item=>item.code).join('\n');
 [
@@ -62,4 +77,4 @@ assert.ok(section.items.every(item=>String(item.preview).length>0));
 assert.ok(section.items.some(item=>String(item.preview).includes('type="file"')));
 assert.ok(section.items.some(item=>String(item.preview).includes('type="date"')));
 
-console.log({status:'ok',category:'HTML',section:section.title,lessons:section.items.length,inputTypes:22,attributeExplanations:true,realPreviews:true});
+console.log({status:'ok',category:'HTML',section:section.title,lessons:section.items.length,inputTypes:22,attributeExplanations:true,afterForms:true,realPreviews:true});
