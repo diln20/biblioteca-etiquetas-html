@@ -92,7 +92,12 @@
     const ai=areaIndex.has(aa)?areaIndex.get(aa):areas.length;
     const bi=areaIndex.has(ba)?areaIndex.get(ba):areas.length;
     if(ai!==bi)return ai-bi;
-    return (Number.isFinite(a.areaOrder)?a.areaOrder:1000+original.get(a))-(Number.isFinite(b.areaOrder)?b.areaOrder:1000+original.get(b));
+    if(aa===COURSE&&ba===COURSE){
+      const ao=Number.isFinite(a.areaOrder)?a.areaOrder:1000+original.get(a);
+      const bo=Number.isFinite(b.areaOrder)?b.areaOrder:1000+original.get(b);
+      return ao-bo;
+    }
+    return original.get(a)-original.get(b);
   });
   sections.forEach((section,index)=>section.routeOrder=index+1);
   window.learningPath={...(window.learningPath||{}),areas,areaOf:section=>section.primaryArea||section.group||'HTML'};
