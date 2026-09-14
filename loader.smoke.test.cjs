@@ -176,7 +176,7 @@ assert.ok(angularItems.some(item => item.filesToCreate.some(file => file.path ==
 
 const allItems = context.sections.flatMap(section => section.items);
 assert.ok(allItems.every(item => String(item.description).includes('Cómo funciona exactamente:')));
-assert.ok(allItems.every(item => String(item.description).includes('Cómo comprobarlo:'));
+assert.ok(allItems.every(item => String(item.description).includes('Cómo comprobarlo:')));
 assert.ok(allItems.filter(item => String(item.preview).includes('data-visual="diagram"')).length >= 20);
 assert.ok(allItems.filter(item => String(item.preview).includes('data-visual="folder-tree"')).length >= 3);
 
@@ -186,12 +186,12 @@ assert.ok(uxItems.some(item => item.code.includes(':focus-visible')));
 assert.ok(uxItems.some(item => item.code.includes('aria-describedby')));
 
 const solidItems = context.sections.filter(section => section.title.includes('Solid.js')).flatMap(section => section.items);
-assert.ok(solidItems.some(item => item.code.includes('createSignal'));
+assert.ok(solidItems.some(item => item.code.includes('createSignal')));
 assert.ok(solidItems.filter(item => item.kind === 'Ejercicio Solid.js').length >= 6);
 
 const scalingItems = context.sections.filter(section => section.title.includes('Escalabilidad')).flatMap(section => section.items);
 assert.ok(scalingItems.some(item => item.name.includes('balanceador')));
-assert.ok(scalingItems.some(item => `${item.code} ${item.preview}`.includes('k6 run'));
+assert.ok(scalingItems.some(item => `${item.code} ${item.preview}`.includes('k6 run')));
 
 const django = read('backend-django-rest-section.js');
 const correction = read('content-corrections.js');
