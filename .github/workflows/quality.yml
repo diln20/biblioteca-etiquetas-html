@@ -79,10 +79,13 @@ jobs:
           grep -q 'data-group="FastAPI"' /tmp/biblioteca-runtime.html
           grep -q 'data-group="Django REST"' /tmp/biblioteca-runtime.html
           grep -q 'data-group="Base de datos"' /tmp/biblioteca-runtime.html
+          grep -q 'JWT, Cookies y Sessions' /tmp/biblioteca-runtime.html
+          grep -q 'JWT describe un formato de token' /tmp/biblioteca-runtime.html
+          grep -q 'session_id en la URL' /tmp/biblioteca-runtime.html
           test "$first_nav_title" = '<span class="nav-title">01. Fundamentos web</span>'
           ! grep -q '<span class="nav-title">01. Imágenes · Atributos de img</span>' /tmp/biblioteca-runtime.html
           ! grep -q '<span class="nav-title">01. Tipos de input</span>' /tmp/biblioteca-runtime.html
-          test "$nav_count" -ge 171
+          test "$nav_count" -ge 172
           test "$typescript_count" -ge 9
           test "$angular_count" -ge 20
           test "$react_count" -ge 2
@@ -93,4 +96,4 @@ jobs:
           test "$card_count" -ge 1
           ! grep -q '</sections.length-1)' /tmp/biblioteca-runtime.html
 
-          echo "Browser smoke OK: ${nav_count} temas, primero=${first_nav_title}, TypeScript=${typescript_count}, Angular=${angular_count}, React=${react_count}, DjangoFramework=${django_framework_count}, FastAPI=${fastapi_count}, DjangoREST=${django_count}, BasesDatos=${database_count}, tarjetas=${card_count}."
+          echo "Browser smoke OK: ${nav_count} temas, JWT/Cookies/Sessions presente, primero=${first_nav_title}, TypeScript=${typescript_count}, Angular=${angular_count}, React=${react_count}, DjangoFramework=${django_framework_count}, FastAPI=${fastapi_count}, DjangoREST=${django_count}, BasesDatos=${database_count}, tarjetas=${card_count}."
