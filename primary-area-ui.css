@@ -1,8 +1,10 @@
-/* Organización principal de la ruta: HTML, CSS, JavaScript, Git, APIs, Angular, Frameworks, Base de datos y Backend. */
+/* Organización principal de la ruta: HTML, CSS, JavaScript, TypeScript, Git, APIs, Angular, Frameworks, Base de datos y Backend. */
+body[data-course="TypeScript"]{--course-accent:#60a5fa;--course-soft:rgba(96,165,250,.12);--course-line:rgba(96,165,250,.44)}
 body[data-course="Angular"]{--course-accent:#f43f5e;--course-soft:rgba(244,63,94,.12);--course-line:rgba(244,63,94,.44)}
 body[data-course="Frameworks"]{--course-accent:#818cf8;--course-soft:rgba(129,140,248,.12);--course-line:rgba(129,140,248,.42)}
 body[data-course="Base de datos"]{--course-accent:#f59e0b;--course-soft:rgba(245,158,11,.12);--course-line:rgba(245,158,11,.42)}
 body[data-course="Backend"]{--course-accent:#34d399;--course-soft:rgba(52,211,153,.12);--course-line:rgba(52,211,153,.42)}
+.nav-item[data-group="TypeScript"]{--nav-accent:#60a5fa}
 .nav-item[data-group="Angular"]{--nav-accent:#f43f5e}
 .nav-item[data-group="Frameworks"]{--nav-accent:#818cf8}
 .nav-item[data-group="Base de datos"]{--nav-accent:#f59e0b}
