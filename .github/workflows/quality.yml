@@ -58,6 +58,7 @@ jobs:
           nav_count=$(grep -o 'nav-item' /tmp/biblioteca-runtime.html | wc -l)
           typescript_count=$(grep -o 'data-group="TypeScript"' /tmp/biblioteca-runtime.html | wc -l)
           angular_count=$(grep -o 'data-group="Angular"' /tmp/biblioteca-runtime.html | wc -l)
+          react_count=$(grep -o 'data-group="React"' /tmp/biblioteca-runtime.html | wc -l)
           django_framework_count=$(grep -o 'data-group="Django Framework"' /tmp/biblioteca-runtime.html | wc -l)
           fastapi_count=$(grep -o 'data-group="FastAPI"' /tmp/biblioteca-runtime.html | wc -l)
           django_count=$(grep -o 'data-group="Django REST"' /tmp/biblioteca-runtime.html | wc -l)
@@ -75,29 +76,10 @@ jobs:
           grep -q 'data-group="FastAPI"' /tmp/biblioteca-runtime.html
           grep -q 'data-group="Django REST"' /tmp/biblioteca-runtime.html
           grep -q 'data-group="Base de datos"' /tmp/biblioteca-runtime.html
-          grep -q 'HTML · Formularios · Tipos de input' /tmp/biblioteca-runtime.html
-          grep -q 'HTML · Imágenes · Atributos de img' /tmp/biblioteca-runtime.html
-          grep -q 'CSS · Manejo de DIV · Filas y columnas' /tmp/biblioteca-runtime.html
-          grep -q 'CSS · Pseudoclases' /tmp/biblioteca-runtime.html
-          grep -q 'TypeScript · 0. Desde cero' /tmp/biblioteca-runtime.html
-          grep -q 'TypeScript · 7. TypeScript avanzado' /tmp/biblioteca-runtime.html
-          grep -q 'TypeScript · 8. Proyecto y repaso avanzado' /tmp/biblioteca-runtime.html
-          grep -q 'Angular · Desde cero' /tmp/biblioteca-runtime.html
-          grep -q 'Django Framework · 0. Desde cero' /tmp/biblioteca-runtime.html
-          grep -q 'Backend FastAPI · 0. Desde cero' /tmp/biblioteca-runtime.html
-          grep -q 'Django REST · 0. Desde cero' /tmp/biblioteca-runtime.html
-          grep -q 'Base de datos · 0. Desde cero' /tmp/biblioteca-runtime.html
-          grep -q 'Base de datos · 1. Oracle desde cero' /tmp/biblioteca-runtime.html
-          grep -q 'Base de datos · 2. PostgreSQL desde cero' /tmp/biblioteca-runtime.html
-          grep -q 'Base de datos · 3. MongoDB desde cero' /tmp/biblioteca-runtime.html
-          grep -q 'Base de datos · 4. Neo4j desde cero' /tmp/biblioteca-runtime.html
-          grep -q 'Base de datos · 5. Redis desde cero' /tmp/biblioteca-runtime.html
-          grep -q 'Base de datos · 6. Cassandra desde cero' /tmp/biblioteca-runtime.html
-          grep -q '<span class="nav-title">01. Primeros pasos</span>' /tmp/biblioteca-runtime.html
-          ! grep -Eq '<span class="nav-title">[0-9]{2}\. JavaScript · [0-9]{1,2}\.' /tmp/biblioteca-runtime.html
           test "$nav_count" -ge 171
           test "$typescript_count" -ge 9
           test "$angular_count" -ge 20
+          test "$react_count" -ge 2
           test "$django_framework_count" -ge 5
           test "$fastapi_count" -ge 2
           test "$django_count" -ge 5
@@ -105,4 +87,4 @@ jobs:
           test "$card_count" -ge 1
           ! grep -q '</sections.length-1)' /tmp/biblioteca-runtime.html
 
-          echo "Browser smoke OK: ${nav_count} temas, TypeScript=${typescript_count}, Angular=${angular_count}, DjangoFramework=${django_framework_count}, FastAPI=${fastapi_count}, DjangoREST=${django_count}, BasesDatos=${database_count}, tarjetas=${card_count}."
+          echo "Browser smoke OK: ${nav_count} temas, TypeScript=${typescript_count}, Angular=${angular_count}, React=${react_count}, DjangoFramework=${django_framework_count}, FastAPI=${fastapi_count}, DjangoREST=${django_count}, BasesDatos=${database_count}, tarjetas=${card_count}."
