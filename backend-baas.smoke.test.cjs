@@ -5,7 +5,8 @@ const assert = require('assert');
 const source = fs.readFileSync('backend-baas-section.js', 'utf8');
 const sections = [];
 const T = (tag,name,description,code,preview,attrs=[],meta={}) => ({tag,name,description,code,preview,attrs,...meta});
-const context = { window: { sections, T }, console };
+const context = { sections, T, console };
+context.window = context;
 vm.createContext(context);
 vm.runInContext(source, context);
 
