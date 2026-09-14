@@ -31,14 +31,14 @@ if(typeof esc==='function')window.esc=esc;
     const mainScript=bridgedSource.replace(/<\/script\s*>/gi,'<\\/script>');
     html=html.slice(0,scriptStart)+mainScript+html.slice(scriptClose);
 
-    const styles='<link rel="stylesheet" href="screen-fit.css?v=2"><link rel="stylesheet" href="theme-modern.css?v=6"><link rel="stylesheet" href="course-ui-enhancements.css?v=1&django=1"><link rel="stylesheet" href="primary-area-ui.css?v=4">';
+    const styles='<link rel="stylesheet" href="screen-fit.css?v=2"><link rel="stylesheet" href="theme-modern.css?v=6"><link rel="stylesheet" href="course-ui-enhancements.css?v=1&django=1"><link rel="stylesheet" href="primary-area-ui.css?v=4&db=1">';
     html=html.replace('</head>',styles+'</head>');
     const editor='<button class="ghost-btn" id="editorBtn" type="button">Editor en vivo</button>';
     const example='<a class="ghost-btn" href="ejemplo.html" style="display:inline-flex;align-items:center;justify-content:center;min-height:40px;text-decoration:none;white-space:nowrap" title="Abrir ejemplo completo de HTML5">HTML de ejemplo</a>';
     html=html.replace(editor,example+editor);
     const scripts=[
-      'attribute-examples.js?v=6','learning-visuals.js?v=1','web-foundations-section.js?v=2','html-practice-section.js?v=1','html-input-types-section.js?v=1','html-input-attribute-explanations.js?v=1',
-      'css-section.js?v=4','css-frameworks-section.js?v=4','ui-ux-tools-section.js?v=1','course-ux-form-keyboard.js?v=1','course-ux-form-errors.js?v=1','course-ux-form-project.js?v=1',
+      'attribute-examples.js?v=6','learning-visuals.js?v=1','web-foundations-section.js?v=2','html-practice-section.js?v=1','html-image-attributes-section.js?v=1','html-input-types-section.js?v=1','html-input-attribute-explanations.js?v=1',
+      'css-section.js?v=4','css-pseudo-classes-section.js?v=1','css-frameworks-section.js?v=4','ui-ux-tools-section.js?v=1','course-ux-form-keyboard.js?v=1','course-ux-form-errors.js?v=1','course-ux-form-project.js?v=1',
       'javascript-section.js?v=3','dom-section.js?v=1','free-apis-section.js?v=1','api-html-css-basic-section.js?v=1',
       'frontend-frameworks-section.js?v=4','angular-from-zero-section.js?v=1&fix=2','angular-overview-section.js?v=1','angular-beginner-environment.js?v=1','course-angular-components.js?v=1','course-angular-bindings.js?v=1','angular-beginner-signals.js?v=1','course-angular-forms.js?v=1',
       'course-angular-exercises-01.js?v=1','course-angular-exercises-02.js?v=1','course-angular-exercises-03.js?v=1',
@@ -51,7 +51,7 @@ if(typeof esc==='function')window.esc=esc;
       'fastapi-from-zero-section.js?v=1','backend-fastapi-section.js?v=11','django-rest-from-zero-section.js?v=1','backend-django-rest-section.js?v=1',
       'django-framework-from-zero-section.js?v=1','django-framework-html-detailed.js?v=1','django-framework-css-detailed.js?v=1','django-framework-js-detailed.js?v=1','django-framework-forms-detailed.js?v=1','django-framework-project-detailed.js?v=1','django-html-css-section.js?v=1',
       'html-css-section.js?v=1','integration-sections.js?v=1','practice-expansion.js?v=2','git-section.js?v=1','content-corrections.js?v=1',
-      'section-order.js?v=5','framework-category-guide.js?v=1','backend-category-guide.js?v=1','django-framework-category-guide.js?v=1','django-framework-js-guide.js?v=1','css-property-explanations.js?v=3','example-code-formatter.js?v=1','explanation-enhancer.js?v=9','exact-explanation-enhancer.js?v=1','course-ui.js?v=15','file-guide-ui.js?v=2&frameworks=3','primary-area-ui.js?v=2'
+      'section-order.js?v=5','framework-category-guide.js?v=1','backend-category-guide.js?v=1','django-framework-category-guide.js?v=1','django-framework-js-guide.js?v=1','database-from-zero-section.js?v=1','database-category-guide.js?v=1','css-property-explanations.js?v=3','example-code-formatter.js?v=1','explanation-enhancer.js?v=9','exact-explanation-enhancer.js?v=1','course-ui.js?v=15','file-guide-ui.js?v=2&frameworks=3&db=1','primary-area-ui.js?v=2'
     ];
     const extraScripts=scripts.map(src=>'<scr'+'ipt src="'+src+'"></scr'+'ipt>').join('');
     const bodyClose=html.lastIndexOf('</body>');
