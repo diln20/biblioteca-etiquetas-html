@@ -37,7 +37,7 @@ if(typeof esc==='function')window.esc=esc;
     const example='<a class="ghost-btn" href="ejemplo.html" style="display:inline-flex;align-items:center;justify-content:center;min-height:40px;text-decoration:none;white-space:nowrap" title="Abrir ejemplo completo de HTML5">HTML de ejemplo</a>';
     html=html.replace(editor,example+editor);
     const scripts=[
-      'attribute-examples.js?v=6','learning-visuals.js?v=1','web-foundations-section.js?v=2','html-practice-section.js?v=1',
+      'attribute-examples.js?v=6','learning-visuals.js?v=1','web-foundations-section.js?v=2','html-practice-section.js?v=1','html-input-types-section.js?v=1',
       'css-section.js?v=4','css-frameworks-section.js?v=4','ui-ux-tools-section.js?v=1','course-ux-form-keyboard.js?v=1','course-ux-form-errors.js?v=1','course-ux-form-project.js?v=1',
       'javascript-section.js?v=3','dom-section.js?v=1','free-apis-section.js?v=1','api-html-css-basic-section.js?v=1',
       'frontend-frameworks-section.js?v=4','angular-from-zero-section.js?v=1&fix=2','angular-overview-section.js?v=1','angular-beginner-environment.js?v=1','course-angular-components.js?v=1','course-angular-bindings.js?v=1','angular-beginner-signals.js?v=1','course-angular-forms.js?v=1',
