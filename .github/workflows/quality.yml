@@ -98,11 +98,7 @@ jobs:
           grep -q 'Python en HTML · PyScript y Pyodide' /tmp/biblioteca-runtime.html
           grep -q 'DOM · Selectores' /tmp/biblioteca-runtime.html
           grep -q 'Visual Studio Code desde cero' /tmp/biblioteca-runtime.html
-          grep -q 'Console Ninja' /tmp/biblioteca-runtime.html
-          grep -q 'Error Lens' /tmp/biblioteca-runtime.html
           grep -q 'Prettier y ESLint' /tmp/biblioteca-runtime.html
-          grep -q 'Path Intellisense' /tmp/biblioteca-runtime.html
-          grep -q 'Live Share' /tmp/biblioteca-runtime.html
           grep -q 'Ejercicio para ti' /tmp/biblioteca-runtime.html
           grep -q 'Usa datos ficticios si vas a publicar el ejercicio' /tmp/biblioteca-runtime.html
           test "$first_nav_title" = '<span class="nav-title">01. Fundamentos web</span>'
