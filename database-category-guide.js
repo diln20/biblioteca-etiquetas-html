@@ -31,12 +31,19 @@
     }
 
     const p=paths[engine];
-    const terminalRx={Oracle:/\b(?:sqlplus|sql\s+\w)|PostgreSQL:/\bpsql\b/,MongoDB:/\bmongosh\b/,Neo4j:/\bcypher-shell\b/,Redis:/\bredis-cli\b/,Cassandra:/\bcqlsh\b/}[engine];
+    const terminalRx={
+      Oracle:/\b(?:sqlplus|sql\s+\w)/,
+      PostgreSQL:/\bpsql\b/,
+      MongoDB:/\bmongosh\b/,
+      Neo4j:/\bcypher-shell\b/,
+      Redis:/\bredis-cli\b/,
+      Cassandra:/\bcqlsh\b/
+    }[engine];
     if(terminalRx&&terminalRx.test(code))add('Ejecutar',`Terminal · ${terminals[engine]}`,`Abre ${terminals[engine]} y conecta con tu instancia local antes de ejecutar los ejemplos.`);
 
-    const schemaLike=/create\s+(?:table|database|keyspace|constraint|index)|alter\s+table|primary\s+key|generated\s+|create\s*\(/i.test(code)
+    const schemaLike=/create\s+(?:table|database|keyspace|constraint|index)|alter\s+table|primary\s+key|generated\s+/i.test(code)
       || (engine==='Neo4j'&&/CREATE \(|CONSTRAINT|INDEX/.test(code));
-    const queryLike=/insert|select|update|delete|find\s*\(|find\(|aggregate|match\s*\(|merge\s*\(|set\s+|get\s+|hset|lpush|rpush|sadd|multi|consistency/i.test(code);
+    const queryLike=/insert|select|update|delete|find\s*\(|aggregate|match\s*\(|merge\s*\(|set\s+|get\s+|hset|lpush|rpush|sadd|multi|consistency/i.test(code);
 
     if(schemaLike){
       add('Crear o modificar',p.schema,`Guarda aquí el esquema, restricciones o comandos de estructura de ${engine}. Así el estudiante puede repetir el ejercicio desde cero.`);
