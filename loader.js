@@ -51,7 +51,7 @@ if(typeof esc==='function')window.esc=esc;
       'fastapi-from-zero-section.js?v=1','backend-fastapi-section.js?v=11','django-rest-from-zero-section.js?v=1','backend-django-rest-section.js?v=1',
       'django-framework-from-zero-section.js?v=1','django-framework-html-detailed.js?v=1','django-framework-css-detailed.js?v=1','django-framework-js-detailed.js?v=1','django-framework-forms-detailed.js?v=1','django-framework-project-detailed.js?v=1','django-html-css-section.js?v=1',
       'html-css-section.js?v=1','integration-sections.js?v=1','practice-expansion.js?v=2','git-section.js?v=1','content-corrections.js?v=1',
-      'section-order.js?v=4','framework-category-guide.js?v=1','backend-category-guide.js?v=1','django-framework-category-guide.js?v=1','django-framework-js-guide.js?v=1','css-property-explanations.js?v=3','example-code-formatter.js?v=1','explanation-enhancer.js?v=9','exact-explanation-enhancer.js?v=1','course-ui.js?v=15','file-guide-ui.js?v=2&frameworks=3','primary-area-ui.js?v=2'
+      'section-order.js?v=5','framework-category-guide.js?v=1','backend-category-guide.js?v=1','django-framework-category-guide.js?v=1','django-framework-js-guide.js?v=1','css-property-explanations.js?v=3','example-code-formatter.js?v=1','explanation-enhancer.js?v=9','exact-explanation-enhancer.js?v=1','course-ui.js?v=15','file-guide-ui.js?v=2&frameworks=3','primary-area-ui.js?v=2'
     ];
     const extraScripts=scripts.map(src=>'<scr'+'ipt src="'+src+'"></scr'+'ipt>').join('');
     const bodyClose=html.lastIndexOf('</body>');
