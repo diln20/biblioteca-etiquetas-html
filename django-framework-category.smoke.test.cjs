@@ -33,7 +33,7 @@ for(const file of files){
   'django-framework-js-guide.js?v=1'
 ].forEach(resource=>assert.ok(loader.includes(resource),`falta cargar ${resource}`));
 assert.ok(loader.includes('file-guide-ui.js?v=2&frameworks=3'));
-assert.ok(index.includes('loader.js?v=16&fix=7'));
+assert.ok(index.includes('loader.js?v=16&fix=8'));
 assert.ok(fileGuide.includes('Django Framework'));
 assert.ok(css.includes('body[data-course="Django Framework"]'));
 assert.ok(css.includes('.nav-item[data-group="Django Framework"]'));
