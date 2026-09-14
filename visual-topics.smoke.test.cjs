@@ -14,6 +14,8 @@ assert.doesNotThrow(()=>new vm.Script(divLayout,{filename:'css-div-layout-sectio
 assert.ok(loader.includes('html-image-attributes-section.js?v=1'));
 assert.ok(loader.includes('css-div-layout-section.js?v=1'));
 assert.ok(loader.includes('css-pseudo-classes-section.js?v=1'));
+assert.ok(loader.includes('section-order.js?v=6'));
+assert.ok(loader.includes('database-category-guide.js?v=2'));
 
 const context={
   console,
@@ -58,4 +60,52 @@ const pseudoCode=pseudo.items.map(item=>item.code).join('\n');
   assert.ok(pseudoCode.includes(selector),`falta ${selector}`);
 });
 
-console.log({status:'ok',imageAttributes:9,divLayouts:divSection.items.length,pseudoClasses:12,visualReviews:true});
+// La continuidad de HTML debe mantener los temas introductorios primero y
+// colocar cada ampliación inmediatamente después de su tema base.
+const orderContext={
+  console,
+  sections:[
+    {title:'HTML · Primeros pasos',items:[{tag:'html'}]},
+    {title:'HTML · Texto y enlaces',items:[{tag:'a'}]},
+    {title:'HTML · Imágenes',items:[{tag:'<img>'}]},
+    {title:'HTML · Tablas',items:[{tag:'table'}]},
+    {title:'HTML · Formularios',items:[{tag:'form'}]},
+    {title:'HTML · Semántica',items:[{tag:'section'}]},
+    {title:'HTML · Imágenes · Atributos de img',group:'HTML',primaryArea:'HTML',areaOrder:540,items:[]},
+    {title:'HTML · Formularios · Tipos de input',group:'HTML',primaryArea:'HTML',areaOrder:610,items:[]}
+  ],
+  buildNav(){},
+  render(){}
+};
+orderContext.window=orderContext;
+vm.createContext(orderContext);
+new vm.Script(read('section-order.js'),{filename:'section-order.js'}).runInContext(orderContext);
+let titles=orderContext.sections.map(section=>section.title);
+let imageBase=titles.indexOf('HTML · Imágenes');
+let imageAttrs=titles.indexOf('HTML · Imágenes · Atributos de img');
+let formsBase=titles.indexOf('HTML · Formularios');
+let inputTypes=titles.indexOf('HTML · Formularios · Tipos de input');
+assert.equal(imageAttrs,imageBase+1,'Atributos de img debe ir justo después de Imágenes');
+assert.equal(inputTypes,formsBase+1,'Tipos de input debe ir justo después de Formularios');
+assert.ok(imageAttrs>1,'Atributos de img no debe aparecer al inicio de HTML');
+assert.ok(inputTypes>imageAttrs,'Tipos de input debe respetar la progresión previa de HTML');
+
+// La categoría Base de datos se carga después del orden principal y no debe
+// volver a mover las ampliaciones de HTML al principio de la ruta.
+orderContext.sections.push({
+  title:'Base de datos · 0. Desde cero',
+  primaryArea:'Base de datos',
+  group:'Base de datos',
+  areaOrder:0,
+  items:[]
+});
+new vm.Script(read('database-category-guide.js'),{filename:'database-category-guide.js'}).runInContext(orderContext);
+titles=orderContext.sections.map(section=>section.title);
+imageBase=titles.indexOf('HTML · Imágenes');
+imageAttrs=titles.indexOf('HTML · Imágenes · Atributos de img');
+formsBase=titles.indexOf('HTML · Formularios');
+inputTypes=titles.indexOf('HTML · Formularios · Tipos de input');
+assert.equal(imageAttrs,imageBase+1,'Base de datos no debe mover Atributos de img al inicio');
+assert.equal(inputTypes,formsBase+1,'Base de datos no debe mover Tipos de input al inicio');
+
+console.log({status:'ok',imageAttributes:9,divLayouts:divSection.items.length,pseudoClasses:12,visualReviews:true,htmlContinuity:true});
