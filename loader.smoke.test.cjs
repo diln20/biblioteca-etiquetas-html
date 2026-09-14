@@ -42,7 +42,7 @@ assert.ok(loader.includes("if(typeof T==='function')window.T=T;"));
 assert.ok(loader.includes("if(typeof createCard==='function')window.createCard=createCard;"));
 assert.ok(loader.includes("if(typeof render==='function')window.render=render;"));
 assert.ok(loader.includes("if(typeof buildNav==='function')window.buildNav=buildNav;"));
-assert.ok(index.includes('loader.js?v=16&fix=9'));
+assert.ok(index.includes('loader.js?v=16&fix=8&order=2'));
 
 const expectedAreas = ['HTML','CSS','JavaScript','Git','APIs','Angular','Frameworks','Backend'];
 expectedAreas.forEach(area => assert.ok(order.includes(`'${area}'`), `falta el área ${area}`));
