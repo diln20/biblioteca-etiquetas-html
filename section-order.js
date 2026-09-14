@@ -11,6 +11,24 @@
   const level=title=>({introduccion:10,principiante:20,intermedio:30,avanzado:40,produccion:90})[normalize(detail(title))]??0;
   const htmlInputTypesTitle='HTML · Formularios · Tipos de input';
   const htmlImageAttributesTitle='HTML · Imágenes · Atributos de img';
+  const htmlCoreSequence=[
+    'fundamentos web',
+    'introduccion',
+    'metadatos',
+    'texto',
+    'semantica html',
+    'semantica y secciones',
+    'listas',
+    'enlaces e imagenes',
+    'tablas',
+    'formularios',
+    'multimedia',
+    'interactividad',
+    'citas y datos',
+    'scripts y plantillas'
+  ];
+  const htmlCoreRank=new Map(htmlCoreSequence.map((title,index)=>[title,index*100]));
+  const htmlTopic=title=>normalize(title).replace(/^html\s*·\s*/,'').trim();
 
   const areaOf=section=>{
     if(section?.primaryArea)return section.primaryArea;
@@ -47,16 +65,17 @@
   const htmlImageAnchor=htmlImageTitleAnchor||htmlImageItemAnchor;
 
   const htmlOrder=section=>{
-    if(Number.isFinite(section?.areaOrder))return section.areaOrder;
     const title=String(section?.title||'');
     const source=sourceIndex.get(section)||0;
-    if(title==='Fundamentos web')return 0;
-    if(title==='Práctica HTML paso a paso')return 600;
-    if(title==='HTML · Manipulación de DIV')return 650;
-    if(title==='HTML + CSS')return 700;
-    if(title.startsWith('HTML + JavaScript'))return 800+(level(title)||number(title)||source);
-    if(title.startsWith('HTML + CSS + JavaScript'))return 900+(level(title)||number(title)||source);
-    return 100+source;
+    const topic=htmlTopic(title);
+    if(htmlCoreRank.has(topic))return htmlCoreRank.get(topic);
+    if(title==='Práctica HTML paso a paso')return 3000;
+    if(title==='HTML · Manipulación de DIV')return 3100;
+    if(title==='HTML + CSS')return 3200;
+    if(title.startsWith('HTML + JavaScript'))return 3300+(level(title)||number(title)||source);
+    if(title.startsWith('HTML + CSS + JavaScript'))return 3400+(level(title)||number(title)||source);
+    if(Number.isFinite(section?.areaOrder))return 2000+section.areaOrder;
+    return 1500+source;
   };
 
   const orderInArea=section=>{
