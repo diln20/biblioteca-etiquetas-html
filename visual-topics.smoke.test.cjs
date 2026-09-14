@@ -14,7 +14,7 @@ assert.doesNotThrow(()=>new vm.Script(divLayout,{filename:'css-div-layout-sectio
 assert.ok(loader.includes('html-image-attributes-section.js?v=1'));
 assert.ok(loader.includes('css-div-layout-section.js?v=1'));
 assert.ok(loader.includes('css-pseudo-classes-section.js?v=1'));
-assert.ok(loader.includes('section-order.js?v=6'));
+assert.ok(loader.includes('section-order.js?v=7'));
 assert.ok(loader.includes('database-category-guide.js?v=2'));
 
 const context={
@@ -60,17 +60,25 @@ const pseudoCode=pseudo.items.map(item=>item.code).join('\n');
   assert.ok(pseudoCode.includes(selector),`falta ${selector}`);
 });
 
-// La continuidad de HTML debe mantener los temas introductorios primero y
-// colocar cada ampliación inmediatamente después de su tema base.
+// Reproduce la secuencia que ve el estudiante en la barra lateral.
+// Las ampliaciones nuevas no pueden saltar al inicio solo por tener areaOrder.
 const orderContext={
   console,
   sections:[
-    {title:'HTML · Primeros pasos',items:[{tag:'html'}]},
-    {title:'HTML · Texto y enlaces',items:[{tag:'a'}]},
-    {title:'HTML · Imágenes',items:[{tag:'<img>'}]},
-    {title:'HTML · Tablas',items:[{tag:'table'}]},
-    {title:'HTML · Formularios',items:[{tag:'form'}]},
-    {title:'HTML · Semántica',items:[{tag:'section'}]},
+    {title:'Fundamentos web',primaryArea:'HTML',items:[]},
+    {title:'Introducción',primaryArea:'HTML',items:[]},
+    {title:'Metadatos',primaryArea:'HTML',items:[]},
+    {title:'Texto',primaryArea:'HTML',items:[]},
+    {title:'Semántica HTML',primaryArea:'HTML',items:[]},
+    {title:'Semántica y secciones',primaryArea:'HTML',items:[]},
+    {title:'Listas',primaryArea:'HTML',items:[]},
+    {title:'Enlaces e imágenes',primaryArea:'HTML',items:[{tag:'<img>'}]},
+    {title:'Tablas',primaryArea:'HTML',items:[]},
+    {title:'Formularios',primaryArea:'HTML',items:[{tag:'form'}]},
+    {title:'Multimedia',primaryArea:'HTML',items:[]},
+    {title:'Interactividad',primaryArea:'HTML',items:[]},
+    {title:'Citas y datos',primaryArea:'HTML',items:[]},
+    {title:'Scripts y plantillas',primaryArea:'HTML',items:[]},
     {title:'HTML · Imágenes · Atributos de img',group:'HTML',primaryArea:'HTML',areaOrder:540,items:[]},
     {title:'HTML · Formularios · Tipos de input',group:'HTML',primaryArea:'HTML',areaOrder:610,items:[]}
   ],
@@ -81,11 +89,13 @@ orderContext.window=orderContext;
 vm.createContext(orderContext);
 new vm.Script(read('section-order.js'),{filename:'section-order.js'}).runInContext(orderContext);
 let titles=orderContext.sections.map(section=>section.title);
-let imageBase=titles.indexOf('HTML · Imágenes');
+let imageBase=titles.indexOf('Enlaces e imágenes');
 let imageAttrs=titles.indexOf('HTML · Imágenes · Atributos de img');
-let formsBase=titles.indexOf('HTML · Formularios');
+let formsBase=titles.indexOf('Formularios');
 let inputTypes=titles.indexOf('HTML · Formularios · Tipos de input');
-assert.equal(imageAttrs,imageBase+1,'Atributos de img debe ir justo después de Imágenes');
+assert.equal(titles[0],'Fundamentos web','Fundamentos web debe ser el primer tema HTML');
+assert.equal(titles[1],'Introducción','Introducción debe seguir a Fundamentos web');
+assert.equal(imageAttrs,imageBase+1,'Atributos de img debe ir justo después de Enlaces e imágenes');
 assert.equal(inputTypes,formsBase+1,'Tipos de input debe ir justo después de Formularios');
 assert.ok(imageAttrs>1,'Atributos de img no debe aparecer al inicio de HTML');
 assert.ok(inputTypes>imageAttrs,'Tipos de input debe respetar la progresión previa de HTML');
@@ -101,11 +111,12 @@ orderContext.sections.push({
 });
 new vm.Script(read('database-category-guide.js'),{filename:'database-category-guide.js'}).runInContext(orderContext);
 titles=orderContext.sections.map(section=>section.title);
-imageBase=titles.indexOf('HTML · Imágenes');
+imageBase=titles.indexOf('Enlaces e imágenes');
 imageAttrs=titles.indexOf('HTML · Imágenes · Atributos de img');
-formsBase=titles.indexOf('HTML · Formularios');
+formsBase=titles.indexOf('Formularios');
 inputTypes=titles.indexOf('HTML · Formularios · Tipos de input');
+assert.equal(titles[0],'Fundamentos web','Base de datos no debe cambiar el primer tema HTML');
 assert.equal(imageAttrs,imageBase+1,'Base de datos no debe mover Atributos de img al inicio');
 assert.equal(inputTypes,formsBase+1,'Base de datos no debe mover Tipos de input al inicio');
 
-console.log({status:'ok',imageAttributes:9,divLayouts:divSection.items.length,pseudoClasses:12,visualReviews:true,htmlContinuity:true});
+console.log({status:'ok',imageAttributes:9,divLayouts:divSection.items.length,pseudoClasses:12,visualReviews:true,htmlContinuity:true,firstHtml:titles[0]});
