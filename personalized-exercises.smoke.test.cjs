@@ -36,7 +36,7 @@ assert.ok(source.includes('Usa datos ficticios si vas a publicar el ejercicio'))
 
 assert.ok(source.includes('getElementById'));
 assert.ok(source.includes('querySelector'));
-assert.ok(source.includes('HTMLCollection'));
+assert.ok(source.includes('data-ciudad'));
 assert.ok(source.includes('componente Perfil'));
 assert.ok(source.includes('endpoint /perfil'));
 assert.ok(source.includes('guarda un perfil'));
