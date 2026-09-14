@@ -67,16 +67,16 @@ jobs:
           echo "Browser counts: nav=${nav_count}, TypeScript=${typescript_count}, Angular=${angular_count}, DjangoFramework=${django_framework_count}, FastAPI=${fastapi_count}, DjangoREST=${django_count}, BasesDatos=${database_count}, tarjetas=${card_count}."
 
           grep -Fq 'RUTA DE APRENDIZAJE' /tmp/biblioteca-runtime.html
-          grep -Fq 'data-group="TypeScript"' /tmp/biblioteca-runtime.html
-          grep -Fq 'data-group="Angular"' /tmp/biblioteca-runtime.html
-          grep -Fq 'data-group="React"' /tmp/biblioteca-runtime.html
-          grep -Fq 'data-group="Vue"' /tmp/biblioteca-runtime.html
-          grep -Fq 'data-group="Svelte"' /tmp/biblioteca-runtime.html
-          grep -Fq 'data-group="Solid.js"' /tmp/biblioteca-runtime.html
-          grep -Fq 'data-group="Django Framework"' /tmp/biblioteca-runtime.html
-          grep -Fq 'data-group="FastAPI"' /tmp/biblioteca-runtime.html
-          grep -Fq 'data-group="Django REST"' /tmp/biblioteca-runtime.html
-          grep -Fq 'data-group="Base de datos"' /tmp/biblioteca-runtime.html
+          grep -Fq 'data-group="TypeScript"' /tmp/biblioteca-runtime.html || grep -Fq 'data-group="TypeScript"' /tmp/biblioteca-runtime.html
+          grep -q 'data-group="Angular"' /tmp/biblioteca-runtime.html
+          grep -q 'data-group="React"' /tmp/biblioteca-runtime.html
+          grep -q 'data-group="Vue"' /tmp/biblioteca-runtime.html
+          grep -q 'data-group="Svelte"' /tmp/biblioteca-runtime.html
+          grep -q 'data-group="Solid.js"' /tmp/biblioteca-runtime.html
+          grep -q 'data-group="Django Framework"' /tmp/biblioteca-runtime.html
+          grep -q 'data-group="FastAPI"' /tmp/biblioteca-runtime.html
+          grep -q 'data-group="Django REST"' /tmp/biblioteca-runtime.html
+          grep -q 'data-group="Base de datos"' /tmp/biblioteca-runtime.html
           grep -Fq 'HTML · Formularios · Tipos de input' /tmp/biblioteca-runtime.html
           grep -Fq 'HTML · Imágenes · Atributos de img' /tmp/biblioteca-runtime.html
           grep -Fq 'CSS · Manejo de DIV · Filas y columnas' /tmp/biblioteca-runtime.html
@@ -98,7 +98,7 @@ jobs:
           grep -Fq 'Base de datos · 4. Neo4j desde cero' /tmp/biblioteca-runtime.html
           grep -Fq 'Base de datos · 5. Redis desde cero' /tmp/biblioteca-runtime.html
           grep -Fq 'Base de datos · 6. Cassandra desde cero' /tmp/biblioteca-runtime.html
-          grep -Fq '<span class="nav-title">01. Primeros pasos</span>' /tmp/biblioteca-runtime.html
+          grep -q '<span class="nav-title">01. Primeros pasos</span>' /tmp/biblioteca-runtime.html
           ! grep -Eq '<span class="nav-title">[0-9]{2}\. JavaScript · [0-9]{1,2}\.' /tmp/biblioteca-runtime.html
           test "$nav_count" -ge 129
           test "$typescript_count" -ge 9
