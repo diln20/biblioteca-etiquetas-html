@@ -82,3 +82,4 @@ console.log({
 
 require('./javascript-foundations-depth.smoke.test.cjs');
 require('./javascript-order.smoke.test.cjs');
+require('./example-code-formatter.smoke.test.cjs');
