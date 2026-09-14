@@ -10,6 +10,7 @@
   const number=title=>Number(title.match(/ ·\s*(\d+)/)?.[1]||0);
   const level=title=>({introduccion:10,principiante:20,intermedio:30,avanzado:40,produccion:90})[normalize(detail(title))]??0;
   const htmlInputTypesTitle='HTML · Formularios · Tipos de input';
+  const htmlImageAttributesTitle='HTML · Imágenes · Atributos de img';
 
   const areaOf=section=>{
     if(section?.primaryArea)return section.primaryArea;
@@ -30,6 +31,21 @@
     return /(^|[ ·\-])formularios?([ ·\-]|$)/.test(normalize(title));
   });
 
+  const htmlImageTitleAnchor=sections.find(section=>{
+    const title=String(section?.title||'');
+    if(title===htmlImageAttributesTitle||areaOf(section)!=='HTML')return false;
+    return /(^|[ ·\-])imagenes?([ ·\-]|$)/.test(normalize(title));
+  });
+  const htmlImageItemAnchor=sections.find(section=>{
+    const title=String(section?.title||'');
+    if(title===htmlImageAttributesTitle||areaOf(section)!=='HTML')return false;
+    return Array.isArray(section?.items)&&section.items.some(item=>{
+      const tag=normalize(item?.tag||'').replace(/[<>]/g,'').trim();
+      return tag==='img';
+    });
+  });
+  const htmlImageAnchor=htmlImageTitleAnchor||htmlImageItemAnchor;
+
   const htmlOrder=section=>{
     if(Number.isFinite(section?.areaOrder))return section.areaOrder;
     const title=String(section?.title||'');
@@ -48,6 +64,7 @@
     const area=areaOf(section);
     const source=sourceIndex.get(section)||0;
     if(area==='HTML'){
+      if(title===htmlImageAttributesTitle&&htmlImageAnchor)return htmlOrder(htmlImageAnchor)+0.5;
       if(title===htmlInputTypesTitle&&htmlFormAnchor)return htmlOrder(htmlFormAnchor)+0.5;
       return htmlOrder(section);
     }
