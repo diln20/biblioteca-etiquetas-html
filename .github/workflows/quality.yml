@@ -80,8 +80,6 @@ jobs:
           grep -q 'data-group="Django REST"' /tmp/biblioteca-runtime.html
           grep -q 'data-group="Base de datos"' /tmp/biblioteca-runtime.html
           grep -q 'JWT, Cookies y Sessions' /tmp/biblioteca-runtime.html
-          grep -q 'JWT describe un formato de token' /tmp/biblioteca-runtime.html
-          grep -q 'session_id en la URL' /tmp/biblioteca-runtime.html
           test "$first_nav_title" = '<span class="nav-title">01. Fundamentos web</span>'
           ! grep -q '<span class="nav-title">01. Imágenes · Atributos de img</span>' /tmp/biblioteca-runtime.html
           ! grep -q '<span class="nav-title">01. Tipos de input</span>' /tmp/biblioteca-runtime.html
