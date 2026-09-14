@@ -64,7 +64,7 @@ jobs:
           django_count=$(grep -o 'data-group="Django REST"' /tmp/biblioteca-runtime.html | wc -l)
           database_count=$(grep -o 'data-group="Base de datos"' /tmp/biblioteca-runtime.html | wc -l)
           card_count=$(grep -o 'tag-card' /tmp/biblioteca-runtime.html | wc -l)
-          first_nav_title=$(grep -m 1 -o '<span class="nav-title">[^<]*</span>' /tmp/biblioteca-runtime.html)
+          first_nav_title=$(grep -o '<span class="nav-title">[^<]*</span>' /tmp/biblioteca-runtime.html | sed -n '1p')
 
           grep -q 'RUTA DE APRENDIZAJE' /tmp/biblioteca-runtime.html
           grep -q 'data-group="TypeScript"' /tmp/biblioteca-runtime.html
