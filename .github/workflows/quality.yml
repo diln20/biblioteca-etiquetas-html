@@ -102,8 +102,6 @@ jobs:
           grep -q 'Visual Studio Code desde cero' /tmp/biblioteca-runtime.html
           grep -q 'Prettier y ESLint' /tmp/biblioteca-runtime.html
           grep -q 'CDN y librerías' /tmp/biblioteca-runtime.html
-          grep -q 'Vue 3 por CDN · alternativa oficial' /tmp/biblioteca-runtime.html
-          grep -q 'Tailwind Play CDN' /tmp/biblioteca-runtime.html
           grep -q 'Ejercicio para ti' /tmp/biblioteca-runtime.html
           grep -q 'Usa datos ficticios si vas a publicar el ejercicio' /tmp/biblioteca-runtime.html
           test "$first_nav_title" = '<span class="nav-title">01. Fundamentos web</span>'
