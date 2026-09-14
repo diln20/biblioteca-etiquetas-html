@@ -9,6 +9,7 @@
   const detail=title=>title.includes(' · ')?title.split(' · ').slice(1).join(' · '):'';
   const number=title=>Number(title.match(/ ·\s*(\d+)/)?.[1]||0);
   const level=title=>({introduccion:10,principiante:20,intermedio:30,avanzado:40,produccion:90})[normalize(detail(title))]??0;
+  const htmlInputTypesTitle='HTML · Formularios · Tipos de input';
 
   const areaOf=section=>{
     if(section?.primaryArea)return section.primaryArea;
@@ -23,20 +24,34 @@
     return 'HTML';
   };
 
-  const orderInArea=section=>{
+  const htmlFormAnchor=sections.find(section=>{
+    const title=String(section?.title||'');
+    if(title===htmlInputTypesTitle||areaOf(section)!=='HTML')return false;
+    return /(^|[ ·\-])formularios?([ ·\-]|$)/.test(normalize(title));
+  });
+
+  const htmlOrder=section=>{
     if(Number.isFinite(section?.areaOrder))return section.areaOrder;
+    const title=String(section?.title||'');
+    const source=sourceIndex.get(section)||0;
+    if(title==='Fundamentos web')return 0;
+    if(title==='Práctica HTML paso a paso')return 600;
+    if(title==='HTML · Manipulación de DIV')return 650;
+    if(title==='HTML + CSS')return 700;
+    if(title.startsWith('HTML + JavaScript'))return 800+(level(title)||number(title)||source);
+    if(title.startsWith('HTML + CSS + JavaScript'))return 900+(level(title)||number(title)||source);
+    return 100+source;
+  };
+
+  const orderInArea=section=>{
     const title=String(section?.title||'');
     const area=areaOf(section);
     const source=sourceIndex.get(section)||0;
     if(area==='HTML'){
-      if(title==='Fundamentos web')return 0;
-      if(title==='Práctica HTML paso a paso')return 600;
-      if(title==='HTML · Manipulación de DIV')return 650;
-      if(title==='HTML + CSS')return 700;
-      if(title.startsWith('HTML + JavaScript'))return 800+(level(title)||number(title)||source);
-      if(title.startsWith('HTML + CSS + JavaScript'))return 900+(level(title)||number(title)||source);
-      return 100+source;
+      if(title===htmlInputTypesTitle&&htmlFormAnchor)return htmlOrder(htmlFormAnchor)+0.5;
+      return htmlOrder(section);
     }
+    if(Number.isFinite(section?.areaOrder))return section.areaOrder;
     if(area==='CSS'){
       if(title.startsWith('CSS · '))return level(title)||number(title)||100+source;
       if(/^(UI\/UX|UI y UX|Herramientas UI\/UX)/i.test(title))return 200+source;
