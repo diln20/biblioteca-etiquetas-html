@@ -25,7 +25,7 @@ const resources = [
   'course-angular-exercises-07.js?v=1','course-angular-exercises-08.js?v=1','course-angular-exercises-09.js?v=1','angular-category-guide.js?v=1','angular-category-finalizer.js?v=1','angular-file-guide-corrections.js?v=4','angular-required-files.js?v=1',
   'course-solid-introduction.js?v=1','course-solid-reactivity.js?v=1','course-solid-exercises-01.js?v=1','course-solid-exercises-02.js?v=1',
   'course-backend-scaling-basics.js?v=1','course-backend-scaling-architecture.js?v=1','course-backend-scaling-resilience.js?v=1',
-  'exact-explanation-enhancer.js?v=1','section-order.js?v=5','course-ui.js?v=15','file-guide-ui.js?v=2','primary-area-ui.js?v=2'
+  'exact-explanation-enhancer.js?v=1','section-order.js?v=6','course-ui.js?v=15','file-guide-ui.js?v=2','primary-area-ui.js?v=2'
 ];
 assert.deepEqual(resources.filter(resource => !loader.includes(resource)), []);
 
@@ -42,7 +42,7 @@ assert.ok(loader.includes("if(typeof T==='function')window.T=T;"));
 assert.ok(loader.includes("if(typeof createCard==='function')window.createCard=createCard;"));
 assert.ok(loader.includes("if(typeof render==='function')window.render=render;"));
 assert.ok(loader.includes("if(typeof buildNav==='function')window.buildNav=buildNav;"));
-assert.ok(index.includes('loader.js?v=16&fix=8&order=2'));
+assert.ok(index.includes('loader.js?v=16&fix=8&order=3'));
 
 const expectedAreas = ['HTML','CSS','JavaScript','Git','APIs','Angular','Frameworks','Backend'];
 expectedAreas.forEach(area => assert.ok(order.includes(`'${area}'`), `falta el área ${area}`));
@@ -52,6 +52,9 @@ assert.ok(order.includes('sections.sort('));
 assert.ok(order.includes("htmlInputTypesTitle='HTML · Formularios · Tipos de input'"));
 assert.ok(order.includes('htmlFormAnchor=sections.find'));
 assert.ok(order.includes('htmlOrder(htmlFormAnchor)+0.5'));
+assert.ok(order.includes("htmlImageAttributesTitle='HTML · Imágenes · Atributos de img'"));
+assert.ok(order.includes('htmlImageAnchor=htmlImageTitleAnchor||htmlImageItemAnchor'));
+assert.ok(order.includes('htmlOrder(htmlImageAnchor)+0.5'));
 assert.ok(courseUi.includes('if(section?.group)return section.group'));
 assert.ok(areaUi.includes('section.routeAreaPosition=position'));
 assert.ok(areaUi.includes('const navLabelOf='));
