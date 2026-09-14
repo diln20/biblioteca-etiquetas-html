@@ -6,6 +6,7 @@ const read = file => fs.readFileSync(file, 'utf8');
 const loader = read('loader.js');
 const index = read('index.html');
 const order = read('section-order.js');
+const htmlOrderFinalizer = read('html-order-finalizer.js');
 const courseUi = read('course-ui.js');
 const areaUi = read('primary-area-ui.js');
 const areaCss = read('primary-area-ui.css');
@@ -25,7 +26,7 @@ const resources = [
   'course-angular-exercises-07.js?v=1','course-angular-exercises-08.js?v=1','course-angular-exercises-09.js?v=1','angular-category-guide.js?v=1','angular-category-finalizer.js?v=1','angular-file-guide-corrections.js?v=4','angular-required-files.js?v=1',
   'course-solid-introduction.js?v=1','course-solid-reactivity.js?v=1','course-solid-exercises-01.js?v=1','course-solid-exercises-02.js?v=1',
   'course-backend-scaling-basics.js?v=1','course-backend-scaling-architecture.js?v=1','course-backend-scaling-resilience.js?v=1',
-  'exact-explanation-enhancer.js?v=1','section-order.js?v=7','course-ui.js?v=15','file-guide-ui.js?v=2','primary-area-ui.js?v=3'
+  'exact-explanation-enhancer.js?v=1','section-order.js?v=7','html-order-finalizer.js?v=1','course-ui.js?v=15','file-guide-ui.js?v=2','primary-area-ui.js?v=3'
 ];
 assert.deepEqual(resources.filter(resource => !loader.includes(resource)), []);
 
@@ -42,7 +43,7 @@ assert.ok(loader.includes("if(typeof T==='function')window.T=T;"));
 assert.ok(loader.includes("if(typeof createCard==='function')window.createCard=createCard;"));
 assert.ok(loader.includes("if(typeof render==='function')window.render=render;"));
 assert.ok(loader.includes("if(typeof buildNav==='function')window.buildNav=buildNav;"));
-assert.ok(index.includes('loader.js?v=17&fix=9&htmlorder=2'));
+assert.ok(index.includes('loader.js?v=18&fix=10&htmlfinal=1'));
 
 const expectedAreas = ['HTML','CSS','JavaScript','Git','APIs','Angular','Frameworks','Backend'];
 expectedAreas.forEach(area => assert.ok(order.includes(`'${area}'`), `falta el área ${area}`));
@@ -58,6 +59,11 @@ assert.ok(order.includes('htmlOrder(htmlImageAnchor)+0.5'));
 assert.ok(order.includes("'fundamentos web'"));
 assert.ok(order.includes("'enlaces e imagenes'"));
 assert.ok(order.includes("'formularios'"));
+assert.ok(htmlOrderFinalizer.includes("title==='HTML · Imágenes · Atributos de img'"));
+assert.ok(htmlOrderFinalizer.includes("title==='HTML · Formularios · Tipos de input'"));
+assert.ok(htmlOrderFinalizer.includes("if(areaOf(section)==='HTML')"));
+assert.ok(loader.indexOf('typescript-category-finalizer.js?v=1') < loader.indexOf('html-order-finalizer.js?v=1'));
+assert.ok(loader.indexOf('html-order-finalizer.js?v=1') < loader.indexOf('course-ui.js?v=15'));
 assert.ok(courseUi.includes('if(section?.group)return section.group'));
 assert.ok(areaUi.includes('section.routeAreaPosition=position'));
 assert.ok(areaUi.includes('const navLabelOf='));
@@ -170,7 +176,7 @@ assert.ok(angularItems.some(item => item.filesToCreate.some(file => file.path ==
 
 const allItems = context.sections.flatMap(section => section.items);
 assert.ok(allItems.every(item => String(item.description).includes('Cómo funciona exactamente:')));
-assert.ok(allItems.every(item => String(item.description).includes('Cómo comprobarlo:')));
+assert.ok(allItems.every(item => String(item.description).includes('Cómo comprobarlo:'));
 assert.ok(allItems.filter(item => String(item.preview).includes('data-visual="diagram"')).length >= 20);
 assert.ok(allItems.filter(item => String(item.preview).includes('data-visual="folder-tree"')).length >= 3);
 
@@ -180,12 +186,12 @@ assert.ok(uxItems.some(item => item.code.includes(':focus-visible')));
 assert.ok(uxItems.some(item => item.code.includes('aria-describedby')));
 
 const solidItems = context.sections.filter(section => section.title.includes('Solid.js')).flatMap(section => section.items);
-assert.ok(solidItems.some(item => item.code.includes('createSignal')));
+assert.ok(solidItems.some(item => item.code.includes('createSignal'));
 assert.ok(solidItems.filter(item => item.kind === 'Ejercicio Solid.js').length >= 6);
 
 const scalingItems = context.sections.filter(section => section.title.includes('Escalabilidad')).flatMap(section => section.items);
 assert.ok(scalingItems.some(item => item.name.includes('balanceador')));
-assert.ok(scalingItems.some(item => `${item.code} ${item.preview}`.includes('k6 run')));
+assert.ok(scalingItems.some(item => `${item.code} ${item.preview}`.includes('k6 run'));
 
 const django = read('backend-django-rest-section.js');
 const correction = read('content-corrections.js');
