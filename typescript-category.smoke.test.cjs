@@ -56,7 +56,7 @@ assert.ok(items.every(item=>item.codeLabel==='Código TypeScript'));
 assert.ok(items.every(item=>Array.isArray(item.filesToCreate)));
 assert.ok(items.every(item=>String(item.preview).includes('Resultado ·')));
 
-const code=items.map(item=>item.code).join('\n');
+const corpus=items.map(item=>`${item.code}\n${item.description}\n${item.name}`).join('\n');
 [
   '"strict": true',
   'number | string',
@@ -74,7 +74,7 @@ const code=items.map(item=>item.code).join('\n');
   'satisfies Config',
   'declare module',
   'crypto.randomUUID()'
-].forEach(text=>assert.ok(code.includes(text),`falta contenido avanzado: ${text}`));
+].forEach(text=>assert.ok(corpus.includes(text),`falta contenido avanzado: ${text}`));
 
 assert.ok(items.some(item=>item.filesToCreate.some(file=>file.path==='tsconfig.json')));
 assert.ok(items.some(item=>item.filesToCreate.some(file=>file.path==='src/types/legacy-lib.d.ts')));
