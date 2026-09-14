@@ -3,6 +3,9 @@
   window.__typescriptCategoryFinalized=true;
   if(!Array.isArray(window.sections))return;
 
+  // Los ejemplos de configuración de VS Code cargados después usan este placeholder literal.
+  if(typeof window.workspaceFolder==='undefined')window.workspaceFolder='${workspaceFolder}';
+
   const COURSE='TypeScript';
   const fallback=['HTML','CSS','JavaScript','Git','APIs','Angular','React','Vue','Svelte','Solid.js','Django Framework','FastAPI','Django REST','Frameworks','Base de datos','Backend'];
   const areas=Array.isArray(window.learningPath?.areas)&&window.learningPath.areas.length?[...window.learningPath.areas]:fallback;

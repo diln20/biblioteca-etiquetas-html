@@ -2,7 +2,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const vm = require('node:vm');
 
-const placeholders = fs.readFileSync('vscode-snippet-placeholders.js','utf8');
+const tsFinalizer = fs.readFileSync('typescript-category-finalizer.js','utf8');
 const source = fs.readFileSync('vscode-tools-section.js','utf8');
 const finalizer = fs.readFileSync('dev-tools-category-finalizer.js','utf8');
 const exercises = fs.readFileSync('dev-tools-exercises.js','utf8');
@@ -11,15 +11,14 @@ const index = fs.readFileSync('index.html','utf8');
 const fileGuide = fs.readFileSync('file-guide-ui.js','utf8');
 const css = fs.readFileSync('primary-area-ui.css','utf8');
 
-assert.doesNotThrow(()=>new vm.Script(placeholders,{filename:'vscode-snippet-placeholders.js'}));
+assert.doesNotThrow(()=>new vm.Script(tsFinalizer,{filename:'typescript-category-finalizer.js'}));
 assert.doesNotThrow(()=>new vm.Script(source,{filename:'vscode-tools-section.js'}));
 assert.doesNotThrow(()=>new vm.Script(finalizer,{filename:'dev-tools-category-finalizer.js'}));
 assert.doesNotThrow(()=>new vm.Script(exercises,{filename:'dev-tools-exercises.js'}));
-assert.ok(loader.includes('vscode-snippet-placeholders.js?v=1'));
 assert.ok(loader.includes('vscode-tools-section.js?v=1'));
 assert.ok(loader.includes('dev-tools-category-finalizer.js?v=1'));
 assert.ok(loader.includes('dev-tools-exercises.js?v=1'));
-assert.ok(loader.indexOf('vscode-snippet-placeholders.js?v=1') < loader.indexOf('vscode-tools-section.js?v=1'));
+assert.ok(loader.indexOf('typescript-category-finalizer.js?v=1') < loader.indexOf('vscode-tools-section.js?v=1'));
 assert.ok(loader.indexOf('vscode-tools-section.js?v=1') < loader.indexOf('dev-tools-category-finalizer.js?v=1'));
 assert.ok(loader.indexOf('dev-tools-category-finalizer.js?v=1') < loader.indexOf('dev-tools-exercises.js?v=1'));
 assert.ok(loader.indexOf('dev-tools-exercises.js?v=1') < loader.indexOf('personalized-exercises.js?v=1'));
@@ -27,16 +26,17 @@ assert.ok(index.includes('vscode=1'));
 assert.ok(fileGuide.includes('Herramientas'));
 assert.ok(css.includes('body[data-course="Herramientas"]'));
 assert.ok(css.includes('.nav-item[data-group="Herramientas"]'));
+assert.ok(tsFinalizer.includes("window.workspaceFolder='${workspaceFolder}'"));
 
 const context={
   console,
   sections:[],
-  learningPath:{areas:['HTML','CSS','JavaScript','TypeScript','Git','APIs','Angular','React','Vue','Svelte','Solid.js','Django Framework','FastAPI','Django REST','Frameworks','Base de datos','Backend']},
+  learningPath:{areas:['HTML','CSS','JavaScript','Git','APIs','Angular','React','Vue','Svelte','Solid.js','Django Framework','FastAPI','Django REST','Frameworks','Base de datos','Backend']},
   T:(tag,name,description,code,preview='',attrs=[],meta={})=>({tag,name,description,code,preview,attrs,...meta})
 };
 context.window=context;
 vm.createContext(context);
-new vm.Script(placeholders,{filename:'vscode-snippet-placeholders.js'}).runInContext(context);
+new vm.Script(tsFinalizer,{filename:'typescript-category-finalizer.js'}).runInContext(context);
 new vm.Script(source,{filename:'vscode-tools-section.js'}).runInContext(context);
 new vm.Script(finalizer,{filename:'dev-tools-category-finalizer.js'}).runInContext(context);
 new vm.Script(exercises,{filename:'dev-tools-exercises.js'}).runInContext(context);
