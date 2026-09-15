@@ -23,6 +23,7 @@ const titles=[
   'JavaScript · 5. Estructuras condicionales',
   'JavaScript · 4B. Objeto Math y aleatoriedad',
   'JavaScript · 10. Errores, módulos y asincronía',
+  'JavaScript · 10B. Fetch API a fondo',
   'JavaScript · 2A. Tipos especiales y memoria',
   'JavaScript · 8. Métodos de arreglos',
   'JavaScript · 1A. Sintaxis, entrada y salida',
@@ -58,14 +59,15 @@ const expected=[
   'Manejo del DOM',
   'JavaScript · DOM · Selectores',
   'JavaScript · 10. Errores, módulos y asincronía',
+  'JavaScript · 10B. Fetch API a fondo',
   'JavaScript · 10A. Motor, navegador y Node.js',
   'JavaScript · 11A. Repaso y preguntas de entrevista'
 ];
 assert.deepEqual(js.map(section=>section.title),expected);
 assert.deepEqual(js.slice(0,11).map(section=>section.learningLevel),Array(11).fill('Básico'));
 assert.deepEqual(js.slice(11,18).map(section=>section.learningLevel),Array(7).fill('Intermedio'));
-assert.deepEqual(js.slice(18).map(section=>section.learningLevel),Array(3).fill('Avanzado'));
+assert.deepEqual(js.slice(18).map(section=>section.learningLevel),Array(4).fill('Avanzado'));
 assert.equal(context.sections[0].title,'HTML · referencia');
 assert.equal(context.sections.at(-1).title,'Git · referencia');
-assert.equal(context.javascriptLearningPath.titles.length,21);
-console.log({status:'ok',javascriptSections:js.length,basic:11,intermediate:7,advanced:3});
+assert.equal(context.javascriptLearningPath.titles.length,22);
+console.log({status:'ok',javascriptSections:js.length,basic:11,intermediate:7,advanced:4});
