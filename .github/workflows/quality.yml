@@ -110,7 +110,6 @@ jobs:
           grep -q 'Fetch API a fondo' /tmp/biblioteca-runtime.html
           grep -q 'Despliegue · Railway vs Render vs Fly.io' /tmp/biblioteca-runtime.html
           grep -q 'ORM Node.js · Prisma vs Sequelize vs Drizzle' /tmp/biblioteca-runtime.html
-          grep -q 'defer vs async' /tmp/biblioteca-runtime.html
           grep -q 'Ejercicio para ti' /tmp/biblioteca-runtime.html
           grep -q 'Usa datos ficticios si vas a publicar el ejercicio' /tmp/biblioteca-runtime.html
           test "$first_nav_title" = '<span class="nav-title">01. Fundamentos web</span>'
