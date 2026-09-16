@@ -28,6 +28,7 @@ const titles=[
   'JavaScript · 10D. Archivos JSON',
   'JavaScript · 10E. Mini base de datos con JSON',
   'JavaScript · 10F. APIs autenticadas con Node.js · IGDB',
+  'JavaScript · 10G. APIs desde el navegador · sin Node.js',
   'JavaScript · 2A. Tipos especiales y memoria',
   'JavaScript · 8. Métodos de arreglos',
   'JavaScript · 1A. Sintaxis, entrada y salida',
@@ -68,14 +69,15 @@ const expected=[
   'JavaScript · 10D. Archivos JSON',
   'JavaScript · 10E. Mini base de datos con JSON',
   'JavaScript · 10F. APIs autenticadas con Node.js · IGDB',
+  'JavaScript · 10G. APIs desde el navegador · sin Node.js',
   'JavaScript · 10A. Motor, navegador y Node.js',
   'JavaScript · 11A. Repaso y preguntas de entrevista'
 ];
 assert.deepEqual(js.map(section=>section.title),expected);
 assert.deepEqual(js.slice(0,11).map(section=>section.learningLevel),Array(11).fill('Básico'));
 assert.deepEqual(js.slice(11,18).map(section=>section.learningLevel),Array(7).fill('Intermedio'));
-assert.deepEqual(js.slice(18).map(section=>section.learningLevel),Array(8).fill('Avanzado'));
+assert.deepEqual(js.slice(18).map(section=>section.learningLevel),Array(9).fill('Avanzado'));
 assert.equal(context.sections[0].title,'HTML · referencia');
 assert.equal(context.sections.at(-1).title,'Git · referencia');
-assert.equal(context.javascriptLearningPath.titles.length,26);
-console.log({status:'ok',javascriptSections:js.length,basic:11,intermediate:7,advanced:8});
+assert.equal(context.javascriptLearningPath.titles.length,27);
+console.log({status:'ok',javascriptSections:js.length,basic:11,intermediate:7,advanced:9});
