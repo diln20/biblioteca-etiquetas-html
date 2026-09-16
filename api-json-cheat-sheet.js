@@ -371,13 +371,13 @@ async function loadUsers() {
       const detail = document.createElement("p");
 
       title.textContent = user.name;
-      detail.textContent = \`${user.email} · ${user.city}\`;
+      detail.textContent = user.email + " · " + user.city;
 
       card.append(title, detail);
       list.append(card);
     }
 
-    statusText.textContent = \`${users.length} usuarios cargados\`;
+    statusText.textContent = users.length + " usuarios cargados";
   } catch (error) {
     statusText.textContent = "No se pudieron cargar los usuarios";
     console.error(error);
