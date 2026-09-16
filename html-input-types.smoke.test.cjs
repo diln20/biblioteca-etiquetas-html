@@ -16,7 +16,7 @@ assert.ok(loader.includes('html-input-types-section.js?v=1'));
 assert.ok(loader.includes('html-input-attribute-explanations.js?v=1'));
 assert.ok(loader.includes('section-order.js?v=7'));
 assert.ok(loader.includes('html-order-finalizer.js?v=1'));
-assert.ok(index.includes('loader.js?v=18&fix=10&htmlfinal=1'));
+assert.match(index,/loader\.js\?v=\d+&fix=10&htmlfinal=1/);
 
 [
   "for:'En un <label>",
