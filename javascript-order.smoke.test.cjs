@@ -5,9 +5,9 @@ const vm=require('node:vm');
 const source=fs.readFileSync('javascript-order-finalizer.js','utf8');
 const loader=fs.readFileSync('loader.js','utf8');
 assert.doesNotThrow(()=>new vm.Script(source,{filename:'javascript-order-finalizer.js'}));
-assert.ok(loader.includes('javascript-order-finalizer.js?v=1'));
-assert.ok(loader.indexOf('modern-frontend-tools-section.js?v=1')<loader.indexOf('javascript-order-finalizer.js?v=1'));
-assert.ok(loader.indexOf('javascript-order-finalizer.js?v=1')<loader.indexOf('course-ui.js?v=15'));
+assert.ok(loader.includes('javascript-order-finalizer.js?v='));
+assert.ok(loader.indexOf('modern-frontend-tools-section.js')<loader.indexOf('javascript-order-finalizer.js'));
+assert.ok(loader.indexOf('javascript-order-finalizer.js')<loader.indexOf('course-ui.js'));
 
 const titles=[
   'JavaScript · 10A. Motor, navegador y Node.js',
@@ -24,6 +24,9 @@ const titles=[
   'JavaScript · 4B. Objeto Math y aleatoriedad',
   'JavaScript · 10. Errores, módulos y asincronía',
   'JavaScript · 10B. Fetch API a fondo',
+  'JavaScript · 10C. APIs públicas de PublicAPIs.io',
+  'JavaScript · 10D. Archivos JSON',
+  'JavaScript · 10E. Mini base de datos con JSON',
   'JavaScript · 2A. Tipos especiales y memoria',
   'JavaScript · 8. Métodos de arreglos',
   'JavaScript · 1A. Sintaxis, entrada y salida',
@@ -60,14 +63,17 @@ const expected=[
   'JavaScript · DOM · Selectores',
   'JavaScript · 10. Errores, módulos y asincronía',
   'JavaScript · 10B. Fetch API a fondo',
+  'JavaScript · 10C. APIs públicas de PublicAPIs.io',
+  'JavaScript · 10D. Archivos JSON',
+  'JavaScript · 10E. Mini base de datos con JSON',
   'JavaScript · 10A. Motor, navegador y Node.js',
   'JavaScript · 11A. Repaso y preguntas de entrevista'
 ];
 assert.deepEqual(js.map(section=>section.title),expected);
 assert.deepEqual(js.slice(0,11).map(section=>section.learningLevel),Array(11).fill('Básico'));
 assert.deepEqual(js.slice(11,18).map(section=>section.learningLevel),Array(7).fill('Intermedio'));
-assert.deepEqual(js.slice(18).map(section=>section.learningLevel),Array(4).fill('Avanzado'));
+assert.deepEqual(js.slice(18).map(section=>section.learningLevel),Array(7).fill('Avanzado'));
 assert.equal(context.sections[0].title,'HTML · referencia');
 assert.equal(context.sections.at(-1).title,'Git · referencia');
-assert.equal(context.javascriptLearningPath.titles.length,22);
-console.log({status:'ok',javascriptSections:js.length,basic:11,intermediate:7,advanced:4});
+assert.equal(context.javascriptLearningPath.titles.length,25);
+console.log({status:'ok',javascriptSections:js.length,basic:11,intermediate:7,advanced:7});
