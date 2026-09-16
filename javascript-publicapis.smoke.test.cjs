@@ -33,6 +33,33 @@ assert.ok(section.items.some(i => Array.isArray(i.filesToCreate) && i.filesToCre
 assert.ok(section.items.every(i => Array.isArray(i.guide) && i.guide.length > 0));
 assert.ok(section.items.every(i => Array.isArray(i.exerciseTasks) && i.exerciseTasks.length > 0));
 
+for (const item of section.items) {
+  const code = String(item.code || '');
+  if (code.includes('await ')) {
+    assert.ok(
+      code.includes('async function'),
+      `${item.name}: usa await pero no muestra una función async completa`
+    );
+  }
+}
+
+const weather = section.items.find(i => String(i.code).includes('api.open-meteo.com'));
+assert.ok(weather.code.includes('async function consultarClima()'));
+assert.ok(weather.code.includes('try {'));
+assert.ok(weather.code.includes('catch (error)'));
+assert.ok(weather.code.includes('current_units'));
+
+const countries = section.items.find(i => String(i.code).includes('restcountries.com'));
+assert.ok(countries.code.includes('<script src="app.js" defer>'));
+assert.ok(countries.code.includes('async function buscarPais()'));
+assert.ok(countries.code.includes('encodeURIComponent(name)'));
+
+const characters = section.items.find(i => String(i.code).includes('rickandmortyapi.com'));
+assert.ok(characters.code.includes('<link rel="stylesheet" href="styles.css">'));
+assert.ok(characters.code.includes('async function loadCharacters()'));
+assert.ok(characters.code.includes('finally {'));
+assert.ok(characters.code.includes('characters.length'));
+
 console.log({
   status: 'ok',
   section: section.title,
@@ -40,6 +67,7 @@ console.log({
   apiExamples: 3,
   htmlPractice: true,
   cssPractice: true,
+  asyncAwaitGuard: true,
   fileGuides: true,
   exercises: true
 });
