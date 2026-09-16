@@ -38,7 +38,8 @@ const text=section.items.map(item=>`${item.name}\n${item.description}\n${item.co
 assert.ok(text.includes('node-fetch 3 es ESM'));
 assert.ok(text.includes('node-fetch@2'));
 assert.ok(text.includes('body no contiene JSON'));
-assert.ok(text.includes('No necesitas declarar application/json'));
+assert.ok(text.includes('application/json'));
+assert.ok(text.includes('body textual'));
 assert.ok(text.includes('Markdown'));
 assert.ok(section.items.every(item=>Array.isArray(item.guide)&&item.guide.length));
 assert.ok(section.items.every(item=>Array.isArray(item.filesToCreate)&&item.filesToCreate.length));
