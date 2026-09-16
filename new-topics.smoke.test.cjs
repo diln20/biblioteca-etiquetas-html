@@ -56,12 +56,18 @@ const deferText=`${deferItem.description}\n${deferItem.code}`;
 assert.ok(deferItem.filesToCreate.some(file=>file.path==='javascript/carga/index.html'));
 
 const loader=read('loader.js');
-[
-  'javascript-fetch-api-detailed.js?v=1',
-  'javascript-script-loading-enhancer.js?v=1',
-  'backend-deployment-platforms-section.js?v=1',
-  'backend-node-orms-section.js?v=1'
-].forEach(resource=>assert.ok(loader.includes(resource),`loader no carga ${resource}`));
-assert.ok(loader.indexOf('javascript-fetch-api-detailed.js?v=1')<loader.indexOf('javascript-order-finalizer.js?v=1'));
+const requiredLoaderResources=[
+  'javascript-fetch-api-detailed.js',
+  'javascript-script-loading-enhancer.js',
+  'backend-deployment-platforms-section.js',
+  'backend-node-orms-section.js'
+];
+for(const resource of requiredLoaderResources){
+  assert.ok(loader.includes(`${resource}?v=`),`loader no carga ${resource} con versión de cache`);
+}
+assert.ok(
+  loader.indexOf('javascript-fetch-api-detailed.js')<loader.indexOf('javascript-order-finalizer.js'),
+  'Fetch API debe cargarse antes del finalizador de orden de JavaScript'
+);
 
 console.log({status:'ok',fetchLessons:fetchSection.items.length,deploymentLessons:deploy.items.length,ormLessons:orm.items.length,defer:true});
