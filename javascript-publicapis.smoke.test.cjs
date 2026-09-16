@@ -22,12 +22,12 @@ assert.strictEqual(section.primaryArea, 'JavaScript');
 assert.ok(section.items.length >= 5, 'Se esperaban al menos 5 lecciones');
 
 const all = section.items.map(i => `${i.name}\n${i.description}\n${i.code}`).join('\n');
-for (const expected of ['Open-Meteo','REST Countries','Rick and Morty','response.ok','Cargando']) {
+for (const expected of ['Open-Meteo','PokéAPI','Rick and Morty','response.ok','Cargando']) {
   assert.ok(all.includes(expected), `Falta ${expected}`);
 }
 
 assert.ok(section.items.some(i => String(i.code).includes('api.open-meteo.com')));
-assert.ok(section.items.some(i => String(i.code).includes('restcountries.com')));
+assert.ok(section.items.some(i => String(i.code).includes('pokeapi.co/api/v2/pokemon')));
 assert.ok(section.items.some(i => String(i.code).includes('rickandmortyapi.com')));
 assert.ok(section.items.some(i => Array.isArray(i.filesToCreate) && i.filesToCreate.some(f => f.path.endsWith('styles.css'))));
 assert.ok(section.items.every(i => Array.isArray(i.guide) && i.guide.length > 0));
@@ -49,10 +49,11 @@ assert.ok(weather.code.includes('try {'));
 assert.ok(weather.code.includes('catch (error)'));
 assert.ok(weather.code.includes('current_units'));
 
-const countries = section.items.find(i => String(i.code).includes('restcountries.com'));
-assert.ok(countries.code.includes('<script src="app.js" defer>'));
-assert.ok(countries.code.includes('async function buscarPais()'));
-assert.ok(countries.code.includes('encodeURIComponent(name)'));
+const pokemon = section.items.find(i => String(i.code).includes('pokeapi.co/api/v2/pokemon'));
+assert.ok(pokemon.code.includes('<script src="app.js" defer>'));
+assert.ok(pokemon.code.includes('async function buscarPokemon()'));
+assert.ok(pokemon.code.includes('encodeURIComponent(name)'));
+assert.ok(pokemon.code.includes('pokemon.sprites.front_default'));
 
 const characters = section.items.find(i => String(i.code).includes('rickandmortyapi.com'));
 assert.ok(characters.code.includes('<link rel="stylesheet" href="styles.css">'));
