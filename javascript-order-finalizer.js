@@ -23,6 +23,7 @@
     ['JavaScript · DOM · Selectores','Intermedio'],
     ['JavaScript · 10. Errores, módulos y asincronía','Avanzado'],
     ['JavaScript · 10B. Fetch API a fondo','Avanzado'],
+    ['JavaScript · 10C. APIs públicas de PublicAPIs.io','Avanzado'],
     ['JavaScript · 10A. Motor, navegador y Node.js','Avanzado'],
     ['JavaScript · 11A. Repaso y preguntas de entrevista','Avanzado']
   ];
