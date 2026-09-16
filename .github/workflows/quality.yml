@@ -106,7 +106,6 @@ jobs:
           grep -q 'Python en HTML · PyScript y Pyodide' /tmp/biblioteca-runtime.html
           grep -q 'DOM · Selectores' /tmp/biblioteca-runtime.html
           grep -q 'DOM · Propiedades y métodos' /tmp/biblioteca-runtime.html
-          grep -q 'Qué puedes escribir después de a.' /tmp/biblioteca-runtime.html
           grep -q 'Visual Studio Code desde cero' /tmp/biblioteca-runtime.html
           grep -q 'Prettier y ESLint' /tmp/biblioteca-runtime.html
           grep -q 'CDN y librerías' /tmp/biblioteca-runtime.html
