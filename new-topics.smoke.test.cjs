@@ -26,9 +26,71 @@ const fetchSection=sections.find(section=>section.title==='JavaScript · 10B. Fe
 assert.ok(fetchSection,'falta Fetch API a fondo');
 assert.ok(fetchSection.items.length>=11);
 const fetchText=fetchSection.items.map(item=>`${item.name}\n${item.description}\n${item.code}`).join('\n');
-['response.ok','response.json()','URLSearchParams','POST','PATCH','DELETE','Authorization','AbortController','Promise.all','Loading'].forEach(term=>assert.ok(fetchText.includes(term),`falta Fetch: ${term}`));
+['response.ok','response.json()','URLSearchParams','POST','PUT','PATCH','DELETE','Authorization','AbortController','Promise.all','Loading'].forEach(term=>assert.ok(fetchText.includes(term),`falta Fetch: ${term}`));
 assert.ok(fetchSection.items.every(item=>Array.isArray(item.guide)&&item.guide.length));
 assert.ok(fetchSection.items.every(item=>Array.isArray(item.filesToCreate)&&item.filesToCreate.length));
+
+for(const item of fetchSection.items){
+  const code=String(item.code||'');
+  if(code.includes('await ')){
+    assert.ok(code.includes('async function'),`${item.name}: usa await sin mostrar una función async`);
+  }
+}
+
+const getLesson=fetchSection.items.find(item=>String(item.name).startsWith('4.'));
+assert.ok(getLesson.code.includes('url.searchParams.set("userId", "1")'));
+assert.ok(!getLesson.code.includes('_limit'),'GET no debe depender de _limit para esta práctica');
+assert.ok(getLesson.code.includes('posts.slice(0, 5)'));
+
+const postLesson=fetchSection.items.find(item=>String(item.name).startsWith('5.'));
+assert.ok(postLesson.code.includes('method: "POST"'));
+assert.ok(postLesson.code.includes('JSON.stringify'));
+assert.ok(postLesson.description.includes('no lo guarda realmente'));
+
+const methodsLesson=fetchSection.items.find(item=>String(item.name).startsWith('6.'));
+for(const method of ['method: "PUT"','method: "PATCH"','method: "DELETE"']){
+  assert.ok(methodsLesson.code.includes(method),`falta ${method}`);
+}
+assert.ok(methodsLesson.code.includes('/posts/1'));
+assert.ok(methodsLesson.code.includes('deleteResponse.text()'));
+
+const authLesson=fetchSection.items.find(item=>String(item.name).startsWith('7.'));
+assert.ok(authLesson.code.includes('https://httpbin.org/bearer'));
+assert.ok(authLesson.code.includes('Bearer ${tokenDePractica}'));
+assert.ok(authLesson.description.includes('deliberadamente falso'));
+
+const uiLesson=fetchSection.items.find(item=>String(item.name).startsWith('8.'));
+assert.ok(uiLesson.code.includes('id="output"'));
+assert.ok(uiLesson.code.includes('aria-live="polite"'));
+assert.ok(uiLesson.code.includes('replaceChildren'));
+
+const abortLesson=fetchSection.items.find(item=>String(item.name).startsWith('9.'));
+assert.ok(abortLesson.code.includes('https://httpbin.org/delay/5'));
+assert.ok(abortLesson.code.includes('new AbortController()'));
+assert.ok(abortLesson.code.includes('activeController.abort()'));
+assert.ok(abortLesson.code.includes('AbortError'));
+assert.ok(abortLesson.code.includes('id="start"'));
+assert.ok(abortLesson.code.includes('id="cancel"'));
+
+const parallelLesson=fetchSection.items.find(item=>String(item.name).startsWith('10.'));
+assert.ok(parallelLesson.code.includes('Promise.all'));
+assert.ok(!parallelLesson.code.includes('_limit'));
+
+const projectLesson=fetchSection.items.find(item=>String(item.name).startsWith('11.'));
+for(const expected of [
+  '<!DOCTYPE html>',
+  'styles.css',
+  'id="load"',
+  'id="cancel"',
+  'id="retry"',
+  'async function loadUsers',
+  'async function renderUsers',
+  'new AbortController()',
+  'retryButton.hidden = false',
+  'usersContainer.append(article)'
+]){
+  assert.ok(projectLesson.code.includes(expected),`proyecto Fetch incompleto: ${expected}`);
+}
 
 const deploy=sections.find(section=>section.title==='Backend · Despliegue · Railway vs Render vs Fly.io');
 assert.ok(deploy,'falta comparativa de despliegue');
@@ -70,4 +132,15 @@ assert.ok(
   'Fetch API debe cargarse antes del finalizador de orden de JavaScript'
 );
 
-console.log({status:'ok',fetchLessons:fetchSection.items.length,deploymentLessons:deploy.items.length,ormLessons:orm.items.length,defer:true});
+console.log({
+  status:'ok',
+  fetchLessons:fetchSection.items.length,
+  fetchAwaitGuard:true,
+  fetchMethods:true,
+  fetchAuthorizationDemo:true,
+  fetchAbortDemo:true,
+  fetchProjectComplete:true,
+  deploymentLessons:deploy.items.length,
+  ormLessons:orm.items.length,
+  defer:true
+});
