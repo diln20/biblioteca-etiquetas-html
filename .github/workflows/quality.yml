@@ -54,6 +54,8 @@ jobs:
         run: node javascript-browser-apis-no-node.smoke.test.cjs
       - name: Run OpenAPI Swagger Scalar documentation smoke test
         run: node api-documentation-openapi.smoke.test.cjs
+      - name: Run Git history and commit recovery smoke test
+        run: node git-history-commits.smoke.test.cjs
       - name: Run VS Code tools smoke test
         run: node vscode-tools.smoke.test.cjs
       - name: Run personalized exercises smoke test
