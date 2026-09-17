@@ -28,6 +28,8 @@ jobs:
         run: node visual-topics.smoke.test.cjs
       - name: Run centered DIV smoke test
         run: node css-div-center-screen.smoke.test.cjs
+      - name: Run CSS games smoke test
+        run: node css-games.smoke.test.cjs
       - name: Run UI UX visual styles smoke test
         run: node ui-ux-visual-styles.smoke.test.cjs
       - name: Run modern frontend tools smoke test
