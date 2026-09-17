@@ -28,6 +28,8 @@ jobs:
         run: node visual-topics.smoke.test.cjs
       - name: Run centered DIV smoke test
         run: node css-div-center-screen.smoke.test.cjs
+      - name: Run UI UX visual styles smoke test
+        run: node ui-ux-visual-styles.smoke.test.cjs
       - name: Run modern frontend tools smoke test
         run: node modern-frontend-tools.smoke.test.cjs
       - name: Run JavaScript functions and Python-in-HTML smoke test
@@ -125,6 +127,12 @@ jobs:
           grep -q 'DOM · Selectores' /tmp/biblioteca-runtime.html
           grep -q 'DOM · Propiedades y métodos' /tmp/biblioteca-runtime.html
           grep -q 'Centrar un DIV exactamente en el centro de la pantalla' /tmp/biblioteca-runtime.html
+          grep -q 'UI/UX · Estilos de diseño web modernos' /tmp/biblioteca-runtime.html
+          grep -q 'UI/UX · Dashboards, loaders y microinteracciones' /tmp/biblioteca-runtime.html
+          grep -q 'Sitio web brutalista / neo-brutalista' /tmp/biblioteca-runtime.html
+          grep -q 'Sitio web maximalista' /tmp/biblioteca-runtime.html
+          grep -q 'Sitio web minimalista' /tmp/biblioteca-runtime.html
+          grep -q 'Glassmorphism · efecto de vidrio' /tmp/biblioteca-runtime.html
           grep -q 'APIs públicas de PublicAPIs.io' /tmp/biblioteca-runtime.html
           grep -q 'JavaScript · 10D. Archivos JSON' /tmp/biblioteca-runtime.html
           grep -q 'JavaScript · 10E. Mini base de datos con JSON' /tmp/biblioteca-runtime.html
@@ -148,7 +156,7 @@ jobs:
           test "$first_nav_title" = '<span class="nav-title">01. Fundamentos web</span>'
           ! grep -q '<span class="nav-title">01. Imágenes · Atributos de img</span>' /tmp/biblioteca-runtime.html
           ! grep -q '<span class="nav-title">01. Tipos de input</span>' /tmp/biblioteca-runtime.html
-          test "$nav_count" -ge 199
+          test "$nav_count" -ge 201
           test "$exercise_count" -ge 1
           test "$typescript_count" -ge 9
           test "$tools_count" -ge 4
