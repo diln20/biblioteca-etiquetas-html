@@ -23,7 +23,7 @@ const section = sections.find(item => item.title === 'APIs · Códigos de estado
 assert.ok(section, 'falta la sección de estados HTTP');
 assert.ok(section.items.length >= 15, 'faltan prácticas de estados HTTP');
 
-const text = section.items.map(item => `${item.name}\n${item.description}\n${item.code}\n${item.preview}`).join('\n');
+const text = section.items.map(item => `${item.name}\n${item.description}\n${item.code}\n${item.preview}\n${item.tip || ''}`).join('\n');
 [
   '1xx', '2xx', '3xx', '4xx', '5xx',
   '200 OK', '201 Created', '202 Accepted', '204 No Content', '206 Partial Content',
