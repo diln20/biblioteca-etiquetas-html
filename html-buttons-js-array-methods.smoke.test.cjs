@@ -25,7 +25,7 @@ new vm.Script(jsSource, { filename:'javascript-reduce-some-every-section.js' }).
 const buttons = sections.find(section => section.title === 'HTML · Formularios · Tipos de button');
 assert.ok(buttons, 'falta la sección de tipos de button');
 assert.ok(buttons.items.length >= 8, 'faltan ejemplos de button');
-const buttonText = buttons.items.map(item => `${item.name}\n${item.description}\n${item.code}\n${item.tip || ''}`).join('\n');
+const buttonText = buttons.items.map(item => `${item.name}\n${item.description}\n${item.code}\n${item.preview}\n${item.tip || ''}`).join('\n');
 [
   'type="submit"',
   'type="reset"',
@@ -42,7 +42,7 @@ const buttonText = buttons.items.map(item => `${item.name}\n${item.description}\
 const arrays = sections.find(section => section.title === 'JavaScript · 8B. reduce(), some() y every() a fondo');
 assert.ok(arrays, 'falta la sección reduce some every');
 assert.ok(arrays.items.length >= 8, 'faltan prácticas de arrays');
-const arrayText = arrays.items.map(item => `${item.name}\n${item.description}\n${item.code}\n${item.tip || ''}`).join('\n');
+const arrayText = arrays.items.map(item => `${item.name}\n${item.description}\n${item.code}\n${item.preview}\n${item.tip || ''}`).join('\n');
 [
   '.reduce(',
   '.some(',
