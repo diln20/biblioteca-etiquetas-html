@@ -30,6 +30,7 @@
     if(coreRank.has(normalized))return coreRank.get(normalized);
     if(title==='HTML · Imágenes · Atributos de img')return coreRank.get('enlaces e imagenes')+50;
     if(title==='HTML · Formularios · Tipos de input')return coreRank.get('formularios')+50;
+    if(title==='HTML · Formularios · Tipos de button')return coreRank.get('formularios')+60;
     if(Number.isFinite(section?.learningLessonOrder))return section.learningLessonOrder;
     if(title==='Práctica HTML paso a paso')return 3000;
     if(title==='HTML · Manipulación de DIV')return 3100;
