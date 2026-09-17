@@ -18,6 +18,7 @@
     ['JavaScript · 7A. Tipos de funciones','Intermedio'],
     ['JavaScript · 8. Métodos de arreglos','Intermedio'],
     ['JavaScript · 8A. map vs filter vs reduce','Intermedio'],
+    ['JavaScript · 8B. reduce(), some() y every() a fondo','Intermedio'],
     ['JavaScript · 9. Objetos y manejo de datos','Intermedio'],
     ['Manejo del DOM','Intermedio'],
     ['JavaScript · DOM · Selectores','Intermedio'],
