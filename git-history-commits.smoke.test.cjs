@@ -24,7 +24,7 @@ const history = sections.find(section => section.title === 'Git · Historial, co
 assert.ok(history, 'falta la sección de historial y recuperación');
 assert.ok(history.items.length >= 12, 'la sección necesita suficientes prácticas');
 
-const allText = history.items.map(item => `${item.name}\n${item.description}\n${item.code}`).join('\n');
+const allText = history.items.map(item => `${item.name}\n${item.description}\n${item.code}\n${item.tip || ''}`).join('\n');
 [
   'git log --oneline --graph --decorate --all',
   'git show',
@@ -43,7 +43,7 @@ const allText = history.items.map(item => `${item.name}\n${item.description}\n${
 
 const advanced = sections.find(section => section.title === 'Git · Avanzado');
 assert.ok(advanced, 'falta Git avanzado');
-const advancedText = advanced.items.map(item => `${item.name}\n${item.description}\n${item.code}`).join('\n');
+const advancedText = advanced.items.map(item => `${item.name}\n${item.description}\n${item.code}\n${item.tip || ''}`).join('\n');
 [
   'git stash apply',
   'git rebase -i',
