@@ -12,8 +12,8 @@ assert.ok(html.includes('Flexbox Arena'));
 assert.ok(html.includes('id="cssEditor"'));
 assert.ok(html.includes('id="targetArena"'));
 assert.ok(html.includes('id="playerArena"'));
-assert.ok(html.includes('css-flexbox-game.css?v=3'));
-assert.ok(html.includes('css-flexbox-game.js?v=3'));
+assert.ok(html.includes('css-flexbox-game.css?v=5'));
+assert.ok(html.includes('css-flexbox-game.js?v=5'));
 
 [
   'justify-content','align-items','flex-direction','flex-wrap','align-content',

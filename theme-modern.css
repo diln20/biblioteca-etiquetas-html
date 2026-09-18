@@ -95,3 +95,11 @@ body[data-course="Git"]{--course-accent:#f97316;--course-soft:rgba(249,115,22,.1
 .file-guide p{margin:5px 0 0;color:#9fb2c8;font-size:11px;line-height:1.4}
 .file-action{display:inline-flex;margin:0 7px 4px 0;padding:2px 6px;border-radius:999px;background:rgba(45,212,191,.12);color:#5eead4;font-size:9px;font-weight:800;text-transform:uppercase}
 @media(max-width:760px){.file-guide ol{grid-template-columns:1fr}}
+.course-sidebar-toggle{display:block;width:100%;min-height:36px;margin-bottom:10px;padding:6px;border:1px solid #355273;border-radius:8px;background:#10243c;color:#dbeafe;font:inherit;font-size:12px;cursor:pointer}
+.course-sidebar-toggle:hover{background:#163657}.course-sidebar-toggle:focus-visible{outline:2px solid #38bdf8;outline-offset:2px}
+.layout.is-sidebar-collapsed{grid-template-columns:48px minmax(0,1fr)}
+.sidebar.is-collapsed{padding:8px 4px;overflow:hidden}
+.sidebar.is-collapsed>:not(.course-overview),.sidebar.is-collapsed .course-overview>:not(.course-sidebar-toggle){display:none!important}
+.sidebar.is-collapsed .course-overview{padding:0;margin:0;background:transparent;border:0}
+.sidebar.is-collapsed .course-sidebar-toggle{font-size:26px;line-height:1;margin:0}
+@media(max-width:820px){.layout.is-sidebar-collapsed{grid-template-columns:1fr}.sidebar.is-collapsed{height:auto;min-height:0}.sidebar.is-collapsed .course-sidebar-toggle{width:40px}}

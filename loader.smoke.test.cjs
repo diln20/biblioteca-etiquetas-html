@@ -16,7 +16,7 @@ const angularGuideCorrections = read('angular-file-guide-corrections.js');
 const angularRequiredFiles = read('angular-required-files.js');
 
 const resources = [
-  'screen-fit.css?v=2','theme-modern.css?v=6','course-ui-enhancements.css?v=1','primary-area-ui.css?v=4',
+  'screen-fit.css?v=2','theme-modern.css?v=7','course-ui-enhancements.css?v=1','primary-area-ui.css?v=4',
   'learning-visuals.js?v=1','course-ux-form-keyboard.js?v=1','course-ux-form-errors.js?v=1','course-ux-form-project.js?v=1',
   'angular-from-zero-section.js?v=1','angular-overview-section.js?v=1','angular-beginner-environment.js?v=1','course-angular-components.js?v=1','course-angular-bindings.js?v=1','angular-beginner-signals.js?v=1','course-angular-forms.js?v=1',
   'course-angular-exercises-01.js?v=1','course-angular-exercises-02.js?v=1','course-angular-exercises-03.js?v=1',

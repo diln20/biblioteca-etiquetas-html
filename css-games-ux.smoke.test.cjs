@@ -17,6 +17,7 @@ const context={
 };
 context.window=context;
 vm.createContext(context);
+new vm.Script(fs.readFileSync('css-guided-challenges.js','utf8')).runInContext(context);
 
 new vm.Script(sectionSource,{filename:'css-games-section.js'}).runInContext(context);
 const section=sections.find(item=>item.title==='CSS · Juegos y retos prácticos');
@@ -33,7 +34,7 @@ for(const item of section.items){
   assert.ok(!item.description.includes('Cómo comprobarlo:'),'no debe aparecer comprobación genérica en '+item.name);
 }
 
-assert.ok(loader.includes('css-games-section.js?v=10'));
+assert.ok(loader.includes('css-games-section.js?v=15'));
 assert.ok(loader.includes('explanation-enhancer.js?v=10'));
 assert.ok(loader.includes('exact-explanation-enhancer.js?v=2'));
 assert.ok(loader.includes('personalized-exercises.js?v=2'));

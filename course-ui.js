@@ -118,6 +118,23 @@
     sidebar.insertBefore(overview,nav);
     if(header)overview.append(header);
     overview.append(progressLabel,progress,jumps);
+
+    const toggle=document.createElement('button');
+    toggle.type='button';
+    toggle.className='course-sidebar-toggle';
+    sidebar.id=sidebar.id||'courseSidebar';
+    toggle.setAttribute('aria-controls',sidebar.id);
+    const setCollapsed=collapsed=>{
+      sidebar.classList.toggle('is-collapsed',collapsed);
+      sidebar.closest('.layout')?.classList.toggle('is-sidebar-collapsed',collapsed);
+      toggle.setAttribute('aria-expanded',String(!collapsed));
+      toggle.setAttribute('aria-label',collapsed?'Expandir ruta de aprendizaje':'Contraer ruta de aprendizaje');
+      toggle.title=collapsed?'Expandir ruta de aprendizaje':'Contraer ruta de aprendizaje';
+      toggle.textContent=collapsed?'›':'‹ Contraer ruta';
+    };
+    toggle.addEventListener('click',()=>setCollapsed(!sidebar.classList.contains('is-collapsed')));
+    overview.prepend(toggle);
+    setCollapsed(false);
   }
 
   const navButtons=[...nav.children];

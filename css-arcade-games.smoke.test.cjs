@@ -21,7 +21,7 @@ assert.equal(levelCount('divs','position'),12,'DIV Lab debe tener 12 niveles');
 assert.equal(levelCount('position','responsive'),9,'Position Rescue debe tener 9 niveles');
 assert.equal(levelCount('responsive'),9,'Responsive Racer debe tener 9 niveles');
 assert.ok(html.includes('id="cssEditor"'));
-assert.ok(html.includes('css-arcade-game.js?v=2'),'HTML debe cargar la lógica revisada');
+assert.ok(html.includes('css-arcade-game.js?v=8'),'HTML debe cargar la lógica revisada');
 assert.ok(html.includes('id="targetFrame"'));
 assert.ok(html.includes('id="playerFrame"'));
 assert.ok(html.includes('Comprobar'));

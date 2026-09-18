@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="CSS Arcade: juegos interactivos para practicar CSS escribiendo código real.">
   <title>CSS Arcade · Juego interactivo</title>
-  <link rel="stylesheet" href="css-arcade-game.css?v=1">
+  <link rel="stylesheet" href="css-arcade-game.css?v=5">
+  <link rel="stylesheet" href="css-game-fullscreen.css?v=1">
 </head>
 <body>
   <header class="arcade-topbar">
@@ -28,6 +29,13 @@
       </div>
 
       <p id="instruction" class="instruction"></p>
+      <details id="learningGuide" class="learning-guide" open>
+        <summary>Entiende el reto antes de escribir</summary>
+        <p><strong>Por qué funciona:</strong> <span id="whyText"></span></p>
+        <p><strong>Error frecuente:</strong> <span id="mistakeText"></span></p>
+        <p><strong>Cómo comprobarlo:</strong> <span id="verifyText"></span></p>
+        <p><strong>Después de resolverlo:</strong> <span id="extraText"></span></p>
+      </details>
 
       <div class="preview-grid">
         <section class="preview-card">
@@ -59,12 +67,21 @@
         <div><i></i><i></i><i></i></div>
         <span>styles.css · editable</span>
       </div>
-      <textarea id="cssEditor" spellcheck="false" autocomplete="off" autocapitalize="off" aria-label="Editor CSS"></textarea>
+      <details class="html-reference"><summary>Ver HTML del escenario</summary><pre id="htmlSource"></pre></details>
+      <p id="editorClue" class="editor-clue"></p>
+      <textarea id="cssEditor" spellcheck="false" autocomplete="off" autocapitalize="off" aria-label="Editor CSS" aria-describedby="editorClue"></textarea>
+      <section id="propertyHelp" class="property-help" aria-label="Ayuda de propiedades CSS">
+        <strong>Propiedades y valores útiles</strong>
+        <p>Abre un tema para consultar valores y ejemplos. Adapta los selectores al HTML del escenario: las combinaciones son referencias, no la solución de todos los niveles.</p>
+      </section>
       <div class="editor-foot"><span>Ctrl + Enter = comprobar</span><span id="concepts"></span></div>
       <nav class="levels"><p>Niveles</p><div id="levelButtons"></div></nav>
     </aside>
   </main>
 
-  <script src="css-arcade-game.js?v=2" defer></script>
+  <script src="css-guided-challenges.js?v=4" defer></script>
+  <script src="css-guided-game-levels.js?v=3" defer></script>
+  <script src="css-arcade-game.js?v=8" defer></script>
+  <script src="css-arcade-help.js?v=1" defer></script>
 </body>
 </html>

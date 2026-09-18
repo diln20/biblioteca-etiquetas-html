@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="Flexbox Arena: juego interactivo para practicar CSS Flexbox por niveles.">
   <title>Flexbox Arena · Juego CSS</title>
-  <link rel="stylesheet" href="css-flexbox-game.css?v=3">
+  <link rel="stylesheet" href="css-flexbox-game.css?v=5">
+  <link rel="stylesheet" href="css-game-fullscreen.css?v=1">
 </head>
 <body>
   <header class="topbar">
@@ -52,8 +53,54 @@
       </div>
       <div class="property-help">
         <strong>Propiedades y valores útiles</strong>
-        <code>justify-content</code><code>align-items</code><code>flex-direction</code><code>flex-wrap</code><code>align-content</code><code>gap</code>
-        <code>center</code><code>space-between</code><code>space-evenly</code><code>wrap-reverse</code>
+        <p>Escribe una propiedad y un valor separados por dos puntos; termina con punto y coma. Ejemplo: <code>justify-content: center;</code></p>
+        <details>
+          <summary>Distribuir en el eje principal · justify-content</summary>
+          <p>En una fila mueve horizontalmente; en una columna, verticalmente.</p>
+          <dl>
+            <dt><code>flex-start</code> / <code>flex-end</code></dt><dd>Agrupa al inicio o al final del eje principal.</dd>
+            <dt><code>center</code></dt><dd>Centra el grupo.</dd>
+            <dt><code>space-between</code></dt><dd>Reparte espacio entre elementos, sin añadirlo en los extremos.</dd>
+            <dt><code>space-around</code></dt><dd>Deja espacio alrededor de cada elemento; en los extremos queda la mitad que entre vecinos.</dd>
+            <dt><code>space-evenly</code></dt><dd>Deja el mismo espacio entre elementos y en los extremos.</dd>
+          </dl>
+        </details>
+        <details>
+          <summary>Alinear en el eje transversal · align-items</summary>
+          <p>En una fila controla la alineación vertical; en una columna, la horizontal.</p>
+          <code>flex-start</code><code>center</code><code>flex-end</code><code>stretch</code><code>baseline</code>
+          <p><code>stretch</code> estira los elementos con tamaño automático en este eje; <code>baseline</code> alinea las líneas base del texto. Los orbes tienen tamaño definido, por lo que stretch puede no cambiar su aspecto.</p>
+        </details>
+        <details>
+          <summary>Cambiar la dirección · flex-direction</summary>
+          <code>row</code><code>row-reverse</code><code>column</code><code>column-reverse</code>
+          <p><code>row</code> forma una fila y <code>column</code> una columna. Las variantes reverse invierten el sentido visual sin cambiar el orden del HTML. En este tablero, row va de izquierda a derecha.</p>
+        </details>
+        <details>
+          <summary>Permitir varias líneas · flex-wrap</summary>
+          <code>nowrap</code><code>wrap</code><code>wrap-reverse</code>
+          <p><code>nowrap</code> mantiene una línea; <code>wrap</code> permite saltos cuando falta espacio; <code>wrap-reverse</code> invierte el sentido en que se apilan las líneas.</p>
+        </details>
+        <details>
+          <summary>Distribuir varias líneas · align-content</summary>
+          <code>flex-start</code><code>center</code><code>flex-end</code><code>space-between</code><code>space-around</code><code>space-evenly</code><code>stretch</code>
+          <p>Distribuye las líneas completas en el eje transversal. Necesitas un contenedor con wrap y espacio libre en ese eje; con nowrap no actúa. No sustituye a align-items, que alinea los elementos dentro de cada línea.</p>
+          <p>Prueba: <code>flex-wrap: wrap; align-content: space-between;</code></p>
+        </details>
+        <details>
+          <summary>Separar los elementos · gap</summary>
+          <code>gap: 0;</code><code>gap: 8px;</code><code>gap: 16px;</code><code>gap: 1rem;</code><code>gap: 12px 24px;</code>
+          <p>Un valor define ambas separaciones. Con dos valores, el primero es row-gap y el segundo column-gap. No añade espacio alrededor del borde del contenedor.</p>
+          <code>row-gap: 12px;</code><code>column-gap: 24px;</code>
+          <p>En una fila, column-gap separa elementos y row-gap separa líneas; en una columna se intercambian esos papeles.</p>
+        </details>
+        <details>
+          <summary>Combinaciones para experimentar</summary>
+          <p>Centro en ambos ejes: <code>justify-content: center; align-items: center;</code></p>
+          <p>Columna centrada: <code>flex-direction: column; justify-content: center; align-items: center;</code></p>
+          <p>Filas con separación: <code>flex-wrap: wrap; gap: 16px;</code></p>
+          <p>Estas combinaciones sirven para explorar. Para superar cada nivel, sigue su objetivo concreto.</p>
+        </details>
       </div>
       <div class="editor-shortcut">Ctrl + Enter también comprueba el nivel.</div>
       <nav class="levels" aria-label="Niveles de Flexbox"><p>Niveles</p><div id="levelButtons" class="level-buttons"></div></nav>
@@ -61,6 +108,6 @@
   </main>
 
   <footer><p>Practica por experimentación: escribe, observa, corrige y vuelve a intentar.</p></footer>
-  <script src="css-flexbox-game.js?v=3" defer></script>
+  <script src="css-flexbox-game.js?v=5" defer></script>
 </body>
 </html>

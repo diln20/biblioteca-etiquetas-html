@@ -5,6 +5,15 @@
 
   const style=document.createElement('style');
   style.textContent=`
+    .css-game-screen-controls{display:flex;align-items:center;flex-wrap:wrap;gap:10px;padding:8px 12px;background:#0b1b2d;color:#cbd5e1;font-size:12px}
+    .css-game-screen-button{border:1px solid #365a80;border-radius:8px;background:#10243c;color:#e8f1ff;padding:8px 12px;font:inherit;cursor:pointer}
+    .css-game-screen-button:focus-visible{outline:2px solid #38bdf8;outline-offset:3px}
+    .preview-panel:fullscreen{box-sizing:border-box;width:100%;height:100%;max-width:none;min-height:0;padding:0;overflow:hidden;background:#06111e;border:0;border-radius:0;display:flex;flex-direction:column}
+    .preview-panel:fullscreen .css-game-screen-controls{flex:none;border-bottom:1px solid #294766}
+    .preview-panel:fullscreen>.panel-label,.preview-panel:fullscreen>.browser-bar{display:none}
+    .preview-panel:fullscreen>iframe{display:block;width:100%!important;height:0!important;min-height:0!important;max-height:none!important;flex:1 1 0;min-width:0;border:0;border-radius:0;background:#06111e}
+    .css-game-screen-name{display:none;font-weight:700}
+    .preview-panel:fullscreen .css-game-screen-name{display:block}
     .css-guided-game-card .tag-description{
       max-width:78ch;
       margin-bottom:12px;
@@ -167,6 +176,51 @@
     }
   };
 
+  const addFullscreen=(card,item)=>{
+    const panel=card.querySelector('.preview-panel');
+    if(!panel)return;
+    const controls=document.createElement('div');
+    controls.className='css-game-screen-controls';
+    const button=document.createElement('button');
+    button.type='button';
+    button.className='css-game-screen-button';
+    const status=document.createElement('span');
+    status.setAttribute('role','status');
+    const name=document.createElement('span');
+    name.className='css-game-screen-name';
+    name.textContent=item.name||'Reto CSS';
+    const frame=panel.querySelector('iframe');
+    let wasActive=false;
+    const update=()=>{
+      const active=document.fullscreenElement===panel;
+      button.textContent=active?'⤢ Salir de pantalla completa':'⤢ Pantalla completa';
+      button.setAttribute('aria-pressed',String(active));
+      button.title=active?'Volver a la vista normal (también puedes usar Esc)':'Ampliar este reto a pantalla completa';
+      // The game keeps its document and editor state when changing layout.
+      if(frame?.classList.contains('css-game-direct-frame')){
+        frame.contentDocument?.documentElement.classList.toggle('game-fullscreen',active);
+      }
+      if(wasActive&&!active)button.focus({preventScroll:true});
+      wasActive=active;
+    };
+    button.addEventListener('click',async()=>{
+      status.textContent='';
+      try{
+        if(document.fullscreenElement===panel)await document.exitFullscreen();
+        else if(panel.requestFullscreen)await panel.requestFullscreen();
+        else status.textContent='Este navegador no admite pantalla completa.';
+      }catch{
+        status.textContent='No se pudo activar la pantalla completa. Revisa los permisos del navegador.';
+      }
+      update();
+    });
+    panel.addEventListener('fullscreenchange',update);
+    frame?.addEventListener('load',update);
+    controls.append(button,name,status);
+    panel.prepend(controls);
+    update();
+  };
+
   const originalCreateCard=window.createCard;
   window.createCard=createCard=function(item){
     const fragment=originalCreateCard(item);
@@ -202,6 +256,22 @@
         frame.style.maxWidth='none';
       });
 
+      const frame=card.querySelector('.preview-panel iframe');
+      const preview=document.createElement('template');
+      preview.innerHTML=item.preview||'';
+      const gameUrl=preview.content.querySelector('iframe')?.getAttribute('src');
+      // Only our two local game pages bypass the sandbox for arbitrary HTML examples.
+      // A direct frame removes the white srcdoc wrapper and lets the game save progress.
+      if(frame&&/^css-(?:flexbox|arcade)-game\.html(?:\?|$)/.test(gameUrl||'')){
+        frame.classList.add('css-game-direct-frame');
+        frame.removeAttribute('srcdoc');
+        frame.removeAttribute('sandbox');
+        frame.src=gameUrl;
+        frame.title=item.name+' · juego editable';
+        frame.loading='lazy';
+      }
+      addFullscreen(card,item);
+
       const labels=[...card.querySelectorAll('.panel-label')];
       const resultLabel=labels.find(label=>/resultado/i.test(label.textContent||''));
       if(resultLabel?.firstChild)resultLabel.firstChild.textContent=(item.name||'Juego CSS')+' · editor CSS ';
@@ -209,6 +279,7 @@
     }
 
     if(item?.kind==='Juego CSS'){
+      addFullscreen(card,item);
       card.classList.add('css-guided-game-card');
       card.querySelector('.file-guide')?.remove();
       card.querySelector('.file-create-guide')?.remove();

@@ -293,4 +293,11 @@ footer{text-align:center;color:var(--muted);padding:8px 20px 30px}
 }
 
 .editor-shortcut{padding:9px 16px;border-top:1px solid var(--line);color:var(--muted);font-size:.78rem;background:#081522}
+.property-help>p,.property-help details{width:100%;min-width:0;margin:0;color:#b9cadd;font-size:.8rem;line-height:1.6}
+.property-help details{padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:#081522}
+.property-help summary{cursor:pointer;color:#dbeafe;font-weight:700}
+.property-help summary:focus-visible{outline:2px solid #38bdf8;outline-offset:4px}
+.property-help details p{margin:8px 0}.property-help dl{margin:8px 0}.property-help dt{margin-top:8px}.property-help dd{margin:3px 0 8px 10px}
+.property-help code{display:inline-block;white-space:normal;overflow-wrap:anywhere;margin:3px 3px 3px 0;max-width:100%}
+#cssEditor::placeholder{color:#94a3b8;opacity:1}
 @media(max-width:600px){.level-buttons{grid-template-columns:repeat(4,1fr)}}

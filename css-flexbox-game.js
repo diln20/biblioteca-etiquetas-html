@@ -84,8 +84,8 @@
     title.textContent=level.title;
     counter.textContent='Nivel '+(current+1)+' de '+levels.length;
     instruction.textContent=level.instruction;
-    editor.value='';
-    editor.placeholder=current===0?'justify-content: center;':'Escribe aquí las propiedades…';
+    editor.value=Object.keys(level.expected).map(prop=>'/* '+prop+': ...; */').join('\n');
+    editor.placeholder=Object.keys(level.expected).map(prop=>prop+': /* completa el valor */;').join('\n');
     const pieceSize=level.pieceSize||'64px';
     player.style.setProperty('--piece-size',pieceSize);
     target.style.setProperty('--piece-size',pieceSize);
@@ -166,7 +166,7 @@
     if(!solutionBox.hidden)solutionBox.textContent='Solución de referencia: '+levels[current].solution.replace(/\n/g,' ');
   });
   $('#resetLevelBtn').addEventListener('click',()=>{
-    editor.value='';
+    editor.value=Object.keys(levels[current].expected).map(prop=>'/* '+prop+': ...; */').join('\n');
     applyEditor();
     feedback.textContent='Nivel limpio. Inténtalo de nuevo.';
     editor.focus();
