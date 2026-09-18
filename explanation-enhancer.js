@@ -54,6 +54,12 @@
   };
 
   sections.forEach(section=>{
+    if(section.title==='CSS · Juegos y retos prácticos'){
+      section.items.forEach(item=>{
+        if(item.gameDescription)item.description=item.gameDescription;
+      });
+      return;
+    }
     if(!section.description.includes('Orden recomendado:')){
       section.description+=` Orden recomendado: lee la idea principal, revisa el código y confirma el efecto en el resultado.`;
     }
