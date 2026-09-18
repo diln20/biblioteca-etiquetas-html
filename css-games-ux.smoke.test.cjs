@@ -37,6 +37,6 @@ assert.ok(loader.includes('css-games-section.js?v=10'));
 assert.ok(loader.includes('explanation-enhancer.js?v=10'));
 assert.ok(loader.includes('exact-explanation-enhancer.js?v=2'));
 assert.ok(loader.includes('personalized-exercises.js?v=2'));
-assert.ok(loader.includes('css-flexbox-card-ui.js?v=4'));
+assert.ok(loader.includes('css-flexbox-card-ui.js?v=5'));
 
 console.log({status:'ok',section:section.title,items:section.items.length,conciseDescriptions:true});
