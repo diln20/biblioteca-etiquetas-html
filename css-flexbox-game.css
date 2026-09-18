@@ -227,7 +227,7 @@ h1{margin:0;font-size:clamp(1.6rem,4vw,2.6rem)}
 }
 .levels{padding:0 16px 18px;border-top:1px solid var(--line)}
 .levels p{font-weight:800}
-.level-buttons{display:grid;grid-template-columns:repeat(6,1fr);gap:7px}
+.level-buttons{display:grid;grid-template-columns:repeat(8,1fr);gap:7px}
 .level-btn{
   aspect-ratio:1;
   border:1px solid #355173;
@@ -291,3 +291,6 @@ footer{text-align:center;color:var(--muted);padding:8px 20px 30px}
     position:static;
   }
 }
+
+.editor-shortcut{padding:9px 16px;border-top:1px solid var(--line);color:var(--muted);font-size:.78rem;background:#081522}
+@media(max-width:600px){.level-buttons{grid-template-columns:repeat(4,1fr)}}
