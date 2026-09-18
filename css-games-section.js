@@ -110,15 +110,15 @@
         'CSS · Juego interactivo',
         'Flexbox Arena · juego tipo niveles',
         'Juego interactivo inspirado en la dinámica de aprender haciendo: mueve orbes hasta sus objetivos escribiendo propiedades Flexbox. Tiene 12 niveles, editor CSS en vivo, pistas, comprobación, progreso guardado y un boss final. Se puede jugar directamente aquí, dentro de esta sección, sin salir de la biblioteca.',
-        '/* Edita las propiedades directamente en el panel interactivo de esta tarjeta. */\njustify-content: center;',
-        flexboxInlineGame,
+        'Editor CSS interactivo integrado en el panel Resultado.',
+        '<iframe class="flexbox-arena-frame" src="css-flexbox-game.html?embed=1&inside=library" title="Flexbox Arena editable" loading="eager" style="display:block;width:100%;height:760px;border:0;border-radius:14px;background:#07111f"></iframe>',
         [],
         {
           kind:'Juego CSS interactivo',
-          tip:'Edita el CSS directamente aquí. Cada cambio se aplica al tablero en tiempo real; usa Comprobar o Ctrl + Enter para validar.',
+          tip:'Escribe directamente en el editor styles.css del panel Resultado. Cada cambio mueve los elementos en tiempo real; usa Comprobar o Ctrl + Enter.',
           guideTitle:'Cómo jugar',
           guide:[
-            ['1','Editor dentro de la sección','Escribe CSS directamente en el textarea visible de esta tarjeta; no necesitas abrir otra página.'],
+            ['1','Editor dentro de Resultado','Escribe CSS en styles.css dentro del propio panel Resultado; no necesitas abrir otra página.'],
             ['2','Editor CSS','Escribe propiedades como justify-content, align-items o flex-direction.'],
             ['3','Comprobar','El juego valida el estilo calculado y habilita el siguiente nivel cuando coincide.'],
             ['4','Progreso','Los niveles completados se guardan en localStorage del navegador.']
