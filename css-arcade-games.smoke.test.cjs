@@ -7,8 +7,21 @@ const js=fs.readFileSync('css-arcade-game.js','utf8');
 assert.doesNotThrow(()=>new vm.Script(js,{filename:'css-arcade-game.js'}));
 ['grid','selectors','box','divs','position','responsive'].forEach(game=>assert.ok(js.includes(game+':'),'falta juego '+game));
 ['Grid Forge','Selector Hunt','Box Model Lab','DIV Lab','Position Rescue','Responsive Racer'].forEach(name=>assert.ok(js.includes(name),'falta '+name));
-assert.ok((js.match(/title:'/g)||[]).length >=45,'faltan niveles de arcade');
+assert.ok((js.match(/title:'/g)||[]).length >=66,'faltan niveles de arcade');
+
+function levelCount(key,nextKey){
+  const start=js.indexOf(key+':{title:');
+  const end=nextKey?js.indexOf(nextKey+':{title:',start):js.indexOf('\n  };',start);
+  return (js.slice(start,end).match(/{title:'/g)||[]).length-1;
+}
+assert.equal(levelCount('grid','selectors'),10,'Grid Forge debe tener 10 niveles');
+assert.equal(levelCount('selectors','box'),10,'Selector Hunt debe tener 10 niveles');
+assert.equal(levelCount('box','divs'),10,'Box Model Lab debe tener 10 niveles');
+assert.equal(levelCount('divs','position'),12,'DIV Lab debe tener 12 niveles');
+assert.equal(levelCount('position','responsive'),9,'Position Rescue debe tener 9 niveles');
+assert.equal(levelCount('responsive'),9,'Responsive Racer debe tener 9 niveles');
 assert.ok(html.includes('id="cssEditor"'));
+assert.ok(html.includes('css-arcade-game.js?v=2'),'HTML debe cargar la lógica revisada');
 assert.ok(html.includes('id="targetFrame"'));
 assert.ok(html.includes('id="playerFrame"'));
 assert.ok(html.includes('Comprobar'));
@@ -23,4 +36,9 @@ assert.ok(css.includes('@media(max-width:760px)'));
 assert.ok(js.includes('Boss · dashboard de DIVs'));
 assert.ok(js.includes('place-items:center'));
 assert.ok(js.includes('z-index'));
-console.log({status:'ok',games:6,levels:'45+',divLevels:12,editable:true,inlinePreview:true});
+assert.ok(js.includes('auto-fit'));
+assert.ok(js.includes('nth-child(2)'));
+assert.ok(js.includes('overflow:hidden'));
+assert.ok(js.includes('inset:16px'));
+assert.ok(js.includes('display:none'));
+console.log({status:'ok',games:6,levels:60,grid:10,selectors:10,box:10,divs:12,position:9,responsive:9,editable:true});
