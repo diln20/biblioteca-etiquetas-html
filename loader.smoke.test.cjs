@@ -26,7 +26,7 @@ const resources = [
   'course-angular-exercises-07.js?v=1','course-angular-exercises-08.js?v=1','course-angular-exercises-09.js?v=1','angular-category-guide.js?v=1','angular-category-finalizer.js?v=1','angular-file-guide-corrections.js?v=4','angular-required-files.js?v=1',
   'course-solid-introduction.js?v=1','course-solid-reactivity.js?v=1','course-solid-exercises-01.js?v=1','course-solid-exercises-02.js?v=1',
   'course-backend-scaling-basics.js?v=1','course-backend-scaling-architecture.js?v=1','course-backend-scaling-resilience.js?v=1',
-  'exact-explanation-enhancer.js?v=2','section-order.js?v=7','html-order-finalizer.js?v=1','course-ui.js?v=15','file-guide-ui.js?v=2','primary-area-ui.js?v=3'
+  'exact-explanation-enhancer.js?v=2','section-order.js?v=7','html-order-finalizer.js?v=1','course-ui.js?v=15','file-guide-ui.js?v=2','primary-area-ui.js?v=4'
 ];
 assert.deepEqual(resources.filter(resource => !loader.includes(resource)), []);
 
@@ -70,6 +70,9 @@ assert.ok(areaUi.includes('const navLabelOf='));
 assert.ok(areaUi.includes("label=label.replace(/^JavaScript"));
 assert.ok(areaUi.includes(".replace(/^\\s*\\d{1,2}[A-Z]?\\.\\s*/i,''"));
 assert.ok(areaUi.includes('window.formatCourseNavLabel=navLabelOf'));
+assert.ok(areaUi.includes('syncHeadingCounter'));
+assert.ok(areaUi.includes("counter.dataset.areaCounter='true'"));
+assert.ok(areaUi.includes('section.routeAreaTotal'));
 assert.ok(areaCss.includes('body[data-course="Angular"]'));
 assert.ok(areaCss.includes('.nav-item[data-group="Angular"]'));
 assert.ok(areaCss.includes('counter-reset:file-guide-step'));
@@ -97,7 +100,7 @@ const courseResourceNames = resources.filter(resource =>
   resource.endsWith('.js?v=1') ||
   resource === 'exact-explanation-enhancer.js?v=2' ||
   resource === 'angular-file-guide-corrections.js?v=4' ||
-  resource === 'primary-area-ui.js?v=3'
+  resource === 'primary-area-ui.js?v=4'
 );
 const scriptFiles = courseResourceNames.map(resource => resource.replace(/\?v=\d+$/,''));
 for(const file of scriptFiles){
