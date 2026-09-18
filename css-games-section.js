@@ -10,7 +10,7 @@
     name,
     description,
     'Editor CSS interactivo integrado en el panel Resultado.',
-    '<iframe class="css-arcade-frame" src="css-arcade-game.html?game='+key+'&embed=1&inside=library" title="'+name+' editable" loading="lazy" style="display:block;width:100%;height:760px;border:0;border-radius:14px;background:#06111e"></iframe>',
+    '<iframe class="css-arcade-frame" src="css-arcade-game.html?game='+key+'&embed=1&inside=library&arcade=2" title="'+name+' editable" loading="lazy" style="display:block;width:100%;height:760px;border:0;border-radius:14px;background:#06111e"></iframe>',
     [],
     {
       kind:'Juego CSS interactivo',
