@@ -33,6 +33,7 @@ jobs:
           node css-games.smoke.test.cjs
           node css-flexbox-card-ui.smoke.test.cjs
           node css-flexbox-game.smoke.test.cjs
+          node css-arcade-games.smoke.test.cjs
       - name: Run UI UX visual styles smoke test
         run: node ui-ux-visual-styles.smoke.test.cjs
       - name: Run modern frontend tools smoke test
@@ -163,8 +164,27 @@ jobs:
             > /tmp/flexbox-arena-runtime.html
 
           grep -q 'Flexbox Arena' /tmp/flexbox-arena-runtime.html
-          grep -q 'Nivel 1 de 12' /tmp/flexbox-arena-runtime.html
+          grep -q 'Nivel 1 de 16' /tmp/flexbox-arena-runtime.html
           grep -q 'id="cssEditor"' /tmp/flexbox-arena-runtime.html
           grep -q 'id="playerArena"' /tmp/flexbox-arena-runtime.html
           grep -q 'class="embed-mode"' /tmp/flexbox-arena-runtime.html
           echo "Flexbox Arena embebido browser smoke OK."
+
+          google-chrome \
+            --headless=new \
+            --no-sandbox \
+            --disable-gpu \
+            --disable-dev-shm-usage \
+            --disable-extensions \
+            --window-size=1500,1000 \
+            --virtual-time-budget=5000 \
+            --dump-dom \
+            'http://127.0.0.1:4173/css-arcade-game.html?game=grid&embed=1&ci-browser=1' \
+            > /tmp/css-arcade-grid-runtime.html
+
+          grep -q 'Grid Forge' /tmp/css-arcade-grid-runtime.html
+          grep -q 'id="cssEditor"' /tmp/css-arcade-grid-runtime.html
+          grep -q 'Objetivo' /tmp/css-arcade-grid-runtime.html
+          grep -q 'Tu resultado' /tmp/css-arcade-grid-runtime.html
+          grep -q 'Nivel 1 de 7' /tmp/css-arcade-grid-runtime.html
+          echo "CSS Arcade browser smoke OK."
