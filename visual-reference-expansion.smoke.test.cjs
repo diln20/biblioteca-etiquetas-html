@@ -53,7 +53,7 @@ const display=sections.find(section=>section.title==='CSS · display visual · 6
 assert.ok(display,'falta la referencia visual de display');
 assert.equal(display.primaryArea,'CSS');
 assert.equal(display.items.length,6);
-const displayText=display.items.map(item=>`${item.name}\n${item.description}\n${item.code}\n${item.preview}`).join('\n');
+const displayText=display.items.map(item=>`${item.name}\n${item.description}\n${item.code}\n${item.preview}\n${item.tip||''}`).join('\n');
 ['display: block','display: inline','display: inline-block','display: flex','display: grid','display: none'].forEach(term=>{
   assert.ok(displayText.includes(term),`falta display: ${term}`);
 });
