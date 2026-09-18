@@ -15,7 +15,7 @@ assert.ok(source.includes("frame.style.height='820px'"),'debe ampliar el área d
 assert.ok(section.includes('class="flexbox-arena-frame"'),'la vista debe cargar el juego dentro de Resultado');
 assert.ok(section.includes('css-flexbox-game.html?embed=1&inside=library'),'debe usar modo embebido');
 assert.ok(section.includes('styles.css del panel Resultado'),'debe explicar dónde editar');
-assert.ok(loader.includes('css-flexbox-card-ui.js?v=5'),'loader no carga el ajuste de tarjetas');
+assert.ok(loader.includes('css-flexbox-card-ui.js?v=6'),'loader no carga el ajuste de tarjetas');
 assert.ok(!loader.includes('css-flexbox-inline-game.js?v=1'),'no debe cargar el intento inline anterior');
 assert.ok(!loader.includes('css-flexbox-inline-game.css?v=1'),'no debe cargar estilos inline anteriores');
 
@@ -30,4 +30,8 @@ assert.ok(source.includes("gridTemplateColumns='minmax(0,.92fr) minmax(0,1.08fr)
 assert.ok(source.includes("frame.style.height='390px'"),'debe dar altura consistente al preview guiado');
 assert.ok(source.includes("kindBadge.textContent='Reto guiado CSS'"),'debe mejorar la etiqueta del reto');
 assert.ok(source.includes("supportBadge.textContent='HTML + CSS'"),'debe identificar correctamente las tecnologías');
+assert.ok(source.includes('ensureGuidedHeading'),'debe restaurar el encabezado visible del reto');
+assert.ok(source.includes('ensureGuidedMission'),'debe mostrar una misión propia debajo del tip');
+assert.ok(source.includes("card.querySelector('.personal-exercise')?.remove()"),'debe evitar duplicar la misión personalizada');
+assert.ok(source.includes('css-guided-heading-badge'),'debe mostrar badges específicos del reto guiado');
 console.log({status:'ok',cards:'CSS interactive + guided games',editableInResult:true,guidedRedesign:true});
