@@ -32,7 +32,7 @@ const text=section.items.map(item=>[
   'selector','box-sizing','display:flex','justify-content','align-items',
   'display:grid','grid-template-columns','position:relative','position:absolute',
   'especificidad',':hover',':focus-visible',':active','@media',
-  'var(--','@keyframes','prefers-reduced-motion','Boss final'
+  'var(--','@keyframes','prefers-reduced-motion','Proyecto final guiado'
 ].forEach(term=>assert.ok(text.includes(term),`falta practicar ${term}`));
 
 assert.ok(section.items.every(item=>Array.isArray(item.guide)&&item.guide.length>=4));
