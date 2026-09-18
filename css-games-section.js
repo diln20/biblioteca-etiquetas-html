@@ -5,6 +5,67 @@
 
   const preview=(css,html)=>`<style>${css}</style>${html}`;
   const file=(path,detail)=>({path,method:'MANUAL',detail});
+  const flexboxInlineGame=`
+<div class="flexbox-inline-game" data-flexbox-inline-game>
+  <div class="fx-inline-head">
+    <div>
+      <span class="fx-inline-counter">Nivel 1 de 12</span>
+      <h3 class="fx-inline-title">Centro horizontal</h3>
+    </div>
+    <span class="fx-inline-score">0/12</span>
+  </div>
+
+  <div class="fx-inline-body">
+    <div>
+      <p class="fx-inline-instruction">Lleva los tres orbes al centro horizontal usando justify-content.</p>
+
+      <div class="fx-inline-stage">
+        <div class="fx-inline-arena fx-inline-target" aria-hidden="true"></div>
+        <div class="fx-inline-arena fx-inline-player" aria-label="Resultado de tu CSS"></div>
+      </div>
+
+      <div class="fx-inline-status" aria-live="polite">
+        Edita el CSS y mira el resultado en tiempo real.
+      </div>
+
+      <div class="fx-inline-actions">
+        <button type="button" data-action="check">Comprobar</button>
+        <button type="button" data-action="hint">Pista</button>
+        <button type="button" data-action="solution">Ver solución</button>
+        <button type="button" data-action="next" disabled>Siguiente →</button>
+        <button type="button" data-action="reset">Reiniciar</button>
+      </div>
+
+      <div class="fx-inline-note fx-inline-hint" hidden></div>
+      <div class="fx-inline-note fx-inline-solution" hidden></div>
+    </div>
+
+    <div class="fx-inline-editor-panel">
+      <div class="fx-inline-editor-head">styles.css · editable</div>
+      <div class="fx-inline-code">
+        <code>.arena {</code>
+        <code>&nbsp;&nbsp;display: flex;</code>
+        <label class="sr-only" for="flexboxInlineEditor">Propiedades CSS</label>
+        <textarea id="flexboxInlineEditor" class="fx-inline-editor" rows="7" spellcheck="false" placeholder="justify-content: center;"></textarea>
+        <code>}</code>
+      </div>
+      <div class="fx-inline-help">
+        <code>justify-content</code>
+        <code>align-items</code>
+        <code>flex-direction</code>
+        <code>flex-wrap</code>
+        <code>align-content</code>
+      </div>
+    </div>
+  </div>
+
+  <div class="fx-inline-levels" aria-label="Niveles de Flexbox"></div>
+
+  <div class="fx-inline-footer">
+    <span>Tip: Ctrl + Enter también comprueba.</span>
+    <a href="css-flexbox-game.html" target="_blank" rel="noopener">Abrir grande ↗</a>
+  </div>
+</div>`;
   const G=(name,description,html,css,tip,tasks=[],extra='')=>T(
     'CSS · Juego',
     name,
@@ -49,15 +110,15 @@
         'CSS · Juego interactivo',
         'Flexbox Arena · juego tipo niveles',
         'Juego interactivo inspirado en la dinámica de aprender haciendo: mueve orbes hasta sus objetivos escribiendo propiedades Flexbox. Tiene 12 niveles, editor CSS en vivo, pistas, comprobación, progreso guardado y un boss final. Se puede jugar directamente aquí, dentro de esta sección, sin salir de la biblioteca.',
-        '<iframe src="css-flexbox-game.html?embed=1" title="Flexbox Arena interactivo" style="width:100%;height:900px;border:1px solid #284467;border-radius:16px;background:#07111f" loading="lazy"></iframe>\n<p><a href="css-flexbox-game.html" target="_blank" rel="noopener">Abrir Flexbox Arena en pantalla completa</a></p>',
-        '<div style="margin-bottom:10px;padding:12px 14px;border:1px solid #38bdf8;border-radius:12px;background:#071525;color:#e7f0ff"><strong>🎮 Flexbox Arena</strong><span style="margin-left:8px;color:#b9c9dd">Juega directamente aquí · 12 niveles</span></div><iframe src="css-flexbox-game.html?embed=1" title="Flexbox Arena interactivo" style="display:block;width:100%;height:900px;border:1px solid #284467;border-radius:16px;background:#07111f" loading="lazy"></iframe><p style="margin:10px 0 0"><a href="css-flexbox-game.html" target="_blank" rel="noopener" style="color:#38bdf8;font-weight:700">Abrir en pantalla completa ↗</a></p>',
+        '/* Edita las propiedades directamente en el panel interactivo de esta tarjeta. */\njustify-content: center;',
+        flexboxInlineGame,
         [],
         {
           kind:'Juego CSS interactivo',
-          tip:'Intenta cada nivel sin mirar la solución. El tablero objetivo permanece detrás de tus orbes para que compares visualmente.',
+          tip:'Edita el CSS directamente aquí. Cada cambio se aplica al tablero en tiempo real; usa Comprobar o Ctrl + Enter para validar.',
           guideTitle:'Cómo jugar',
           guide:[
-            ['1','Juego incrustado','El tablero y el editor aparecen directamente dentro de esta sección.'],
+            ['1','Editor dentro de la sección','Escribe CSS directamente en el textarea visible de esta tarjeta; no necesitas abrir otra página.'],
             ['2','Editor CSS','Escribe propiedades como justify-content, align-items o flex-direction.'],
             ['3','Comprobar','El juego valida el estilo calculado y habilita el siguiente nivel cuando coincide.'],
             ['4','Progreso','Los niveles completados se guardan en localStorage del navegador.']
