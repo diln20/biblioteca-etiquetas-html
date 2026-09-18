@@ -21,7 +21,7 @@ const section=sections.find(item=>item.title==='CSS · Juegos y retos prácticos
 assert.ok(section,'falta la sección Juegos CSS');
 assert.equal(section.primaryArea,'CSS');
 assert.equal(section.navLabel,'Juegos CSS');
-assert.ok(section.items.length>=17,'faltan juegos y retos CSS');
+assert.ok(section.items.length>=24,'faltan juegos y retos CSS');
 
 const text=section.items.map(item=>[
   item.name,item.description,item.code,item.preview,item.tip,
@@ -42,9 +42,11 @@ assert.ok(section.items.some(item=>item.name.includes('Flexbox Arena')),'falta F
 assert.ok(text.includes('flexbox-arena-frame'),'falta Flexbox Arena dentro del panel Resultado');
 assert.ok(text.includes('css-flexbox-game.html?embed=1&inside=library'),'el Resultado debe cargar el juego editable');
 assert.ok(text.includes('styles.css del panel Resultado'),'falta indicar dónde se edita');
-assert.ok(section.items.filter(item=>item.kind==='Juego CSS interactivo').length>=6,'deben existir al menos 6 juegos interactivos');
-['Grid Forge','Selector Hunt','Box Model Lab','Position Rescue','Responsive Racer'].forEach(name=>assert.ok(text.includes(name),'falta '+name));
-['game=grid','game=selectors','game=box','game=position','game=responsive'].forEach(key=>assert.ok(text.includes(key),'falta ruta '+key));
+assert.ok(section.items.filter(item=>item.kind==='Juego CSS interactivo').length>=7,'deben existir al menos 7 juegos interactivos');
+['Grid Forge','Selector Hunt','Box Model Lab','DIV Lab','Position Rescue','Responsive Racer'].forEach(name=>assert.ok(text.includes(name),'falta '+name));
+['game=grid','game=selectors','game=box','game=divs','game=position','game=responsive'].forEach(key=>assert.ok(text.includes(key),'falta ruta '+key));
+['DIV 1 · Centrar un DIV','DIV 2 · Tres DIVs','DIV 3 · Sidebar','DIV 4 · DIV dentro','DIV 5 · Superponer','DIV 6 · Galería'].forEach(name=>assert.ok(text.includes(name),'falta ejercicio '+name));
+assert.ok(text.includes('más de 60 niveles interactivos'),'falta resumen de la ruta de juegos');
 assert.ok(loader.includes('css-games-section.js?v='),'loader no carga Juegos CSS');
 assert.ok(loader.includes('css-flexbox-card-ui.js?v=2'),'loader no carga el ajuste de juegos interactivos');
 assert.ok(loader.indexOf('css-games-section.js')<loader.indexOf('section-order.js'),'Juegos CSS debe cargar antes de ordenar secciones');
