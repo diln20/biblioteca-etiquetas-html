@@ -5,11 +5,14 @@ const source = fs.readFileSync('personalized-exercises.js', 'utf8');
 const loader = fs.readFileSync('loader.js', 'utf8');
 const index = fs.readFileSync('index.html', 'utf8');
 
-assert.ok(loader.includes("'personalized-exercises.js?v=1'"));
+assert.ok(loader.includes("'personalized-exercises.js?v=2'"));
 assert.ok(index.includes('&practice=1'));
 assert.ok(source.includes("details.className='personal-exercise'"));
 assert.ok(source.includes("details.dataset.personalExercise='true'"));
 assert.ok(source.includes('Ejercicio para ti'));
+assert.ok(source.includes("section?.title==='CSS · Juegos y retos prácticos'"));
+assert.ok(source.includes("title:item.exerciseTitle||'Misión del reto'"));
+assert.ok(source.includes('Resuelve estas variaciones después de estudiar el ejemplo'));
 assert.ok(source.includes('tu nombre'));
 assert.ok(source.includes('tu edad'));
 assert.ok(source.includes('tu ciudad'));
