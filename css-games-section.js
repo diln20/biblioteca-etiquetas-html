@@ -66,6 +66,39 @@
     <a href="css-flexbox-game.html" target="_blank" rel="noopener">Abrir grande ↗</a>
   </div>
 </div>`;
+
+  const Arcade=(name,key,description,focus)=>T(
+    'CSS · Juego interactivo',
+    name,
+    description,
+    'Editor CSS interactivo integrado en el panel Resultado.',
+    '<iframe class="css-arcade-frame" src="css-arcade-game.html?game='+key+'&embed=1&inside=library" title="'+name+' editable" loading="lazy" style="display:block;width:100%;height:760px;border:0;border-radius:14px;background:#06111e"></iframe>',
+    [],
+    {
+      kind:'Juego CSS interactivo',
+      tip:'Escribe CSS directamente en styles.css. Compara Objetivo y Tu resultado, usa Comprobar o Ctrl + Enter y avanza cuando coincidan.',
+      guideTitle:'Cómo jugar',
+      guide:[
+        ['1','Editor CSS','Escribe las reglas directamente dentro del juego.'],
+        ['2','Objetivo vs resultado','Compara las dos vistas para detectar qué propiedad falta.'],
+        ['3','Comprobar','El motor compara estilos calculados y te indica qué propiedad todavía difiere.'],
+        ['4','Progreso','Los niveles superados quedan guardados en localStorage.']
+      ],
+      filesToCreate:[
+        file('css-arcade-game.html','Pantalla común de los juegos CSS.'),
+        file('css-arcade-game.css','Diseño visual de la arcade.'),
+        file('css-arcade-game.js','Niveles, validación y progreso.')
+      ],
+      exerciseTitle:'Objetivo del juego',
+      exerciseTasks:[
+        'Completa todos los niveles sin mirar primero la solución.',
+        'Explica con tus palabras para qué sirve '+focus+'.',
+        'Repite el boss final hasta resolverlo sin pista.'
+      ],
+      exerciseExtra:'Cuando termines, cambia el código de un nivel y crea una variante propia.'
+    }
+  );
+
   const G=(name,description,html,css,tip,tasks=[],extra='')=>T(
     'CSS · Juego',
     name,
@@ -102,14 +135,14 @@
     group:'CSS',
     primaryArea:'CSS',
     areaOrder:45,
-    description:'Entrena CSS como si fueran niveles de un juego. Cada reto parte de un objetivo visual concreto y obliga a usar selectores, modelo de caja, Flexbox, Grid, position, pseudoclases, especificidad, responsive, variables y animaciones. La meta no es memorizar propiedades: es aprender a elegir la herramienta correcta.',
+    description:'Entrena CSS con una arcade de juegos interactivos y retos progresivos. Flexbox, Grid, selectores, box model, position y responsive se practican escribiendo CSS real.  Cada reto parte de un objetivo visual concreto y obliga a usar selectores, modelo de caja, Flexbox, Grid, position, pseudoclases, especificidad, responsive, variables y animaciones. La meta no es memorizar propiedades: es aprender a elegir la herramienta correcta.',
     quote:'“En CSS se mejora resolviendo layouts, rompiéndolos y reparándolos.”',
     challenge:'Completa los niveles en orden. En cada uno intenta primero la misión sin copiar la solución; usa DevTools para probar reglas y solo después compara tu resultado.',
     items:[
       T(
         'CSS · Juego interactivo',
         'Flexbox Arena · juego tipo niveles',
-        'Juego interactivo inspirado en la dinámica de aprender haciendo: mueve orbes hasta sus objetivos escribiendo propiedades Flexbox. Tiene 12 niveles, editor CSS en vivo, pistas, comprobación, progreso guardado y un boss final. Se puede jugar directamente aquí, dentro de esta sección, sin salir de la biblioteca.',
+        'Juego interactivo inspirado en la dinámica de aprender haciendo: mueve orbes hasta sus objetivos escribiendo propiedades Flexbox. Tiene 16 niveles, editor CSS en vivo, pistas, comprobación con feedback de propiedades, progreso guardado y un boss final. Se puede jugar directamente aquí, dentro de esta sección, sin salir de la biblioteca.',
         'Editor CSS interactivo integrado en el panel Resultado.',
         '<iframe class="flexbox-arena-frame" src="css-flexbox-game.html?embed=1&inside=library" title="Flexbox Arena editable" loading="eager" style="display:block;width:100%;height:760px;border:0;border-radius:14px;background:#07111f"></iframe>',
         [],
@@ -130,12 +163,42 @@
           ],
           exerciseTitle:'Objetivo del juego',
           exerciseTasks:[
-            'Completa los 12 niveles sin usar la solución automática.',
+            'Completa los 16 niveles sin usar la solución automática.',
             'Explica qué eje modifica justify-content y cuál modifica align-items.',
-            'Repite los niveles 7 a 12 hasta poder resolverlos sin pista.'
+            'Repite los niveles 11 a 16 hasta poder resolverlos sin pista.'
           ],
           exerciseExtra:'Después de terminar Flexbox Arena, crea un nivel propio agregando otra configuración al arreglo levels.'
         }
+      ),
+      Arcade(
+        'Grid Forge · domina CSS Grid',
+        'grid',
+        'Juego editable de CSS Grid. Construye columnas, filas, gaps y elementos que ocupan varias celdas comparando tu layout con un objetivo visual.',
+        'grid-template-columns, grid-column, gap y place-items'
+      ),
+      Arcade(
+        'Selector Hunt · caza el selector correcto',
+        'selectors',
+        'Juego para practicar selectores sin afectar elementos equivocados: clases combinadas, atributos, hijos directos, pseudoclases y :not().',
+        'selectores de clase, atributos, combinadores y pseudoclases'
+      ),
+      Arcade(
+        'Box Model Lab · repara la caja',
+        'box',
+        'Laboratorio interactivo para entender de verdad width, padding, border, margin y box-sizing viendo cómo cambia el tamaño final de una caja.',
+        'width, padding, border, margin y box-sizing'
+      ),
+      Arcade(
+        'Position Rescue · rescata los elementos',
+        'position',
+        'Juego de posicionamiento para dominar relative, absolute, offsets, transform y z-index colocando insignias y elementos flotantes.',
+        'position, top, right, bottom, left, transform y z-index'
+      ),
+      Arcade(
+        'Responsive Racer · gana en móvil',
+        'responsive',
+        'Juego responsive con previews de distintos anchos. Practica imágenes fluidas, media queries, Grid adaptable, flex-wrap y tipografía con clamp().',
+        'media queries, max-width, flex-wrap, Grid y clamp()'
       ),
       G(
         'Nivel 1 · Caza el selector correcto',
