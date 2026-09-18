@@ -92,7 +92,9 @@
       exerciseTitle:'Objetivo del juego',
       exerciseTasks:[
         'Completa todos los niveles sin mirar primero la solución.',
+        'Resuelve al menos tres niveles seguidos sin usar Pista.',
         'Explica con tus palabras para qué sirve '+focus+'.',
+        'Rompe intencionalmente una propiedad y usa el feedback para corregirla.',
         'Repite el boss final hasta resolverlo sin pista.'
       ],
       exerciseExtra:'Cuando termines, cambia el código de un nivel y crea una variante propia.'
@@ -135,7 +137,7 @@
     group:'CSS',
     primaryArea:'CSS',
     areaOrder:45,
-    description:'Entrena CSS con una arcade de juegos interactivos y retos progresivos. Flexbox, Grid, selectores, box model, position y responsive se practican escribiendo CSS real.  Cada reto parte de un objetivo visual concreto y obliga a usar selectores, modelo de caja, Flexbox, Grid, position, pseudoclases, especificidad, responsive, variables y animaciones. La meta no es memorizar propiedades: es aprender a elegir la herramienta correcta.',
+    description:'Entrena CSS con una arcade de juegos interactivos y retos progresivos. Hay más de 60 niveles interactivos entre Flexbox, Grid, selectores, box model, manipulación de DIVs, position y responsive, además de ejercicios guiados fuera de los juegos.  Cada reto parte de un objetivo visual concreto y obliga a usar selectores, modelo de caja, Flexbox, Grid, position, pseudoclases, especificidad, responsive, variables y animaciones. La meta no es memorizar propiedades: es aprender a elegir la herramienta correcta.',
     quote:'“En CSS se mejora resolviendo layouts, rompiéndolos y reparándolos.”',
     challenge:'Completa los niveles en orden. En cada uno intenta primero la misión sin copiar la solución; usa DevTools para probar reglas y solo después compara tu resultado.',
     items:[
@@ -189,6 +191,12 @@
         'width, padding, border, margin y box-sizing'
       ),
       Arcade(
+        'DIV Lab · manipulación de contenedores',
+        'divs',
+        'Doce ejercicios interactivos para manipular DIVs: tamaños, centrado horizontal y total, filas, columnas, Grid, DIVs anidados, wrap, position, superposición, z-index y responsive.',
+        'width, height, margin, Flexbox, Grid, position, z-index y media queries'
+      ),
+      Arcade(
         'Position Rescue · rescata los elementos',
         'position',
         'Juego de posicionamiento para dominar relative, absolute, offsets, transform y z-index colocando insignias y elementos flotantes.',
@@ -199,6 +207,60 @@
         'responsive',
         'Juego responsive con previews de distintos anchos. Practica imágenes fluidas, media queries, Grid adaptable, flex-wrap y tipografía con clamp().',
         'media queries, max-width, flex-wrap, Grid y clamp()'
+      ),
+      G(
+        'DIV 1 · Centrar un DIV en toda la pantalla',
+        'Practica una de las tareas más comunes de CSS: colocar un contenedor exactamente en el centro horizontal y vertical de la pantalla.',
+        '<main class="pantalla-div">\n  <div class="caja-div">Centro</div>\n</main>',
+        '.pantalla-div { min-height:100vh; display:flex; justify-content:center; align-items:center; }\n.caja-div { width:220px; padding:24px; text-align:center; background:#dbeafe; border-radius:14px; }',
+        'El padre controla la posición del hijo. Para centrar en ambos ejes usa Flexbox en el contenedor.',
+        ['Centra el DIV sin usar position:absolute.','Cambia min-height:100vh por 100dvh y compara.','Haz que la caja tenga un ancho máximo responsive.','Repite el ejercicio usando Grid y place-items:center.'],
+        'Después resuélvelo una tercera vez con position:absolute + transform.'
+      ),
+      G(
+        'DIV 2 · Tres DIVs en una fila',
+        'Organiza tres DIVs hermanos en una fila, con el mismo ancho y separación uniforme.',
+        '<div class="fila-divs">\n  <div>Uno</div><div>Dos</div><div>Tres</div>\n</div>',
+        '.fila-divs { display:flex; gap:16px; }\n.fila-divs > div { flex:1; padding:20px; background:#e0f2fe; border-radius:12px; text-align:center; }',
+        'flex:1 permite que los DIVs hermanos compartan el espacio disponible.',
+        ['Pon los tres DIVs en una sola fila.','Haz que ocupen el mismo ancho.','Agrega 16px de separación con gap.','Convierte la fila en columna sin cambiar el HTML.'],
+        'Haz que en pantallas pequeñas se apilen verticalmente.'
+      ),
+      G(
+        'DIV 3 · Sidebar y contenido',
+        'Construye un layout de dos DIVs: un menú lateral fijo y una zona principal flexible.',
+        '<div class="layout-div">\n  <div class="sidebar-div">Menú</div>\n  <div class="contenido-div">Contenido</div>\n</div>',
+        '.layout-div { display:grid; grid-template-columns:200px 1fr; gap:16px; }\n.sidebar-div,.contenido-div { padding:20px; border-radius:12px; background:#e2e8f0; }',
+        'Grid es muy cómodo cuando conoces la estructura de columnas que quieres.',
+        ['Crea una columna de 200px y otra flexible.','Agrega separación entre los DIVs.','Haz que el contenido principal ocupe el espacio restante.','En móvil cambia el layout a una sola columna.'],
+        'Prueba una versión equivalente usando Flexbox.'
+      ),
+      G(
+        'DIV 4 · DIV dentro de otro DIV',
+        'Practica contenedores anidados y centra un DIV interno dentro de su DIV padre.',
+        '<div class="padre-div">\n  <div class="hijo-div">Hijo</div>\n</div>',
+        '.padre-div { min-height:220px; display:grid; place-items:center; padding:20px; background:#f1f5f9; }\n.hijo-div { width:160px; padding:18px; background:#c4b5fd; border-radius:12px; text-align:center; }',
+        'Un DIV puede ser contenedor y elemento al mismo tiempo. Cada nivel puede tener su propio sistema de layout.',
+        ['Centra el hijo en ambos ejes.','Cambia el tamaño del padre y verifica que siga centrado.','Agrega padding al padre sin romper el centrado.','Añade otro DIV hijo y distribuye ambos.'],
+        'Convierte el padre a Flexbox manteniendo el mismo resultado.'
+      ),
+      G(
+        'DIV 5 · Superponer DIVs',
+        'Superpone dos DIVs y controla cuál aparece encima usando position y z-index.',
+        '<div class="escena-div">\n  <div class="tarjeta-a">A</div>\n  <div class="tarjeta-b">B</div>\n</div>',
+        '.escena-div { position:relative; min-height:220px; }\n.tarjeta-a,.tarjeta-b { position:absolute; width:160px; height:110px; display:grid; place-items:center; border-radius:14px; }\n.tarjeta-a { left:40px; top:40px; background:#bfdbfe; z-index:1; }\n.tarjeta-b { left:120px; top:85px; background:#c4b5fd; z-index:2; }',
+        'z-index define el orden de apilamiento, pero normalmente necesitas elementos posicionados para controlarlo.',
+        ['Superpone B parcialmente sobre A.','Haz que B quede por encima de A.','Intercambia los z-index y observa el cambio.','Mueve ambas tarjetas sin usar margin.'],
+        'Agrega un tercer DIV y crea tres capas visibles.'
+      ),
+      G(
+        'DIV 6 · Galería responsive de DIVs',
+        'Construye una galería de DIVs que use tres columnas en escritorio y una sola en móvil.',
+        '<div class="galeria-divs">\n  <div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div>\n</div>',
+        '.galeria-divs { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }\n.galeria-divs > div { min-height:90px; display:grid; place-items:center; background:#dcfce7; border-radius:12px; }\n@media (max-width:600px) { .galeria-divs { grid-template-columns:1fr; } }',
+        'Responsive consiste en cambiar la organización cuando cambia el espacio disponible, no en duplicar el HTML.',
+        ['Crea tres columnas iguales.','Añade 14px de gap.','En móvil usa una sola columna.','Prueba repeat(auto-fit,minmax(160px,1fr)).'],
+        'Haz una versión que use dos columnas en tablet y una en móvil.'
       ),
       G(
         'Nivel 1 · Caza el selector correcto',
