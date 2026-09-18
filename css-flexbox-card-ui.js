@@ -1,24 +1,24 @@
 (()=>{
-  if(window.__flexboxArenaCardUi)return;
-  window.__flexboxArenaCardUi=true;
+  if(window.__cssInteractiveGameCardUi)return;
+  window.__cssInteractiveGameCardUi=true;
   if(typeof window.createCard!=='function')return;
 
   const originalCreateCard=window.createCard;
   window.createCard=createCard=function(item){
     const fragment=originalCreateCard(item);
-    if(!String(item?.name||'').includes('Flexbox Arena'))return fragment;
+    if(item?.kind!=='Juego CSS interactivo')return fragment;
 
     const card=fragment.querySelector?.('.tag-card');
     if(!card)return fragment;
 
-    card.classList.add('flexbox-arena-card');
+    card.classList.add('css-interactive-game-card');
 
     const codePanel=card.querySelector('.code-panel');
     const panelGroup=codePanel?.parentElement||null;
     codePanel?.remove();
 
     if(panelGroup){
-      panelGroup.classList.add('flexbox-arena-panel-group');
+      panelGroup.classList.add('css-game-panel-group');
       panelGroup.style.display='block';
       panelGroup.style.gridTemplateColumns='1fr';
       panelGroup.style.width='100%';
@@ -39,7 +39,7 @@
 
     const labels=[...card.querySelectorAll('.panel-label')];
     const resultLabel=labels.find(label=>/resultado/i.test(label.textContent||''));
-    if(resultLabel?.firstChild)resultLabel.firstChild.textContent='Flexbox Arena · editor CSS ';
+    if(resultLabel?.firstChild)resultLabel.firstChild.textContent=(item.name||'Juego CSS')+' · editor CSS ';
 
     return fragment;
   };
