@@ -67,10 +67,22 @@
 
   window.formatCourseNavLabel=navLabelOf;
 
-  const escapeRegExp=value=>String(value||'').replace(/[.*+?^$()|[\]\\{}]/g,'\\  window.formatCourseNavLabel=navLabelOf;
+  const syncHeadingCounter=(heading,group,section)=>{
+    const candidates=[...heading.querySelectorAll('span,div,p,strong,small')];
+    const counter=candidates.find(element=>{
+      const text=String(element.textContent||'').trim();
+      const parts=text.split('/');
+      return parts.length===2
+        && areaNames.includes(parts[0].trim())
+        && /^\d+$/.test(parts[1].trim());
+    });
+    if(counter){
+      counter.textContent=`${group} / ${section.routeAreaTotal}`;
+      counter.dataset.areaCounter='true';
+    }
+  };
 
-  const buttons=[...nav.children];');
-  const areaCounterPattern=new RegExp('^(?:'+areaNames.map(escapeRegExp).join('|')+')\\s*\\/\\s*\\d+
+  const buttons=[...nav.children];
   nav.querySelectorAll('.nav-group-label').forEach(label=>label.remove());
 
   let previous='';
