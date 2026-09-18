@@ -35,6 +35,12 @@
   };
 
   sections.forEach(section=>{
+    if(section.title==='CSS · Juegos y retos prácticos'){
+      section.items?.forEach(item=>{
+        if(item.gameDescription)item.description=item.gameDescription;
+      });
+      return;
+    }
     section.items?.forEach(item=>{
       if(typeof item.description!=='string')item.description='';
       if(!item.description.includes('Cómo funciona exactamente:')){
