@@ -66,6 +66,9 @@
     const list=details.querySelector('ol');
     if(list)list.innerHTML=item.exerciseTasks.map(task=>'<li>'+task+'</li>').join('');
 
+    const privacy=details.querySelector('.personal-exercise-privacy');
+    privacy?.remove();
+
     const extra=details.querySelector('.personal-exercise-extra');
     if(extra){
       if(item.exerciseExtra){
@@ -84,6 +87,8 @@
 
     if(item?.kind==='Juego CSS interactivo'){
       card.classList.add('css-interactive-game-card');
+      card.querySelector('.file-guide')?.remove();
+      card.querySelector('.file-create-guide')?.remove();
 
       const codePanel=card.querySelector('.code-panel');
       const panelGroup=codePanel?.parentElement||null;
@@ -117,6 +122,8 @@
 
     if(item?.kind==='Juego CSS'){
       card.classList.add('css-guided-game-card');
+      card.querySelector('.file-guide')?.remove();
+      card.querySelector('.file-create-guide')?.remove();
 
       const description=card.querySelector('.tag-description');
       if(description&&item.gameDescription)description.textContent=item.gameDescription;
