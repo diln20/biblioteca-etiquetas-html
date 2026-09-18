@@ -21,7 +21,7 @@ assert.ok(loader.includes('dev-tools-exercises.js?v=1'));
 assert.ok(loader.indexOf('typescript-category-finalizer.js?v=1') < loader.indexOf('vscode-tools-section.js?v=1'));
 assert.ok(loader.indexOf('vscode-tools-section.js?v=1') < loader.indexOf('dev-tools-category-finalizer.js?v=1'));
 assert.ok(loader.indexOf('dev-tools-category-finalizer.js?v=1') < loader.indexOf('dev-tools-exercises.js?v=1'));
-assert.ok(loader.indexOf('dev-tools-exercises.js?v=1') < loader.indexOf('personalized-exercises.js?v=1'));
+assert.ok(loader.indexOf('dev-tools-exercises.js?v=1') < loader.indexOf('personalized-exercises.js?v=2'));
 assert.ok(index.includes('vscode=1'));
 assert.ok(fileGuide.includes('Herramientas'));
 assert.ok(css.includes('body[data-course="Herramientas"]'));
