@@ -33,6 +33,6 @@ assert.ok(css.includes('prefers-reduced-motion'));
 assert.ok(css.includes('.embed-mode .topbar'));
 assert.ok(css.includes('.embed-mode .game-layout'));
 assert.ok(section.includes('css-flexbox-game.html'),'la sección conserva acceso al modo pantalla completa');
-assert.ok(section.includes('data-flexbox-inline-game'),'la sección debe ofrecer Flexbox Arena editable directamente');
+assert.ok(section.includes('flexbox-arena-frame'),'la sección debe mostrar Flexbox Arena dentro de Resultado');
 
 console.log({status:'ok',game:'Flexbox Arena',levels:12,liveEditor:true,progress:true});
