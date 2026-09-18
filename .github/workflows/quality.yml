@@ -29,7 +29,9 @@ jobs:
       - name: Run centered DIV smoke test
         run: node css-div-center-screen.smoke.test.cjs
       - name: Run CSS games smoke test
-        run: node css-games.smoke.test.cjs
+        run: |
+          node css-games.smoke.test.cjs
+          node css-flexbox-game.smoke.test.cjs
       - name: Run UI UX visual styles smoke test
         run: node ui-ux-visual-styles.smoke.test.cjs
       - name: Run modern frontend tools smoke test
@@ -146,3 +148,21 @@ jobs:
           ! grep -q '</sections.length-1)' /tmp/biblioteca-runtime.html
 
           echo "Browser smoke OK: ${nav_count} temas, ejercicios personalizados=${exercise_count}, Herramientas=${tools_count}, primero=${first_nav_title}, TypeScript=${typescript_count}, Angular=${angular_count}, React=${react_count}, DjangoFramework=${django_framework_count}, FastAPI=${fastapi_count}, DjangoREST=${django_count}, BasesDatos=${database_count}, tarjetas=${card_count}."
+
+          google-chrome \
+            --headless=new \
+            --no-sandbox \
+            --disable-gpu \
+            --disable-dev-shm-usage \
+            --disable-extensions \
+            --window-size=1400,1000 \
+            --virtual-time-budget=4000 \
+            --dump-dom \
+            'http://127.0.0.1:4173/css-flexbox-game.html?ci-browser=1' \
+            > /tmp/flexbox-arena-runtime.html
+
+          grep -q 'Flexbox Arena' /tmp/flexbox-arena-runtime.html
+          grep -q 'Nivel 1 de 12' /tmp/flexbox-arena-runtime.html
+          grep -q 'id="cssEditor"' /tmp/flexbox-arena-runtime.html
+          grep -q 'id="playerArena"' /tmp/flexbox-arena-runtime.html
+          echo "Flexbox Arena browser smoke OK."
