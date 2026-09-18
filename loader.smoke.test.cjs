@@ -26,7 +26,7 @@ const resources = [
   'course-angular-exercises-07.js?v=1','course-angular-exercises-08.js?v=1','course-angular-exercises-09.js?v=1','angular-category-guide.js?v=1','angular-category-finalizer.js?v=1','angular-file-guide-corrections.js?v=4','angular-required-files.js?v=1',
   'course-solid-introduction.js?v=1','course-solid-reactivity.js?v=1','course-solid-exercises-01.js?v=1','course-solid-exercises-02.js?v=1',
   'course-backend-scaling-basics.js?v=1','course-backend-scaling-architecture.js?v=1','course-backend-scaling-resilience.js?v=1',
-  'exact-explanation-enhancer.js?v=1','section-order.js?v=7','html-order-finalizer.js?v=1','course-ui.js?v=15','file-guide-ui.js?v=2','primary-area-ui.js?v=3'
+  'exact-explanation-enhancer.js?v=2','section-order.js?v=7','html-order-finalizer.js?v=1','course-ui.js?v=15','file-guide-ui.js?v=2','primary-area-ui.js?v=3'
 ];
 assert.deepEqual(resources.filter(resource => !loader.includes(resource)), []);
 
