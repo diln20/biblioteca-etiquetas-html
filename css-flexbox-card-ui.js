@@ -121,6 +121,11 @@
       const description=card.querySelector('.tag-description');
       if(description&&item.gameDescription)description.textContent=item.gameDescription;
 
+      const kindBadge=card.querySelector('.kind-badge');
+      const supportBadge=card.querySelector('.support-badge');
+      if(kindBadge)kindBadge.textContent='Reto guiado CSS';
+      if(supportBadge)supportBadge.textContent='HTML + CSS';
+
       const codePanel=card.querySelector('.code-panel');
       const panelGroup=codePanel?.parentElement||null;
       if(panelGroup){
