@@ -262,3 +262,32 @@ footer{text-align:center;color:var(--muted);padding:8px 20px 30px}
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}
 }
+.embed-mode .topbar,
+.embed-mode footer{
+  display:none;
+}
+.embed-mode .game-layout{
+  width:100%;
+  margin:0;
+  padding:10px;
+  grid-template-columns:minmax(0,1.25fr) minmax(300px,.75fr);
+  gap:12px;
+}
+.embed-mode .lesson-panel{
+  padding:18px;
+}
+.embed-mode .editor-panel{
+  top:10px;
+}
+.embed-mode .arena-shell{
+  min-height:330px;
+}
+@media(max-width:900px){
+  .embed-mode .game-layout{
+    grid-template-columns:1fr;
+    padding:8px;
+  }
+  .embed-mode .editor-panel{
+    position:static;
+  }
+}
