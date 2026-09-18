@@ -49,6 +49,8 @@ jobs:
         run: node javascript-publicapis.smoke.test.cjs
       - name: Run HTML CSS JavaScript cheat sheets smoke test
         run: node cheat-sheets.smoke.test.cjs
+      - name: Run visual references smoke test
+        run: node visual-reference-expansion.smoke.test.cjs
       - name: Run API JSON cheat sheet smoke test
         run: node api-json-cheat-sheet.smoke.test.cjs
       - name: Run API JSON HTML JavaScript smoke test
