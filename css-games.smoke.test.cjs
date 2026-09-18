@@ -49,8 +49,14 @@ assert.ok(section.items.filter(item=>item.kind==='Juego CSS interactivo').length
 assert.ok(section.description.includes('76 niveles interactivos'),'falta total actualizado de niveles');
 assert.ok(!source.includes('const flexboxInlineGame'),'debe eliminarse el prototipo obsoleto de Flexbox de 12 niveles');
 assert.ok(section.items.filter(item=>item.kind==='Juego CSS').every(item=>item.exerciseTasks.length>=4),'los retos guiados deben tener varias variaciones');
-assert.ok(loader.includes('css-games-section.js?v=8'),'loader no carga la revisión actual de Juegos CSS');
-assert.ok(loader.includes('css-flexbox-card-ui.js?v=2'),'loader no carga el ajuste de juegos interactivos');
+assert.ok(section.items.filter(item=>item.kind==='Juego CSS').every(item=>item.codeLabel==='HTML + CSS · solución'),'los retos guiados deben rotular correctamente HTML + CSS');
+assert.ok(section.items.filter(item=>item.kind==='Juego CSS').every(item=>item.gameDescription===item.description),'deben conservar una descripción breve original antes de los enhancers');
+assert.ok(section.items.filter(item=>item.kind==='Juego CSS').every(item=>String(item.preview).includes('css-game-stage')),'los previews deben usar un escenario visual consistente');
+assert.ok(text.includes('Reto guiado 7 · Botón con estados'),'debe renombrarse el nivel estático como reto guiado');
+assert.ok(text.includes('Reto guiado 10 · Animación sin marear'),'debe existir el reto guiado de animación');
+assert.ok(text.includes('Proyecto final guiado · HUD responsive'),'el boss estático debe identificarse como proyecto final guiado');
+assert.ok(loader.includes('css-games-section.js?v=9'),'loader no carga la revisión actual de Juegos CSS');
+assert.ok(loader.includes('css-flexbox-card-ui.js?v=3'),'loader no carga el ajuste de juegos interactivos');
 assert.ok(loader.indexOf('css-games-section.js')<loader.indexOf('section-order.js'),'Juegos CSS debe cargar antes de ordenar secciones');
 
 console.log({status:'ok',section:section.title,games:section.items.length,skills:true});
