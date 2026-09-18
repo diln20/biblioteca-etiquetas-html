@@ -51,6 +51,10 @@ jobs:
         run: node cheat-sheets.smoke.test.cjs
       - name: Run visual references smoke test
         run: node visual-reference-expansion.smoke.test.cjs
+      - name: Run CSS visual properties smoke test
+        run: node css-visual-properties.smoke.test.cjs
+      - name: Run global interactive code editor smoke test
+        run: node global-interactive-code-editor.smoke.test.cjs
       - name: Run API JSON cheat sheet smoke test
         run: node api-json-cheat-sheet.smoke.test.cjs
       - name: Run API JSON HTML JavaScript smoke test
@@ -135,6 +139,11 @@ jobs:
           grep -q 'data-group="FastAPI"' /tmp/biblioteca-runtime.html
           grep -q 'data-group="Django REST"' /tmp/biblioteca-runtime.html
           grep -q 'data-group="Base de datos"' /tmp/biblioteca-runtime.html
+          grep -q 'overflow visual' /tmp/biblioteca-runtime.html
+          grep -q 'visibility visual' /tmp/biblioteca-runtime.html
+          grep -q 'text-decoration visual' /tmp/biblioteca-runtime.html
+          grep -q 'object-fit visual' /tmp/biblioteca-runtime.html
+          grep -q 'data-live-code-editor="true"' /tmp/biblioteca-runtime.html
 
           test "$first_nav_title" = '<span class="nav-title">01. Fundamentos web</span>'
           ! grep -q '<span class="nav-title">01. Imágenes · Atributos de img</span>' /tmp/biblioteca-runtime.html
