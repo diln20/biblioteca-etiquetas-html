@@ -48,16 +48,16 @@
       T(
         'CSS · Juego interactivo',
         'Flexbox Arena · juego tipo niveles',
-        'Juego interactivo inspirado en la dinámica de aprender haciendo: mueve orbes hasta sus objetivos escribiendo propiedades Flexbox. Tiene 12 niveles, editor CSS en vivo, pistas, comprobación, progreso guardado y un boss final. No necesitas instalar nada: se abre directamente desde la biblioteca.',
-        '<a href="css-flexbox-game.html" target="_blank" rel="noopener">Abrir Flexbox Arena</a>',
-        '<div style="padding:20px;border:1px solid #38bdf8;border-radius:16px;background:#071525;color:#e7f0ff"><strong style="display:block;font-size:1.2rem;margin-bottom:8px">🎮 Flexbox Arena</strong><p style="margin:0 0 14px;color:#b9c9dd">12 niveles · editor CSS en vivo · pistas · progreso</p><a href="css-flexbox-game.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 14px;border-radius:10px;background:#0284c7;color:white;text-decoration:none;font-weight:800">Jugar ahora →</a></div>',
+        'Juego interactivo inspirado en la dinámica de aprender haciendo: mueve orbes hasta sus objetivos escribiendo propiedades Flexbox. Tiene 12 niveles, editor CSS en vivo, pistas, comprobación, progreso guardado y un boss final. Se puede jugar directamente aquí, dentro de esta sección, sin salir de la biblioteca.',
+        '<iframe src="css-flexbox-game.html?embed=1" title="Flexbox Arena interactivo" style="width:100%;height:900px;border:1px solid #284467;border-radius:16px;background:#07111f" loading="lazy"></iframe>\n<p><a href="css-flexbox-game.html" target="_blank" rel="noopener">Abrir Flexbox Arena en pantalla completa</a></p>',
+        '<div style="margin-bottom:10px;padding:12px 14px;border:1px solid #38bdf8;border-radius:12px;background:#071525;color:#e7f0ff"><strong>🎮 Flexbox Arena</strong><span style="margin-left:8px;color:#b9c9dd">Juega directamente aquí · 12 niveles</span></div><iframe src="css-flexbox-game.html?embed=1" title="Flexbox Arena interactivo" style="display:block;width:100%;height:900px;border:1px solid #284467;border-radius:16px;background:#07111f" loading="lazy"></iframe><p style="margin:10px 0 0"><a href="css-flexbox-game.html" target="_blank" rel="noopener" style="color:#38bdf8;font-weight:700">Abrir en pantalla completa ↗</a></p>',
         [],
         {
           kind:'Juego CSS interactivo',
           tip:'Intenta cada nivel sin mirar la solución. El tablero objetivo permanece detrás de tus orbes para que compares visualmente.',
           guideTitle:'Cómo jugar',
           guide:[
-            ['1','css-flexbox-game.html','Abre el juego desde el botón Jugar ahora.'],
+            ['1','Juego incrustado','El tablero y el editor aparecen directamente dentro de esta sección.'],
             ['2','Editor CSS','Escribe propiedades como justify-content, align-items o flex-direction.'],
             ['3','Comprobar','El juego valida el estilo calculado y habilita el siguiente nivel cuando coincide.'],
             ['4','Progreso','Los niveles completados se guardan en localStorage del navegador.']
