@@ -95,6 +95,7 @@ assert.ok(angularRequiredFiles.includes('ng generate component'));
 
 const courseResourceNames = resources.filter(resource =>
   resource.endsWith('.js?v=1') ||
+  resource === 'exact-explanation-enhancer.js?v=2' ||
   resource === 'angular-file-guide-corrections.js?v=4' ||
   resource === 'primary-area-ui.js?v=3'
 );
