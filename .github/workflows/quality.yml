@@ -158,11 +158,12 @@ jobs:
             --window-size=1400,1000 \
             --virtual-time-budget=4000 \
             --dump-dom \
-            'http://127.0.0.1:4173/css-flexbox-game.html?ci-browser=1' \
+            'http://127.0.0.1:4173/css-flexbox-game.html?embed=1&ci-browser=1' \
             > /tmp/flexbox-arena-runtime.html
 
           grep -q 'Flexbox Arena' /tmp/flexbox-arena-runtime.html
           grep -q 'Nivel 1 de 12' /tmp/flexbox-arena-runtime.html
           grep -q 'id="cssEditor"' /tmp/flexbox-arena-runtime.html
           grep -q 'id="playerArena"' /tmp/flexbox-arena-runtime.html
-          echo "Flexbox Arena browser smoke OK."
+          grep -q 'class="embed-mode"' /tmp/flexbox-arena-runtime.html
+          echo "Flexbox Arena embebido browser smoke OK."
