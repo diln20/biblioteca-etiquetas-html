@@ -46,7 +46,7 @@ assert.ok(section.items.filter(item=>item.kind==='Juego CSS interactivo').length
 ['Grid Forge','Selector Hunt','Box Model Lab','DIV Lab','Position Rescue','Responsive Racer'].forEach(name=>assert.ok(text.includes(name),'falta '+name));
 ['game=grid','game=selectors','game=box','game=divs','game=position','game=responsive'].forEach(key=>assert.ok(text.includes(key),'falta ruta '+key));
 ['DIV 1 · Centrar un DIV','DIV 2 · Tres DIVs','DIV 3 · Sidebar','DIV 4 · DIV dentro','DIV 5 · Superponer','DIV 6 · Galería'].forEach(name=>assert.ok(text.includes(name),'falta ejercicio '+name));
-assert.ok(text.includes('más de 60 niveles interactivos'),'falta resumen de la ruta de juegos');
+assert.ok(section.description.includes('más de 60 niveles interactivos'),'falta resumen de la ruta de juegos');
 assert.ok(loader.includes('css-games-section.js?v='),'loader no carga Juegos CSS');
 assert.ok(loader.includes('css-flexbox-card-ui.js?v=2'),'loader no carga el ajuste de juegos interactivos');
 assert.ok(loader.indexOf('css-games-section.js')<loader.indexOf('section-order.js'),'Juegos CSS debe cargar antes de ordenar secciones');
