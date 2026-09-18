@@ -45,6 +45,15 @@
     const title=`${section?.title||''} ${item?.name||''} ${item?.tag||''} ${item?.kind||''}`;
     const n=normalize(title);
     const custom=Array.isArray(item?.exerciseTasks)?item.exerciseTasks:null;
+    if(section?.title==='CSS · Juegos y retos prácticos'){
+      if(!custom?.length)return null;
+      return {
+        title:item.exerciseTitle||'Misión del reto',
+        intro:item.exerciseIntro||'Resuelve estas variaciones después de estudiar el ejemplo y comprueba cada cambio en el resultado.',
+        tasks:custom,
+        extra:item.exerciseExtra||''
+      };
+    }
     if(custom?.length)return {title:item.exerciseTitle||'Ejercicio para ti',intro:item.exerciseIntro||'Practica modificando el ejemplo.',tasks:custom,extra:item.exerciseExtra||''};
 
     if(area==='HTML'){
