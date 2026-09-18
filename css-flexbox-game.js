@@ -3,110 +3,25 @@
   if(embedMode)document.body.classList.add('embed-mode');
 
   const levels=[
-    {
-      title:'Centro horizontal',
-      instruction:'Lleva los tres orbes al centro horizontal del tablero usando justify-content.',
-      hint:'justify-content controla la distribución sobre el eje principal. Prueba con center.',
-      solution:'justify-content: center;',
-      expected:{'justify-content':'center'},
-      count:3
-    },
-    {
-      title:'Al final de la fila',
-      instruction:'Mueve los orbes hasta el extremo derecho del tablero.',
-      hint:'El valor flex-end coloca el contenido al final del eje principal.',
-      solution:'justify-content: flex-end;',
-      expected:{'justify-content':'flex-end'},
-      count:3
-    },
-    {
-      title:'Extremos separados',
-      instruction:'Distribuye los tres orbes para que el primero quede al inicio, el último al final y el espacio quede entre ellos.',
-      hint:'Busca un valor de justify-content que reparte el espacio entre los elementos.',
-      solution:'justify-content: space-between;',
-      expected:{'justify-content':'space-between'},
-      count:3
-    },
-    {
-      title:'Espacio alrededor',
-      instruction:'Deja espacio alrededor de cada orbe a lo largo de la fila.',
-      hint:'space-around reparte espacio a ambos lados de cada elemento.',
-      solution:'justify-content: space-around;',
-      expected:{'justify-content':'space-around'},
-      count:4
-    },
-    {
-      title:'Centro vertical',
-      instruction:'Los orbes ya están en una fila. Ahora llévalos al centro vertical del tablero.',
-      hint:'align-items trabaja sobre el eje transversal.',
-      solution:'align-items: center;',
-      expected:{'align-items':'center'},
-      count:3
-    },
-    {
-      title:'Aterrizaje inferior',
-      instruction:'Haz que todos los orbes se apoyen en la parte inferior del tablero.',
-      hint:'Usa align-items con el valor que representa el final del eje transversal.',
-      solution:'align-items: flex-end;',
-      expected:{'align-items':'flex-end'},
-      count:4
-    },
-    {
-      title:'Cambia el eje',
-      instruction:'Convierte la fila en una columna y centra el grupo verticalmente.',
-      hint:'Primero cambia flex-direction a column. Después recuerda que justify-content sigue el eje principal.',
-      solution:'flex-direction: column;\njustify-content: center;',
-      expected:{'flex-direction':'column','justify-content':'center'},
-      count:4
-    },
-    {
-      title:'Fila invertida',
-      instruction:'Invierte el orden visual de los orbes manteniendo una fila.',
-      hint:'Existe una variante de row que invierte inicio y final.',
-      solution:'flex-direction: row-reverse;',
-      expected:{'flex-direction':'row-reverse'},
-      count:4
-    },
-    {
-      title:'Columna invertida',
-      instruction:'Coloca los orbes en una columna, pero con el orden visual invertido.',
-      hint:'Combina column con reverse en flex-direction.',
-      solution:'flex-direction: column-reverse;',
-      expected:{'flex-direction':'column-reverse'},
-      count:4
-    },
-    {
-      title:'Salto de línea',
-      instruction:'Hay demasiados orbes para una sola fila. Permite que pasen a nuevas líneas.',
-      hint:'flex-wrap decide si los elementos pueden saltar a otra línea.',
-      solution:'flex-wrap: wrap;',
-      expected:{'flex-wrap':'wrap'},
-      count:6,
-      pieceSize:'38%'
-    },
-    {
-      title:'Filas repartidas',
-      instruction:'Permite varias líneas y reparte esas filas entre la parte superior e inferior del tablero.',
-      hint:'align-content solo se aprecia cuando existen varias líneas. Necesitas wrap y después distribuir las líneas.',
-      solution:'flex-wrap: wrap;\nalign-content: space-between;',
-      expected:{'flex-wrap':'wrap','align-content':'space-between'},
-      count:6,
-      pieceSize:'38%'
-    },
-    {
-      title:'Boss final · columna centrada',
-      instruction:'Coloca los cuatro orbes formando una columna exactamente en el centro del tablero.',
-      hint:'Necesitas cambiar el eje principal y centrar en ambos ejes.',
-      solution:'flex-direction: column;\njustify-content: center;\nalign-items: center;',
-      expected:{'flex-direction':'column','justify-content':'center','align-items':'center'},
-      count:4
-    }
+    {title:'Centro horizontal',instruction:'Lleva los tres orbes al centro horizontal usando justify-content.',hint:'justify-content controla el eje principal. Prueba center.',solution:'justify-content: center;',expected:{'justify-content':'center'},count:3},
+    {title:'Final de la fila',instruction:'Mueve los orbes al extremo derecho del tablero.',hint:'Usa el final del eje principal.',solution:'justify-content: flex-end;',expected:{'justify-content':'flex-end'},count:3},
+    {title:'Extremos separados',instruction:'Primer orbe al inicio, último al final y espacio entre ellos.',hint:'Busca el valor que reparte el espacio entre elementos.',solution:'justify-content: space-between;',expected:{'justify-content':'space-between'},count:3},
+    {title:'Espacio alrededor',instruction:'Deja espacio alrededor de cada orbe.',hint:'space-around reparte espacio a ambos lados.',solution:'justify-content: space-around;',expected:{'justify-content':'space-around'},count:4},
+    {title:'Espacio totalmente uniforme',instruction:'Haz que los espacios antes, entre y después de los orbes sean iguales.',hint:'Existe un valor más uniforme que space-around.',solution:'justify-content: space-evenly;',expected:{'justify-content':'space-evenly'},count:4},
+    {title:'Centro vertical',instruction:'Mantén la fila y lleva los orbes al centro vertical.',hint:'align-items controla el eje transversal.',solution:'align-items: center;',expected:{'align-items':'center'},count:3},
+    {title:'Aterrizaje inferior',instruction:'Apoya todos los orbes en la parte inferior.',hint:'Usa align-items con el final del eje transversal.',solution:'align-items: flex-end;',expected:{'align-items':'flex-end'},count:4},
+    {title:'Cambia el eje',instruction:'Convierte la fila en columna y centra el grupo sobre el eje principal.',hint:'Cambia flex-direction y después piensa qué hace justify-content.',solution:'flex-direction: column;\njustify-content: center;',expected:{'flex-direction':'column','justify-content':'center'},count:4},
+    {title:'Fila invertida',instruction:'Invierte el orden visual manteniendo una fila.',hint:'Usa la variante reverse de row.',solution:'flex-direction: row-reverse;',expected:{'flex-direction':'row-reverse'},count:4},
+    {title:'Columna invertida',instruction:'Coloca los orbes en columna y con orden invertido.',hint:'Combina column con reverse.',solution:'flex-direction: column-reverse;',expected:{'flex-direction':'column-reverse'},count:4},
+    {title:'Salto de línea',instruction:'Hay demasiados orbes para una fila. Permite que salten a nuevas líneas.',hint:'flex-wrap decide si los elementos pueden saltar.',solution:'flex-wrap: wrap;',expected:{'flex-wrap':'wrap'},count:6,pieceSize:'38%'},
+    {title:'Wrap invertido',instruction:'Permite varias líneas, pero invierte el sentido transversal de las filas.',hint:'flex-wrap también tiene una variante reverse.',solution:'flex-wrap: wrap-reverse;',expected:{'flex-wrap':'wrap-reverse'},count:6,pieceSize:'38%'},
+    {title:'Filas centradas',instruction:'Crea varias líneas y centra el bloque de filas en el eje transversal.',hint:'align-content solo se aprecia cuando hay varias líneas.',solution:'flex-wrap: wrap;\nalign-content: center;',expected:{'flex-wrap':'wrap','align-content':'center'},count:6,pieceSize:'38%'},
+    {title:'Separación con gap',instruction:'Mantén cuatro orbes al inicio pero deja exactamente 24px entre ellos.',hint:'gap evita añadir márgenes elemento por elemento.',solution:'gap: 24px;',expected:{'gap':'24px'},count:4},
+    {title:'Combinación avanzada',instruction:'Permite wrap, separa columnas 18px y reparte las filas verticalmente.',hint:'Necesitas flex-wrap, gap y align-content.',solution:'flex-wrap: wrap;\ngap: 18px;\nalign-content: space-around;',expected:{'flex-wrap':'wrap','gap':'18px','align-content':'space-around'},count:6,pieceSize:'38%'},
+    {title:'Boss final · columna perfecta',instruction:'Forma una columna centrada en ambos ejes con 16px entre cada orbe.',hint:'Combina flex-direction, justify-content, align-items y gap.',solution:'flex-direction: column;\njustify-content: center;\nalign-items: center;\ngap: 16px;',expected:{'flex-direction':'column','justify-content':'center','align-items':'center','gap':'16px'},count:4}
   ];
 
-  const allowed=new Set([
-    'justify-content','align-items','flex-direction','flex-wrap','align-content',
-    'gap','row-gap','column-gap'
-  ]);
+  const allowed=new Set(['justify-content','align-items','flex-direction','flex-wrap','align-content','gap','row-gap','column-gap']);
   const $=selector=>document.querySelector(selector);
   const player=$('#playerArena');
   const target=$('#targetArena');
@@ -121,7 +36,7 @@
   const levelButtons=$('#levelButtons');
   const score=$('#score');
   const shell=document.querySelector('.arena-shell');
-  const storageKey='css-flexbox-arena-progress-v1';
+  const storageKey='css-flexbox-arena-progress-v2';
 
   let state=loadState();
   let current=Math.min(state.current,levels.length-1);
@@ -129,26 +44,11 @@
   function loadState(){
     try{
       const saved=JSON.parse(localStorage.getItem(storageKey)||'{}');
-      return {
-        current:Number.isInteger(saved.current)?saved.current:0,
-        completed:Array.isArray(saved.completed)?saved.completed:[]
-      };
-    }catch{
-      return {current:0,completed:[]};
-    }
+      return {current:Number.isInteger(saved.current)?saved.current:0,completed:Array.isArray(saved.completed)?saved.completed:[]};
+    }catch{return {current:0,completed:[]}}
   }
-
-  function saveState(){
-    localStorage.setItem(storageKey,JSON.stringify({current,completed:state.completed}));
-  }
-
-  function maxUnlocked(){
-    if(!state.completed.length)return 0;
-    let i=0;
-    while(i<levels.length&&state.completed.includes(i))i++;
-    return Math.min(i,levels.length-1);
-  }
-
+  function saveState(){try{localStorage.setItem(storageKey,JSON.stringify({current,completed:state.completed}))}catch{}}
+  function maxUnlocked(){let i=0;while(i<levels.length&&state.completed.includes(i))i++;return Math.min(i,levels.length-1)}
   function makeItems(container,count,type){
     container.replaceChildren();
     for(let i=0;i<count;i++){
@@ -158,11 +58,7 @@
       container.append(el);
     }
   }
-
-  function clearFlexStyles(element){
-    for(const prop of allowed)element.style.removeProperty(prop);
-  }
-
+  function clearFlexStyles(element){for(const prop of allowed)element.style.removeProperty(prop)}
   function parseDeclarations(text){
     const cleaned=String(text).replace(/\/\*[\s\S]*?\*\//g,'');
     const result=[];
@@ -175,29 +71,21 @@
     }
     return result;
   }
-
   function applyDeclarations(element,text){
     clearFlexStyles(element);
-    for(const [prop,value] of parseDeclarations(text)){
-      element.style.setProperty(prop,value);
-    }
+    for(const [prop,value] of parseDeclarations(text))element.style.setProperty(prop,value);
   }
-
   function applyExpected(element,expected){
     clearFlexStyles(element);
-    for(const [prop,value] of Object.entries(expected)){
-      element.style.setProperty(prop,value);
-    }
+    for(const [prop,value] of Object.entries(expected))element.style.setProperty(prop,value);
   }
-
   function renderLevel(){
     const level=levels[current];
     title.textContent=level.title;
-    counter.textContent=`Nivel ${current+1} de ${levels.length}`;
+    counter.textContent='Nivel '+(current+1)+' de '+levels.length;
     instruction.textContent=level.instruction;
     editor.value='';
-    editor.placeholder=current===0?'justify-content: ...;':'Escribe aquí las propiedades...';
-
+    editor.placeholder=current===0?'justify-content: center;':'Escribe aquí las propiedades…';
     const pieceSize=level.pieceSize||'64px';
     player.style.setProperty('--piece-size',pieceSize);
     target.style.setProperty('--piece-size',pieceSize);
@@ -205,9 +93,8 @@
     makeItems(target,level.count,'target');
     clearFlexStyles(player);
     applyExpected(target,level.expected);
-
     feedback.className='feedback';
-    feedback.textContent='Escribe CSS y observa cómo se mueven los orbes.';
+    feedback.textContent='Edita el CSS y observa el tablero en tiempo real.';
     shell.classList.remove('solved');
     nextBtn.disabled=true;
     hintBox.hidden=true;
@@ -219,11 +106,7 @@
     saveState();
     editor.focus();
   }
-
-  function updateScore(){
-    score.textContent=`${state.completed.length}/${levels.length}`;
-  }
-
+  function updateScore(){score.textContent=state.completed.length+'/'+levels.length}
   function renderLevelButtons(){
     levelButtons.replaceChildren();
     const unlocked=maxUnlocked();
@@ -232,84 +115,66 @@
       button.type='button';
       button.className='level-btn';
       button.textContent=String(index+1);
-      button.title=`Nivel ${index+1}: ${level.title}`;
+      button.title='Nivel '+(index+1)+': '+level.title;
       if(index===current)button.classList.add('current');
       if(state.completed.includes(index))button.classList.add('done');
-      if(index>unlocked&&!state.completed.includes(index)){
-        button.classList.add('locked');
-        button.disabled=true;
-      }
-      button.addEventListener('click',()=>{
-        if(button.disabled)return;
-        current=index;
-        renderLevel();
-      });
+      if(index>unlocked&&!state.completed.includes(index)){button.classList.add('locked');button.disabled=true}
+      button.addEventListener('click',()=>{if(!button.disabled){current=index;renderLevel()}});
       levelButtons.append(button);
     });
   }
-
   function applyEditor(){
     applyDeclarations(player,editor.value);
     shell.classList.remove('solved');
     nextBtn.disabled=true;
     feedback.className='feedback';
-    feedback.textContent='Vista actualizada. Pulsa Comprobar cuando creas que coincide.';
+    feedback.textContent='Vista actualizada. Pulsa Comprobar o Ctrl + Enter.';
   }
-
-  function normalized(value){
-    return String(value).trim().replace(/\s+/g,' ');
-  }
-
-  function solved(){
+  function normalized(value){return String(value).trim().replace(/\s+/g,' ')}
+  function differences(){
     const computed=getComputedStyle(player);
-    return Object.entries(levels[current].expected).every(([prop,expected])=>{
-      return normalized(computed.getPropertyValue(prop))===normalized(expected);
-    });
+    const missing=[];
+    for(const [prop,expected] of Object.entries(levels[current].expected)){
+      const actual=normalized(computed.getPropertyValue(prop));
+      if(actual!==normalized(expected))missing.push(prop);
+    }
+    return missing;
   }
-
   function check(){
-    if(solved()){
-      if(!state.completed.includes(current)){
-        state.completed.push(current);
-        state.completed.sort((a,b)=>a-b);
-      }
+    const missing=differences();
+    if(!missing.length){
+      if(!state.completed.includes(current)){state.completed.push(current);state.completed.sort((a,b)=>a-b)}
       shell.classList.add('solved');
       feedback.className='feedback success';
-      feedback.textContent=current===levels.length-1
-        ? '¡Boss derrotado! Completaste Flexbox Arena.'
-        : '¡Correcto! Los orbes coinciden con sus objetivos.';
+      feedback.textContent=current===levels.length-1?'¡Boss derrotado! Completaste los 16 niveles de Flexbox Arena.':'¡Correcto! Coincide con el objetivo.';
       nextBtn.disabled=current===levels.length-1;
-      updateScore();
-      renderLevelButtons();
-      saveState();
+      updateScore();renderLevelButtons();saveState();
     }else{
       shell.classList.remove('solved');
       feedback.className='feedback error';
-      feedback.textContent='Aún no coincide. Revisa la propiedad, el valor y el eje sobre el que estás trabajando.';
+      feedback.textContent='Aún falta ajustar: '+missing.join(', ')+'.';
       nextBtn.disabled=true;
     }
   }
 
   editor.addEventListener('input',applyEditor);
+  editor.addEventListener('keydown',event=>{if(event.ctrlKey&&event.key==='Enter'){event.preventDefault();check()}});
   $('#checkBtn').addEventListener('click',check);
-  $('#hintBtn').addEventListener('click',()=>{hintBox.hidden=!hintBox.hidden;});
+  $('#hintBtn').addEventListener('click',()=>{hintBox.hidden=!hintBox.hidden});
   $('#solutionBtn').addEventListener('click',()=>{
     solutionBox.hidden=!solutionBox.hidden;
-    if(!solutionBox.hidden)solutionBox.textContent=`Solución de referencia: ${levels[current].solution.replace(/\n/g,' ')}`;
+    if(!solutionBox.hidden)solutionBox.textContent='Solución de referencia: '+levels[current].solution.replace(/\n/g,' ');
   });
-  nextBtn.addEventListener('click',()=>{
-    if(current<levels.length-1){
-      current++;
-      renderLevel();
-    }
+  $('#resetLevelBtn').addEventListener('click',()=>{
+    editor.value='';
+    applyEditor();
+    feedback.textContent='Nivel limpio. Inténtalo de nuevo.';
+    editor.focus();
   });
+  nextBtn.addEventListener('click',()=>{if(current<levels.length-1){current++;renderLevel()}});
   $('#resetProgress').addEventListener('click',()=>{
-    const ok=window.confirm('¿Reiniciar todos los niveles completados de Flexbox Arena?');
-    if(!ok)return;
-    state={current:0,completed:[]};
-    current=0;
-    localStorage.removeItem(storageKey);
-    renderLevel();
+    if(!window.confirm('¿Reiniciar todos los niveles completados de Flexbox Arena?'))return;
+    state={current:0,completed:[]};current=0;try{localStorage.removeItem(storageKey)}catch{}renderLevel();
   });
 
   renderLevel();
