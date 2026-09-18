@@ -188,3 +188,22 @@ jobs:
           grep -q 'Tu resultado' /tmp/css-arcade-grid-runtime.html
           grep -q 'Nivel 1 de 7' /tmp/css-arcade-grid-runtime.html
           echo "CSS Arcade browser smoke OK."
+
+          google-chrome \
+            --headless=new \
+            --no-sandbox \
+            --disable-gpu \
+            --disable-dev-shm-usage \
+            --disable-extensions \
+            --window-size=1500,1000 \
+            --virtual-time-budget=5000 \
+            --dump-dom \
+            'http://127.0.0.1:4173/css-arcade-game.html?game=divs&embed=1&ci-browser=1' \
+            > /tmp/css-div-lab-runtime.html
+
+          grep -q 'DIV Lab' /tmp/css-div-lab-runtime.html
+          grep -q 'Nivel 1 de 12' /tmp/css-div-lab-runtime.html
+          grep -q 'id="cssEditor"' /tmp/css-div-lab-runtime.html
+          grep -q 'Objetivo' /tmp/css-div-lab-runtime.html
+          grep -q 'Tu resultado' /tmp/css-div-lab-runtime.html
+          echo "DIV Lab browser smoke OK."
