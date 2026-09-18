@@ -11,6 +11,63 @@
       color:#b9c9dd;
       line-height:1.58;
     }
+    .css-guided-heading{
+      margin:0 0 12px;
+      padding:16px 18px;
+      border:1px solid rgba(96,165,250,.34);
+      border-radius:14px;
+      background:linear-gradient(135deg,rgba(37,99,235,.12),rgba(8,16,31,.82));
+    }
+    .css-guided-heading-top{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      align-items:center;
+      margin-bottom:8px;
+    }
+    .css-guided-heading-badge{
+      display:inline-flex;
+      align-items:center;
+      min-height:24px;
+      padding:3px 9px;
+      border:1px solid rgba(96,165,250,.42);
+      border-radius:999px;
+      background:rgba(30,64,175,.18);
+      color:#93c5fd;
+      font-size:11px;
+      font-weight:800;
+    }
+    .css-guided-heading h3{
+      margin:0 0 6px;
+      color:#f8fafc;
+      font-size:clamp(18px,2vw,22px);
+      line-height:1.25;
+    }
+    .css-guided-heading p{
+      max-width:90ch;
+      margin:0;
+      color:#b9c9dd;
+      line-height:1.55;
+    }
+    .css-guided-mission{
+      margin:0 0 12px;
+      padding:13px 15px;
+      border:1px solid rgba(34,197,94,.38);
+      border-radius:12px;
+      background:rgba(20,83,45,.16);
+    }
+    .css-guided-mission strong{
+      display:block;
+      margin-bottom:8px;
+      color:#86efac;
+    }
+    .css-guided-mission ol{
+      margin:0;
+      padding-left:20px;
+      color:#d7e4f3;
+      line-height:1.55;
+    }
+    .css-guided-mission li+li{margin-top:5px}
     .css-guided-game-card .personal-exercise{
       margin:12px 0;
       border-color:rgba(56,189,248,.38);
@@ -52,6 +109,37 @@
   const escape=value=>String(value??'').replace(/[&<>"']/g,char=>({
     '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
   })[char]);
+
+  const ensureGuidedHeading=(card,item)=>{
+    card.querySelector('.css-guided-heading')?.remove();
+    const heading=document.createElement('header');
+    heading.className='css-guided-heading';
+    heading.innerHTML=`
+      <div class="css-guided-heading-top">
+        <span class="css-guided-heading-badge">Reto guiado CSS</span>
+        <span class="css-guided-heading-badge">HTML + CSS</span>
+      </div>
+      <h3>${escape(item.name||'Reto CSS')}</h3>
+      <p>${escape(item.gameDescription||item.description||'Practica CSS comparando el código con el resultado.')}</p>
+    `;
+    const tip=card.querySelector('.tip');
+    if(tip)tip.before(heading);
+    else card.prepend(heading);
+  };
+
+  const ensureGuidedMission=(card,item)=>{
+    card.querySelector('.css-guided-mission')?.remove();
+    if(!Array.isArray(item.exerciseTasks)||!item.exerciseTasks.length)return;
+    const mission=document.createElement('section');
+    mission.className='css-guided-mission';
+    mission.innerHTML=`
+      <strong>${escape(item.exerciseTitle||'Misión del reto')}</strong>
+      <ol>${item.exerciseTasks.map(task=>'<li>'+task+'</li>').join('')}</ol>
+    `;
+    const tip=card.querySelector('.tip');
+    if(tip)tip.after(mission);
+    else card.prepend(mission);
+  };
 
   const fixGuidedExercise=(card,item)=>{
     const details=card.querySelector('.personal-exercise');
@@ -154,7 +242,10 @@
         frame.style.minHeight='390px';
       });
 
+      ensureGuidedHeading(card,item);
       fixGuidedExercise(card,item);
+      card.querySelector('.personal-exercise')?.remove();
+      ensureGuidedMission(card,item);
     }
 
     return fragment;
