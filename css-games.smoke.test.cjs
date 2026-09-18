@@ -39,10 +39,12 @@ assert.ok(section.items.every(item=>Array.isArray(item.guide)&&item.guide.length
 assert.ok(section.items.every(item=>Array.isArray(item.exerciseTasks)&&item.exerciseTasks.length>=3));
 assert.ok(section.items.every(item=>Array.isArray(item.filesToCreate)&&item.filesToCreate.length>=2));
 assert.ok(section.items.some(item=>item.name.includes('Flexbox Arena')),'falta Flexbox Arena');
-assert.ok(text.includes('css-flexbox-game.html?embed=1'),'falta Flexbox Arena incrustado');
-assert.ok(text.includes('<iframe'),'el juego debe mostrarse dentro de la sección');
-assert.ok(text.includes('Juega directamente aquí'),'falta indicar el modo de juego integrado');
+assert.ok(text.includes('data-flexbox-inline-game'),'falta Flexbox Arena directo en la sección');
+assert.ok(text.includes('<textarea'),'el juego debe tener un editor CSS editable dentro de la sección');
+assert.ok(text.includes('Ctrl + Enter'),'falta atajo de comprobación del editor');
 assert.ok(loader.includes('css-games-section.js?v='),'loader no carga Juegos CSS');
+assert.ok(loader.includes('css-flexbox-inline-game.js?v=1'),'loader no carga el editor inline');
+assert.ok(loader.includes('css-flexbox-inline-game.css?v=1'),'loader no carga los estilos del editor inline');
 assert.ok(loader.indexOf('css-games-section.js')<loader.indexOf('section-order.js'),'Juegos CSS debe cargar antes de ordenar secciones');
 
 console.log({status:'ok',section:section.title,games:section.items.length,skills:true});
