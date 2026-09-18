@@ -31,6 +31,7 @@ jobs:
       - name: Run CSS games smoke test
         run: |
           node css-games.smoke.test.cjs
+          node css-games-ux.smoke.test.cjs
           node css-flexbox-card-ui.smoke.test.cjs
           node css-flexbox-game.smoke.test.cjs
           node css-arcade-games.smoke.test.cjs
