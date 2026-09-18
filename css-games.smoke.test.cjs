@@ -58,7 +58,7 @@ assert.ok(text.includes('Reto guiado 7 · Botón con estados'),'debe renombrarse
 assert.ok(text.includes('Reto guiado 10 · Animación sin marear'),'debe existir el reto guiado de animación');
 assert.ok(text.includes('Proyecto final guiado · HUD responsive'),'el boss estático debe identificarse como proyecto final guiado');
 assert.ok(loader.includes('css-games-section.js?v=10'),'loader no carga la revisión actual de Juegos CSS');
-assert.ok(loader.includes('css-flexbox-card-ui.js?v=5'),'loader no carga el ajuste de juegos interactivos');
+assert.ok(loader.includes('css-flexbox-card-ui.js?v=6'),'loader no carga el ajuste de juegos interactivos');
 assert.ok(loader.indexOf('css-games-section.js')<loader.indexOf('section-order.js'),'Juegos CSS debe cargar antes de ordenar secciones');
 
 console.log({status:'ok',section:section.title,games:section.items.length,skills:true});
