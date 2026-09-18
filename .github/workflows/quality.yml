@@ -186,8 +186,29 @@ jobs:
           grep -q 'id="cssEditor"' /tmp/css-arcade-grid-runtime.html
           grep -q 'Objetivo' /tmp/css-arcade-grid-runtime.html
           grep -q 'Tu resultado' /tmp/css-arcade-grid-runtime.html
-          grep -q 'Nivel 1 de 7' /tmp/css-arcade-grid-runtime.html
+          grep -q 'Nivel 1 de 10' /tmp/css-arcade-grid-runtime.html
           echo "CSS Arcade browser smoke OK."
+
+          for game_spec in "selectors|Selector Hunt|10" "box|Box Model Lab|10" "position|Position Rescue|9" "responsive|Responsive Racer|9"; do
+            IFS='|' read -r game_key game_title game_levels <<< "$game_spec"
+            google-chrome \
+              --headless=new \
+              --no-sandbox \
+              --disable-gpu \
+              --disable-dev-shm-usage \
+              --disable-extensions \
+              --window-size=1450,950 \
+              --virtual-time-budget=3500 \
+              --dump-dom \
+              "http://127.0.0.1:4173/css-arcade-game.html?game=${game_key}&embed=1&ci-browser=1" \
+              > "/tmp/css-arcade-${game_key}-runtime.html"
+            grep -q "${game_title}" "/tmp/css-arcade-${game_key}-runtime.html"
+            grep -q "Nivel 1 de ${game_levels}" "/tmp/css-arcade-${game_key}-runtime.html"
+            grep -q 'id="cssEditor"' "/tmp/css-arcade-${game_key}-runtime.html"
+            grep -q 'Objetivo' "/tmp/css-arcade-${game_key}-runtime.html"
+            grep -q 'Tu resultado' "/tmp/css-arcade-${game_key}-runtime.html"
+          done
+          echo "CSS Arcade existing games browser smoke OK."
 
           google-chrome \
             --headless=new \
