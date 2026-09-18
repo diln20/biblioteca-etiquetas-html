@@ -45,6 +45,37 @@
     quote:'“En CSS se mejora resolviendo layouts, rompiéndolos y reparándolos.”',
     challenge:'Completa los niveles en orden. En cada uno intenta primero la misión sin copiar la solución; usa DevTools para probar reglas y solo después compara tu resultado.',
     items:[
+      T(
+        'CSS · Juego interactivo',
+        'Flexbox Arena · juego tipo niveles',
+        'Juego interactivo inspirado en la dinámica de aprender haciendo: mueve orbes hasta sus objetivos escribiendo propiedades Flexbox. Tiene 12 niveles, editor CSS en vivo, pistas, comprobación, progreso guardado y un boss final. No necesitas instalar nada: se abre directamente desde la biblioteca.',
+        '<a href="css-flexbox-game.html" target="_blank" rel="noopener">Abrir Flexbox Arena</a>',
+        '<div style="padding:20px;border:1px solid #38bdf8;border-radius:16px;background:#071525;color:#e7f0ff"><strong style="display:block;font-size:1.2rem;margin-bottom:8px">🎮 Flexbox Arena</strong><p style="margin:0 0 14px;color:#b9c9dd">12 niveles · editor CSS en vivo · pistas · progreso</p><a href="css-flexbox-game.html" target="_blank" rel="noopener" style="display:inline-block;padding:10px 14px;border-radius:10px;background:#0284c7;color:white;text-decoration:none;font-weight:800">Jugar ahora →</a></div>',
+        [],
+        {
+          kind:'Juego CSS interactivo',
+          tip:'Intenta cada nivel sin mirar la solución. El tablero objetivo permanece detrás de tus orbes para que compares visualmente.',
+          guideTitle:'Cómo jugar',
+          guide:[
+            ['1','css-flexbox-game.html','Abre el juego desde el botón Jugar ahora.'],
+            ['2','Editor CSS','Escribe propiedades como justify-content, align-items o flex-direction.'],
+            ['3','Comprobar','El juego valida el estilo calculado y habilita el siguiente nivel cuando coincide.'],
+            ['4','Progreso','Los niveles completados se guardan en localStorage del navegador.']
+          ],
+          filesToCreate:[
+            file('css-flexbox-game.html','Pantalla principal del juego.'),
+            file('css-flexbox-game.css','Diseño visual del tablero y editor.'),
+            file('css-flexbox-game.js','Niveles, validación y progreso.')
+          ],
+          exerciseTitle:'Objetivo del juego',
+          exerciseTasks:[
+            'Completa los 12 niveles sin usar la solución automática.',
+            'Explica qué eje modifica justify-content y cuál modifica align-items.',
+            'Repite los niveles 7 a 12 hasta poder resolverlos sin pista.'
+          ],
+          exerciseExtra:'Después de terminar Flexbox Arena, crea un nivel propio agregando otra configuración al arreglo levels.'
+        }
+      ),
       G(
         'Nivel 1 · Caza el selector correcto',
         'Solo una tarjeta debe quedar resaltada. Practica selectores por clase, descendientes y combinación de clases. El reto consiste en modificar únicamente el elemento correcto sin afectar sus hermanos.',
