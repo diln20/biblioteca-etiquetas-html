@@ -21,7 +21,7 @@ const section=sections.find(item=>item.title==='CSS · Juegos y retos prácticos
 assert.ok(section,'falta la sección Juegos CSS');
 assert.equal(section.primaryArea,'CSS');
 assert.equal(section.navLabel,'Juegos CSS');
-assert.ok(section.items.length>=11,'faltan niveles de juego');
+assert.ok(section.items.length>=12,'faltan juegos y retos CSS');
 
 const text=section.items.map(item=>[
   item.name,item.description,item.code,item.preview,item.tip,
@@ -37,8 +37,8 @@ const text=section.items.map(item=>[
 
 assert.ok(section.items.every(item=>Array.isArray(item.guide)&&item.guide.length>=4));
 assert.ok(section.items.every(item=>Array.isArray(item.exerciseTasks)&&item.exerciseTasks.length>=3));
-assert.ok(section.items.every(item=>Array.isArray(item.filesToCreate)&&item.filesToCreate.length===2));
-assert.ok(loader.includes('css-games-section.js?v=1'),'loader no carga Juegos CSS');
+assert.ok(section.items.every(item=>Array.isArray(item.filesToCreate)&&item.filesToCreate.length>=2));\nassert.ok(section.items.some(item=>item.name.includes('Flexbox Arena')),'falta Flexbox Arena');\nassert.ok(text.includes('css-flexbox-game.html'),'falta enlace al juego interactivo');
+assert.ok(loader.includes('css-games-section.js?v='),'loader no carga Juegos CSS');
 assert.ok(loader.indexOf('css-games-section.js')<loader.indexOf('section-order.js'),'Juegos CSS debe cargar antes de ordenar secciones');
 
 console.log({status:'ok',section:section.title,games:section.items.length,skills:true});
