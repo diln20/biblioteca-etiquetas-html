@@ -3,7 +3,7 @@
   window.__cssGamesSectionAdded=true;
   if(!Array.isArray(window.sections)||typeof window.T!=='function')return;
 
-  const preview=(css,html)=>`<style>${css}</style>${html}`;
+  const preview=(css,html)=>`<style>*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Inter,system-ui,sans-serif;background:#f8fafc;color:#0f172a}.css-game-stage{min-height:320px;padding:28px;display:grid;place-items:center;background:linear-gradient(180deg,#f8fafc,#eef4fb)}.css-game-stage>*{max-width:100%}${css}</style><div class="css-game-stage">${html}</div>`;
   const file=(path,detail)=>({path,method:'MANUAL',detail});
   const Arcade=(name,key,description,focus)=>T(
     'CSS · Juego interactivo',
@@ -14,6 +14,7 @@
     [],
     {
       kind:'Juego CSS interactivo',
+      gameDescription:description,
       tip:'Escribe CSS directamente en styles.css. Compara Objetivo y Tu resultado, usa Comprobar o Ctrl + Enter y avanza cuando coincidan.',
       guideTitle:'Cómo jugar',
       guide:[
@@ -48,9 +49,10 @@
     [],
     {
       kind:'Juego CSS',
+      gameDescription:description,
       tip,
       guideTitle:'Cómo jugar',
-      codeLabel:'Solución de referencia',
+      codeLabel:'HTML + CSS · solución',
       filesToCreateTitle:'Archivos para practicar',
       filesToCreateStatus:'Primero intenta resolver el reto sin mirar toda la solución. Después compara tu CSS con el ejemplo de referencia.',
       guide:[
@@ -63,7 +65,8 @@
         file('css/juegos/index.html','Estructura HTML del reto.'),
         file('css/juegos/styles.css','Tus reglas CSS para resolverlo.')
       ],
-      exerciseTitle:'Tu misión',
+      exerciseTitle:'Misión · '+name.replace(/^Reto guiado \\d+ · /,''),
+      exerciseIntro:'Aplica el concepto de este reto y luego modifica una decisión para comprobar que entiendes qué propiedad produce cada efecto.',
       exerciseTasks:[...tasks,'Crea una variante del ejercicio cambiando una decisión de layout y explica qué efecto produce.'],
       exerciseExtra:extra
     }
@@ -75,7 +78,7 @@
     group:'CSS',
     primaryArea:'CSS',
     areaOrder:45,
-    description:'Entrena CSS con una arcade de juegos interactivos y retos progresivos. Hay 76 niveles interactivos entre Flexbox, Grid, selectores, box model, manipulación de DIVs, position y responsive, además de ejercicios guiados fuera de los juegos.  Cada reto parte de un objetivo visual concreto y obliga a usar selectores, modelo de caja, Flexbox, Grid, position, pseudoclases, especificidad, responsive, variables y animaciones. La meta no es memorizar propiedades: es aprender a elegir la herramienta correcta.',
+    description:'Entrena CSS con una arcade de juegos interactivos y retos progresivos. Hay 76 niveles interactivos entre Flexbox, Grid, selectores, box model, manipulación de DIVs, position y responsive, además de 17 retos guiados rediseñados con misiones específicas, código HTML + CSS claramente rotulado y vistas de resultado consistentes.  Cada reto parte de un objetivo visual concreto y obliga a usar selectores, modelo de caja, Flexbox, Grid, position, pseudoclases, especificidad, responsive, variables y animaciones. La meta no es memorizar propiedades: es aprender a elegir la herramienta correcta.',
     quote:'“En CSS se mejora resolviendo layouts, rompiéndolos y reparándolos.”',
     challenge:'Completa los niveles en orden. En cada uno intenta primero la misión sin copiar la solución; usa DevTools para probar reglas y solo después compara tu resultado.',
     items:[
@@ -201,7 +204,7 @@
         'Haz una versión que use dos columnas en tablet y una en móvil.'
       ),
       G(
-        'Nivel 1 · Caza el selector correcto',
+        'Reto guiado 1 · Caza el selector correcto',
         'Solo una tarjeta debe quedar resaltada. Practica selectores por clase, descendientes y combinación de clases. El reto consiste en modificar únicamente el elemento correcto sin afectar sus hermanos.',
         '<section class="arena-selectores">\n  <article class="carta">HTML</article>\n  <article class="carta objetivo">CSS</article>\n  <article class="carta">JavaScript</article>\n</section>',
         '.arena-selectores { display:flex; gap:10px; }\n.carta { padding:16px; border:2px solid #64748b; border-radius:10px; }\n.carta.objetivo { border-color:#22c55e; background:#dcfce7; transform:translateY(-4px); }',
@@ -210,7 +213,7 @@
         'Añade una cuarta tarjeta y consigue que la regla siga afectando únicamente a .objetivo.'
       ),
       G(
-        'Nivel 2 · Repara la caja',
+        'Reto guiado 2 · Repara la caja',
         'La tarjeta necesita espacio interior, separación exterior y un ancho predecible. Este nivel entrena box model y box-sizing.',
         '<article class="caja-reto">\n  <h3>Inventario</h3>\n  <p>3 objetos encontrados</p>\n</article>',
         '* { box-sizing:border-box; }\n.caja-reto { width:280px; margin:24px auto; padding:24px; border:4px solid #38bdf8; border-radius:16px; background:#e0f2fe; }',
@@ -219,7 +222,7 @@
         'Quita temporalmente box-sizing:border-box y observa cómo cambia el ancho real.'
       ),
       G(
-        'Nivel 3 · Alinea la tripulación con Flexbox',
+        'Reto guiado 3 · Alinea la tripulación con Flexbox',
         'Debes colocar tres controles en una sola fila, separados y centrados verticalmente. Practica display:flex, justify-content, align-items y gap.',
         '<nav class="barra-juego">\n  <strong>Jugador 1</strong>\n  <div class="acciones"><button>Mapa</button><button>Inventario</button></div>\n  <span>⭐ 250</span>\n</nav>',
         '.barra-juego { display:flex; justify-content:space-between; align-items:center; gap:16px; padding:14px; background:#0f172a; color:white; border-radius:12px; }\n.acciones { display:flex; gap:8px; }',
@@ -228,7 +231,7 @@
         'Cambia flex-direction a column y adapta la barra para pantallas pequeñas.'
       ),
       G(
-        'Nivel 4 · Construye el tablero con CSS Grid',
+        'Reto guiado 4 · Construye el tablero con CSS Grid',
         'Crea un tablero de seis casillas y haz que la casilla jefe ocupe dos columnas. Practica grid-template-columns, gap y grid-column.',
         '<section class="tablero-css">\n  <div>1</div><div>2</div><div>3</div>\n  <div>4</div><div class="jefe">BOSS</div>\n</section>',
         '.tablero-css { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; max-width:480px; }\n.tablero-css div { min-height:80px; display:grid; place-items:center; border-radius:12px; background:#ede9fe; font-weight:800; }\n.tablero-css .jefe { grid-column:span 2; background:#fecaca; }',
@@ -237,7 +240,7 @@
         'Haz que la primera casilla ocupe dos filas usando grid-row.'
       ),
       G(
-        'Nivel 5 · Atrapa la insignia',
+        'Reto guiado 5 · Atrapa la insignia',
         'Una etiqueta “NUEVO” debe quedar pegada a la esquina de una tarjeta sin salir disparada hacia la página. Practica relative y absolute.',
         '<article class="producto-juego">\n  <span class="insignia-juego">NUEVO</span>\n  <h3>Curso CSS</h3>\n  <p>Nivel intermedio</p>\n</article>',
         '.producto-juego { position:relative; padding:28px 18px 18px; border:1px solid #cbd5e1; border-radius:14px; }\n.insignia-juego { position:absolute; top:8px; right:8px; padding:4px 8px; border-radius:999px; background:#f97316; color:white; font-size:12px; }',
@@ -246,7 +249,7 @@
         'Añade otra insignia en la esquina inferior izquierda.'
       ),
       G(
-        'Nivel 6 · Duelo de especificidad',
+        'Reto guiado 6 · Duelo de especificidad',
         'Predice qué color gana antes de abrir el navegador. Después simplifica las reglas para depender de clases y no de !important.',
         '<p id="mensaje-boss" class="mensaje-boss alerta-boss">Peligro detectado</p>',
         'p { color:#475569; }\n.mensaje-boss { color:#2563eb; }\n.alerta-boss { color:#f97316; }\n#mensaje-boss { color:#dc2626; }',
@@ -255,7 +258,7 @@
         'Crea dos clases con la misma especificidad e intercambia su orden para observar la cascada.'
       ),
       G(
-        'Nivel 7 · Botón con estados',
+        'Reto guiado 7 · Botón con estados',
         'Haz que el botón responda visualmente a puntero, teclado y clic. Practica :hover, :focus-visible y :active.',
         '<button class="boton-mision">Completar misión</button>',
         '.boton-mision { padding:12px 18px; border:0; border-radius:10px; background:#7c3aed; color:white; font-weight:700; cursor:pointer; transition:transform .15s, background .15s; }\n.boton-mision:hover { background:#6d28d9; }\n.boton-mision:focus-visible { outline:4px solid #c4b5fd; outline-offset:3px; }\n.boton-mision:active { transform:scale(.96); }',
@@ -264,7 +267,7 @@
         'Añade un estado :disabled que comunique claramente que el botón no se puede usar.'
       ),
       G(
-        'Nivel 8 · Rescate responsive',
+        'Reto guiado 8 · Rescate responsive',
         'El panel funciona en escritorio pero debe transformarse en una columna en pantallas pequeñas. Practica unidades fluidas y @media.',
         '<section class="panel-responsive">\n  <aside>Menú</aside>\n  <main>Contenido principal</main>\n</section>',
         '.panel-responsive { display:grid; grid-template-columns:minmax(160px,220px) 1fr; gap:16px; width:min(900px,94%); margin:auto; }\n.panel-responsive > * { padding:20px; border-radius:12px; background:#e2e8f0; }\n@media (max-width:640px) { .panel-responsive { grid-template-columns:1fr; } }',
@@ -273,7 +276,7 @@
         'Añade una tercera columna de estadísticas que desaparezca o se recolocque de forma útil en móvil.'
       ),
       G(
-        'Nivel 9 · Cambia el tema con variables CSS',
+        'Reto guiado 9 · Cambia el tema con variables CSS',
         'Centraliza colores, radios y espacios para poder transformar toda la interfaz cambiando pocas variables.',
         '<article class="panel-tema">\n  <h3>Perfil</h3>\n  <button>Editar</button>\n</article>',
         ':root { --fondo-juego:#0f172a; --texto-juego:#f8fafc; --acento-juego:#22c55e; --radio-juego:16px; }\n.panel-tema { padding:22px; border-radius:var(--radio-juego); background:var(--fondo-juego); color:var(--texto-juego); }\n.panel-tema button { border:0; padding:9px 14px; border-radius:8px; background:var(--acento-juego); }',
@@ -282,7 +285,7 @@
         'Crea [data-theme="claro"] con otros valores para las mismas variables.'
       ),
       G(
-        'Nivel 10 · Animación sin marear',
+        'Reto guiado 10 · Animación sin marear',
         'Crea una recompensa animada y añade una alternativa para usuarios que prefieren menos movimiento.',
         '<div class="recompensa-css" aria-label="Recompensa obtenida">★</div>',
         '.recompensa-css { width:72px; height:72px; display:grid; place-items:center; border-radius:50%; background:#facc15; font-size:36px; animation:recompensa 900ms ease-in-out infinite alternate; }\n@keyframes recompensa { to { transform:translateY(-10px) rotate(8deg); } }\n@media (prefers-reduced-motion:reduce) { .recompensa-css { animation:none; } }',
@@ -291,7 +294,7 @@
         'Haz que la animación ocurra solo al pasar el puntero en vez de repetirse infinitamente.'
       ),
       G(
-        'Boss final · HUD responsive de videojuego',
+        'Proyecto final guiado · HUD responsive de videojuego',
         'Combina varias habilidades en un único reto: variables, Grid, Flexbox, pseudoclases, barras de progreso y responsive. El objetivo es construir una interfaz completa sin frameworks CSS.',
         '<section class="hud-css">\n  <header><strong>CSS QUEST</strong><span>Nivel 10</span></header>\n  <div class="hud-grid">\n    <article><h3>Vida</h3><div class="barra"><span class="vida"></span></div></article>\n    <article><h3>XP</h3><div class="barra"><span class="xp"></span></div></article>\n    <article class="mision"><h3>Misión</h3><p>Construye un layout responsive.</p><button>Completar</button></article>\n  </div>\n</section>',
         ':root { --hud:#0f172a; --card:#1e293b; --text:#f8fafc; --ok:#22c55e; --xp:#38bdf8; }\n.hud-css { max-width:760px; margin:auto; padding:20px; border-radius:18px; background:var(--hud); color:var(--text); }\n.hud-css header { display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; }\n.hud-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }\n.hud-grid article { padding:16px; border-radius:12px; background:var(--card); }\n.mision { grid-column:1 / -1; }\n.barra { height:10px; overflow:hidden; border-radius:999px; background:#334155; }\n.barra span { display:block; height:100%; }\n.vida { width:78%; background:var(--ok); }\n.xp { width:54%; background:var(--xp); }\n.mision button { padding:9px 14px; border:0; border-radius:9px; cursor:pointer; }\n.mision button:hover { transform:translateY(-2px); }\n@media (max-width:560px) { .hud-grid { grid-template-columns:1fr; } .mision { grid-column:auto; } }',
