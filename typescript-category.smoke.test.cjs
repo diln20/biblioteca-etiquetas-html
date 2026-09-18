@@ -13,7 +13,7 @@ assert.doesNotThrow(()=>new vm.Script(finalizer,{filename:'typescript-category-f
 assert.ok(loader.includes('typescript-course-section.js?v=1'));
 assert.ok(loader.includes('typescript-category-finalizer.js?v=1'));
 assert.ok(loader.indexOf('typescript-course-section.js?v=1')<loader.indexOf('typescript-category-finalizer.js?v=1'));
-assert.ok(loader.indexOf('typescript-category-finalizer.js?v=1')<loader.indexOf('primary-area-ui.js?v=3'));
+assert.ok(loader.indexOf('typescript-category-finalizer.js?v=1')<loader.indexOf('primary-area-ui.js?v=4'));
 assert.ok(css.includes('body[data-course="TypeScript"]'));
 assert.ok(css.includes('.nav-item[data-group="TypeScript"]'));
 
