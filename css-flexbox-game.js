@@ -1,4 +1,7 @@
 (()=>{
+  const embedMode=new URLSearchParams(window.location.search).get('embed')==='1';
+  if(embedMode)document.body.classList.add('embed-mode');
+
   const levels=[
     {
       title:'Centro horizontal',
