@@ -5,6 +5,12 @@
 
   const preview=(css,html)=>`<style>*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Inter,system-ui,sans-serif;background:#f8fafc;color:#0f172a}.css-game-stage{min-height:320px;padding:28px;display:grid;place-items:center;background:linear-gradient(180deg,#f8fafc,#eef4fb)}.css-game-stage>*{max-width:100%}${css}</style><div class="css-game-stage">${html}</div>`;
   const file=(path,detail)=>({path,method:'MANUAL',detail});
+  const prettyCss=value=>String(value||'')
+    .replace(/\s*\{\s*/g,' {\n  ')
+    .replace(/;\s*/g,';\n  ')
+    .replace(/\s*\}\s*/g,'\n}\n')
+    .replace(/\n\s*\n/g,'\n')
+    .trim();
   const Arcade=(name,key,description,focus)=>T(
     'CSS · Juego interactivo',
     name,
@@ -44,7 +50,7 @@
     'CSS · Juego',
     name,
     description,
-    `<!-- index.html -->\n${html}\n\n/* styles.css */\n${css}`,
+    `<!-- index.html -->\n${html}\n\n/* styles.css */\n${prettyCss(css)}`,
     preview(css,html),
     [],
     {
