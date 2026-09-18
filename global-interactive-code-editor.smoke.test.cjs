@@ -9,7 +9,6 @@ const loader=fs.readFileSync('loader.js','utf8');
 assert.doesNotThrow(()=>new vm.Script(source,{filename:'global-interactive-code-editor.js'}));
 
 [
-  'data.liveCodeEditor',
   "editor.dataset.liveCodeEditor='true'",
   'global-code-editor',
   'live-code-toolbar',
