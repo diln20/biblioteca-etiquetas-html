@@ -15,7 +15,7 @@ assert.ok(source.includes("frame.style.height='820px'"),'debe ampliar el área d
 assert.ok(section.includes('class="flexbox-arena-frame"'),'la vista debe cargar el juego dentro de Resultado');
 assert.ok(section.includes('css-flexbox-game.html?embed=1&inside=library'),'debe usar modo embebido');
 assert.ok(section.includes('styles.css del panel Resultado'),'debe explicar dónde editar');
-assert.ok(loader.includes('css-flexbox-card-ui.js?v=4'),'loader no carga el ajuste de tarjetas');
+assert.ok(loader.includes('css-flexbox-card-ui.js?v=5'),'loader no carga el ajuste de tarjetas');
 assert.ok(!loader.includes('css-flexbox-inline-game.js?v=1'),'no debe cargar el intento inline anterior');
 assert.ok(!loader.includes('css-flexbox-inline-game.css?v=1'),'no debe cargar estilos inline anteriores');
 
@@ -24,6 +24,8 @@ assert.ok(source.includes('css-guided-game-card'),'debe aplicar estilo específi
 assert.ok(source.includes("textContent='HTML + CSS · referencia '"),'debe corregir el rótulo Código HTML');
 assert.ok(source.includes("textContent='Vista del reto '"),'debe renombrar Resultado');
 assert.ok(source.includes('fixGuidedExercise'),'debe corregir la misión personalizada');
+assert.ok(source.includes("querySelector('.file-guide')?.remove()"),'debe retirar guías repetidas de las tarjetas de juegos');
+assert.ok(source.includes("privacy?.remove()"),'debe retirar el aviso de privacidad irrelevante en retos CSS');
 assert.ok(source.includes("gridTemplateColumns='minmax(0,.92fr) minmax(0,1.08fr)'"),'debe equilibrar código y preview');
 assert.ok(source.includes("frame.style.height='390px'"),'debe dar altura consistente al preview guiado');
 assert.ok(source.includes("kindBadge.textContent='Reto guiado CSS'"),'debe mejorar la etiqueta del reto');
