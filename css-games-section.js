@@ -65,7 +65,7 @@
         file('css/juegos/index.html','Estructura HTML del reto.'),
         file('css/juegos/styles.css','Tus reglas CSS para resolverlo.')
       ],
-      exerciseTitle:'Misión · '+name.replace(/^Reto guiado \\d+ · /,''),
+      exerciseTitle:'Misión · '+name.replace(/^Reto guiado \d+ · /,''),
       exerciseIntro:'Aplica el concepto de este reto y luego modifica una decisión para comprobar que entiendes qué propiedad produce cada efecto.',
       exerciseTasks:[...tasks,'Crea una variante del ejercicio cambiando una decisión de layout y explica qué efecto produce.'],
       exerciseExtra:extra
