@@ -5,68 +5,6 @@
 
   const preview=(css,html)=>`<style>${css}</style>${html}`;
   const file=(path,detail)=>({path,method:'MANUAL',detail});
-  const flexboxInlineGame=`
-<div class="flexbox-inline-game" data-flexbox-inline-game>
-  <div class="fx-inline-head">
-    <div>
-      <span class="fx-inline-counter">Nivel 1 de 12</span>
-      <h3 class="fx-inline-title">Centro horizontal</h3>
-    </div>
-    <span class="fx-inline-score">0/12</span>
-  </div>
-
-  <div class="fx-inline-body">
-    <div>
-      <p class="fx-inline-instruction">Lleva los tres orbes al centro horizontal usando justify-content.</p>
-
-      <div class="fx-inline-stage">
-        <div class="fx-inline-arena fx-inline-target" aria-hidden="true"></div>
-        <div class="fx-inline-arena fx-inline-player" aria-label="Resultado de tu CSS"></div>
-      </div>
-
-      <div class="fx-inline-status" aria-live="polite">
-        Edita el CSS y mira el resultado en tiempo real.
-      </div>
-
-      <div class="fx-inline-actions">
-        <button type="button" data-action="check">Comprobar</button>
-        <button type="button" data-action="hint">Pista</button>
-        <button type="button" data-action="solution">Ver solución</button>
-        <button type="button" data-action="next" disabled>Siguiente →</button>
-        <button type="button" data-action="reset">Reiniciar</button>
-      </div>
-
-      <div class="fx-inline-note fx-inline-hint" hidden></div>
-      <div class="fx-inline-note fx-inline-solution" hidden></div>
-    </div>
-
-    <div class="fx-inline-editor-panel">
-      <div class="fx-inline-editor-head">styles.css · editable</div>
-      <div class="fx-inline-code">
-        <code>.arena {</code>
-        <code>&nbsp;&nbsp;display: flex;</code>
-        <label class="sr-only" for="flexboxInlineEditor">Propiedades CSS</label>
-        <textarea id="flexboxInlineEditor" class="fx-inline-editor" rows="7" spellcheck="false" placeholder="justify-content: center;"></textarea>
-        <code>}</code>
-      </div>
-      <div class="fx-inline-help">
-        <code>justify-content</code>
-        <code>align-items</code>
-        <code>flex-direction</code>
-        <code>flex-wrap</code>
-        <code>align-content</code>
-      </div>
-    </div>
-  </div>
-
-  <div class="fx-inline-levels" aria-label="Niveles de Flexbox"></div>
-
-  <div class="fx-inline-footer">
-    <span>Tip: Ctrl + Enter también comprueba.</span>
-    <a href="css-flexbox-game.html" target="_blank" rel="noopener">Abrir grande ↗</a>
-  </div>
-</div>`;
-
   const Arcade=(name,key,description,focus)=>T(
     'CSS · Juego interactivo',
     name,
@@ -126,7 +64,7 @@
         file('css/juegos/styles.css','Tus reglas CSS para resolverlo.')
       ],
       exerciseTitle:'Tu misión',
-      exerciseTasks:tasks,
+      exerciseTasks:[...tasks,'Crea una variante del ejercicio cambiando una decisión de layout y explica qué efecto produce.'],
       exerciseExtra:extra
     }
   );
@@ -137,7 +75,7 @@
     group:'CSS',
     primaryArea:'CSS',
     areaOrder:45,
-    description:'Entrena CSS con una arcade de juegos interactivos y retos progresivos. Hay más de 60 niveles interactivos entre Flexbox, Grid, selectores, box model, manipulación de DIVs, position y responsive, además de ejercicios guiados fuera de los juegos.  Cada reto parte de un objetivo visual concreto y obliga a usar selectores, modelo de caja, Flexbox, Grid, position, pseudoclases, especificidad, responsive, variables y animaciones. La meta no es memorizar propiedades: es aprender a elegir la herramienta correcta.',
+    description:'Entrena CSS con una arcade de juegos interactivos y retos progresivos. Hay 76 niveles interactivos entre Flexbox, Grid, selectores, box model, manipulación de DIVs, position y responsive, además de ejercicios guiados fuera de los juegos.  Cada reto parte de un objetivo visual concreto y obliga a usar selectores, modelo de caja, Flexbox, Grid, position, pseudoclases, especificidad, responsive, variables y animaciones. La meta no es memorizar propiedades: es aprender a elegir la herramienta correcta.',
     quote:'“En CSS se mejora resolviendo layouts, rompiéndolos y reparándolos.”',
     challenge:'Completa los niveles en orden. En cada uno intenta primero la misión sin copiar la solución; usa DevTools para probar reglas y solo después compara tu resultado.',
     items:[
@@ -175,19 +113,19 @@
       Arcade(
         'Grid Forge · domina CSS Grid',
         'grid',
-        'Juego editable de CSS Grid. Construye columnas, filas, gaps y elementos que ocupan varias celdas comparando tu layout con un objetivo visual.',
+        'Juego editable de CSS Grid con 10 niveles. Construye columnas, filas, gaps, spans, alineación, auto-fit/minmax y elementos que ocupan varias celdas comparando tu layout con un objetivo visual.',
         'grid-template-columns, grid-column, gap y place-items'
       ),
       Arcade(
         'Selector Hunt · caza el selector correcto',
         'selectors',
-        'Juego para practicar selectores sin afectar elementos equivocados: clases combinadas, atributos, hijos directos, pseudoclases y :not().',
+        'Juego de 10 niveles para practicar selectores sin afectar elementos equivocados: clases combinadas, atributos, hijos directos, :nth-child(), hermanos adyacentes, descendientes, pseudoclases y :not().',
         'selectores de clase, atributos, combinadores y pseudoclases'
       ),
       Arcade(
         'Box Model Lab · repara la caja',
         'box',
-        'Laboratorio interactivo para entender de verdad width, padding, border, margin y box-sizing viendo cómo cambia el tamaño final de una caja.',
+        'Laboratorio interactivo de 10 niveles para entender width, padding, border, margin, box-sizing, max-width, overflow y box-shadow viendo cómo cambia el tamaño final de una caja.',
         'width, padding, border, margin y box-sizing'
       ),
       Arcade(
@@ -199,13 +137,13 @@
       Arcade(
         'Position Rescue · rescata los elementos',
         'position',
-        'Juego de posicionamiento para dominar relative, absolute, offsets, transform y z-index colocando insignias y elementos flotantes.',
+        'Juego de 9 niveles para dominar relative, absolute, offsets, inset, transform y z-index colocando insignias, tarjetas y elementos flotantes.',
         'position, top, right, bottom, left, transform y z-index'
       ),
       Arcade(
         'Responsive Racer · gana en móvil',
         'responsive',
-        'Juego responsive con previews de distintos anchos. Practica imágenes fluidas, media queries, Grid adaptable, flex-wrap y tipografía con clamp().',
+        'Juego responsive de 9 niveles con previews de distintos anchos. Practica imágenes fluidas, media queries, Grid adaptable, auto-fit/minmax, flex-wrap, display condicional y clamp().',
         'media queries, max-width, flex-wrap, Grid y clamp()'
       ),
       G(
