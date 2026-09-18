@@ -5,65 +5,44 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="Flexbox Arena: juego interactivo para practicar CSS Flexbox por niveles.">
   <title>Flexbox Arena · Juego CSS</title>
-  <link rel="stylesheet" href="css-flexbox-game.css?v=2">
+  <link rel="stylesheet" href="css-flexbox-game.css?v=3">
 </head>
 <body>
   <header class="topbar">
     <a class="back" href="index.html">← Biblioteca</a>
-    <div>
-      <strong>Flexbox Arena</strong>
-      <span>Juego interactivo de CSS</span>
-    </div>
+    <div><strong>Flexbox Arena</strong><span>16 niveles · editor CSS en vivo</span></div>
     <button id="resetProgress" class="ghost" type="button">Reiniciar progreso</button>
   </header>
 
   <main class="game-layout">
     <section class="lesson-panel" aria-labelledby="levelTitle">
       <div class="level-heading">
-        <div>
-          <p id="levelCounter" class="eyebrow">Nivel 1 de 12</p>
-          <h1 id="levelTitle">Alinea los orbes</h1>
-        </div>
-        <div id="score" class="score" aria-label="Progreso">0/12</div>
+        <div><p id="levelCounter" class="eyebrow">Nivel 1 de 16</p><h1 id="levelTitle">Centro horizontal</h1></div>
+        <div id="score" class="score" aria-label="Progreso">0/16</div>
       </div>
-
       <p id="instruction" class="instruction"></p>
-
-      <div class="legend" aria-label="Leyenda">
-        <span><i class="dot player-dot"></i> Tus orbes</span>
-        <span><i class="dot target-dot"></i> Objetivo</span>
-      </div>
-
+      <div class="legend"><span><i class="dot player-dot"></i> Tus orbes</span><span><i class="dot target-dot"></i> Objetivo</span></div>
       <div class="arena-shell">
         <div id="targetArena" class="arena target-arena" aria-hidden="true"></div>
         <div id="playerArena" class="arena player-arena" aria-label="Tablero del nivel"></div>
       </div>
-
-      <div id="feedback" class="feedback" role="status" aria-live="polite">
-        Escribe CSS y observa cómo se mueven los orbes.
-      </div>
-
+      <div id="feedback" class="feedback" role="status" aria-live="polite">Edita el CSS y observa el tablero.</div>
       <div class="level-actions">
         <button id="checkBtn" class="primary" type="button">Comprobar</button>
         <button id="hintBtn" class="secondary" type="button">Pista</button>
         <button id="solutionBtn" class="secondary" type="button">Ver solución</button>
+        <button id="resetLevelBtn" class="secondary" type="button">Limpiar nivel</button>
         <button id="nextBtn" class="primary" type="button" disabled>Siguiente →</button>
       </div>
-
       <div id="hintBox" class="help-box" hidden></div>
       <div id="solutionBox" class="help-box solution-box" hidden></div>
     </section>
 
     <aside class="editor-panel">
       <div class="editor-heading">
-        <div>
-          <span class="window-dot red"></span>
-          <span class="window-dot yellow"></span>
-          <span class="window-dot green"></span>
-        </div>
-        <span>styles.css</span>
+        <div><span class="window-dot red"></span><span class="window-dot yellow"></span><span class="window-dot green"></span></div>
+        <span>styles.css · editable</span>
       </div>
-
       <div class="code-editor">
         <code>.arena {</code>
         <code class="fixed-line">  display: flex;</code>
@@ -71,28 +50,17 @@
         <textarea id="cssEditor" rows="8" spellcheck="false" autocomplete="off" autocapitalize="off"></textarea>
         <code>}</code>
       </div>
-
       <div class="property-help">
-        <strong>Propiedades disponibles</strong>
-        <code>justify-content</code>
-        <code>align-items</code>
-        <code>flex-direction</code>
-        <code>flex-wrap</code>
-        <code>align-content</code>
-        <code>gap</code>
+        <strong>Propiedades y valores útiles</strong>
+        <code>justify-content</code><code>align-items</code><code>flex-direction</code><code>flex-wrap</code><code>align-content</code><code>gap</code>
+        <code>center</code><code>space-between</code><code>space-evenly</code><code>wrap-reverse</code>
       </div>
-
-      <nav class="levels" aria-label="Niveles de Flexbox">
-        <p>Niveles</p>
-        <div id="levelButtons" class="level-buttons"></div>
-      </nav>
+      <div class="editor-shortcut">Ctrl + Enter también comprueba el nivel.</div>
+      <nav class="levels" aria-label="Niveles de Flexbox"><p>Niveles</p><div id="levelButtons" class="level-buttons"></div></nav>
     </aside>
   </main>
 
-  <footer>
-    <p>Practica por experimentación: escribe, observa, corrige y vuelve a intentar.</p>
-  </footer>
-
-  <script src="css-flexbox-game.js?v=2" defer></script>
+  <footer><p>Practica por experimentación: escribe, observa, corrige y vuelve a intentar.</p></footer>
+  <script src="css-flexbox-game.js?v=3" defer></script>
 </body>
 </html>
