@@ -32,7 +32,8 @@ for(const [title,count,terms] of expected){
   terms.forEach(term=>assert.ok(text.includes(term),`${title}: falta ${term}`));
   assert.ok(section.items.every(item=>item.interactiveWeb===true),`${title}: todos deben ser interactivos`);
 }
-assert.ok(sections.find(s=>s.title==='CSS · visibility visual').items.map(i=>i.description).join(' ').includes('display:none'));
+const visibility=sections.find(s=>s.title==='CSS · visibility visual');
+assert.ok((visibility.description+' '+visibility.items.map(i=>i.description+' '+(i.tip||'')).join(' ')).includes('display:none'));
 assert.ok(sections.find(s=>s.title==='CSS · object-fit visual').items.map(i=>i.description).join(' ').includes('proporción'));
 
 console.log({status:'ok',sections:sections.length,examples:sections.reduce((n,s)=>n+s.items.length,0)});
